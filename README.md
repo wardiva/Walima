@@ -73,9 +73,13 @@ Notes:
   count only each guest's latest reply.
 - A free Gmail account can send about 100 emails a day from Apps Script, which
   is plenty for an invitation.
-- The browser can't read Apps Script's response, so the site shows success once
-  the reply has been sent. If the guest is offline or the request times out, it
-  asks them to tap again.
+- Apps Script can take several seconds to answer, so the site doesn't wait for it.
+  The reply is handed to the browser with `navigator.sendBeacon`, which still
+  delivers it if the page is closed, and the thank-you appears straight away.
+  Only a guest who is offline (the reply can't be queued at all) is asked to tap
+  again.
+- Guests type how many are coming (1 to 20, `rsvp.maxGuests`). "Can't Attend"
+  always sends 0.
 
 ## Running locally
 

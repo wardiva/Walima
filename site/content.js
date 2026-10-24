@@ -145,7 +145,8 @@ export default {
     endpoint: "https://script.google.com/macros/s/AKfycbwsnjax1F9SFKIDIV9sB9LVYnO1pT6JliND5-m97LAbkNqVWiTajtWZDhvVrBWw4KmAaA/exec",
     namePlaceholder: "Your name",
     guestsLabel: "Guests",
-    maxGuests: 6,
+    maxGuests: 20, // guests type a number from 1 to this (the sheet script caps at 20 too)
+    guestsInvalid: "Please enter a number of guests from 1 to 20",
     messagePlaceholder: "A note for the couple (optional)",
     attend: "I Will Attend",
     decline: "Can't Attend",

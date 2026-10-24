@@ -336,7 +336,6 @@ function faq(c) {
 
 function rsvp(c) {
   const v = c.rsvp;
-  const opts = Array.from({ length: v.maxGuests }, (_, i) => `<option value="${i + 1}">${i + 1}</option>`).join("");
   return `
   ${section("rsvp", "blue", "section--tall")}
     ${deco("garland-roses", "d-top-garland", 0, 0.3)}
@@ -352,7 +351,7 @@ function rsvp(c) {
           </label>
           <label class="rsvp__field rsvp__guests">
             <span class="caps">${esc(v.guestsLabel)}</span>
-            <select name="guests">${opts}</select>
+            <input name="guests" type="text" inputmode="numeric" pattern="[0-9]*" autocomplete="off" maxlength="2" value="1" aria-label="${esc(v.guestsLabel)} (1–${v.maxGuests})" />
           </label>
           <label class="rsvp__field rsvp__note">
             <span class="sr-only">${esc(v.messagePlaceholder)}</span>
