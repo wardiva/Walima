@@ -32,7 +32,7 @@ Before sharing, do these:
 | What | Where |
 | --- | --- |
 | Background music: `a-thousand-years.mp3` is included (the client's file, trimmed to start at 2:08, the chorus "I have died every day waiting for you…") | `site/assets/audio/` and `media.music`. To use an untrimmed file, set `start: <seconds>` on its entry. |
-| RSVP deadline | `rsvp.byDate` (currently 20 November 2026) |
+| RSVP deadline | `rsvp.byDate` (currently 25 November 2026) |
 | Where RSVPs go | `rsvp.endpoint`: see [RSVP replies](#rsvp-replies) below. Until it is set, the RSVP card shows "Replies open soon" and nothing can be sent. |
 | Exact Google Maps pin | `venue.mapsUrl` (Google Maps → Share → Copy link) |
 

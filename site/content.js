@@ -141,7 +141,7 @@ export default {
     eyebrow: "RSVP",
     title: "Kindly Reply",
     byLine: "Please confirm your presence by",
-    byDate: "20 November 2026",
+    byDate: "25 November 2026",
     endpoint: "",
     namePlaceholder: "Your name",
     guestsLabel: "Guests",
