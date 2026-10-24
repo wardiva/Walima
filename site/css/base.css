@@ -113,6 +113,7 @@ img, video, canvas, svg { display: block; }
   scroll-snap-align: start;
   scroll-snap-stop: always;
   overflow: hidden;
+  perspective: 1400px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -165,30 +166,45 @@ em, i, cite { font-style: normal; }
 .arabic { font-family: var(--font-arabic); direction: rtl; unicode-bidi: isolate; }
 
 /* ───────────────────────── Reveal choreography ─────────────────────────
-   Elements fade up with a soft blur when their section becomes active.
-   --i sets the stagger step (80 ms each). */
+   Elements arrive when their section becomes active (transform + opacity
+   only). --i sets the stagger step (80 ms each); data-reveal="kind" picks
+   the entrance. More motion lives in motion.css. */
 [data-reveal] {
   opacity: 0;
-  transform: translate3d(0, calc(12 * var(--u)), 0);
-  filter: blur(4px);
+  transform: translate3d(0, calc(16 * var(--u)), 0);
   transition:
     opacity 0.7s var(--ease-out),
-    transform 0.7s var(--ease-out),
-    filter 0.6s var(--ease-out);
+    transform 0.8s var(--ease-out);
   transition-delay: calc(var(--i, 0) * 0.08s + var(--base-delay, 0.08s));
-  will-change: opacity, transform;
 }
-[data-reveal="fade"] { transform: none; filter: none; }
-[data-reveal="card"] { transform: translate3d(0, calc(10 * var(--u)), 0) scale(0.985); filter: none; }
-[data-reveal="bloom"] { transform: none; filter: blur(3px); transition-duration: 1.4s, 0s, 1.2s; } /* ornaments keep their own rotate/scale */
+[data-reveal="fade"] { transform: none; }
+/* cards rise in on a spring, tipped back like a page being set down */
+[data-reveal="card"] {
+  transform: perspective(1100px) translate3d(0, calc(46 * var(--u)), 0) rotateX(16deg) scale(0.94);
+  transform-origin: 50% 100%;
+  transition-duration: 0.6s, 1s;
+  transition-timing-function: var(--ease-out), var(--ease-spring);
+}
+/* the invitation unfolds from its top crease */
+[data-reveal="unfold"] {
+  transform: perspective(1000px) rotateX(-82deg) translate3d(0, calc(-20 * var(--u)), 0);
+  transform-origin: 50% 0;
+  transition-duration: 0.5s, 1.25s;
+  transition-timing-function: var(--ease-out), cubic-bezier(0.22, 1.25, 0.36, 1);
+}
+/* ornaments bloom: grow and turn into place */
+[data-reveal="bloom"] { transform: scale(0.72) rotate(-10deg); transition-duration: 1.2s, 1.6s; transition-timing-function: var(--ease-out), var(--ease-spring); }
+[data-reveal="pop"] { transform: scale(0.3) rotate(-90deg); transition-timing-function: var(--ease-out), var(--ease-spring); }
+[data-reveal="glow"] { transform: scale(0.9); transition-duration: 1.4s, 1.6s; }
+[data-reveal="left"] { transform: translate3d(calc(-60 * var(--u)), 0, 0) rotate(-3deg); transition-timing-function: var(--ease-out), var(--ease-spring); }
+[data-reveal="right"] { transform: translate3d(calc(60 * var(--u)), 0, 0) rotate(3deg); transition-timing-function: var(--ease-out), var(--ease-spring); }
 .section.is-active [data-reveal] {
   opacity: 1;
   transform: none;
-  filter: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  [data-reveal] { transform: none !important; filter: none !important; transition-duration: 0.4s; transition-delay: 0s; }
+  [data-reveal] { transform: none !important; transition-duration: 0.4s; transition-delay: 0s; }
 }
 
 .noscript { position: fixed; inset: auto 0 40%; text-align: center; font-size: 18px; }

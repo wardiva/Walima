@@ -17,7 +17,7 @@ img{position:absolute}
 </style></head><body>
 <div class="c" id="g1" style="background-image:url(../site/assets/images/paper-ice.jpg)">
   <img src="../site/assets/images/garland-bows.webp" style="width:760px;left:20px;top:-60px">
-  <img src="../site/assets/svg/couple.svg" style="height:700px;left:200px;top:230px">
+  <img id="wreath" src="" style="width:640px;left:80px;top:250px">
   <img src="../site/assets/images/roses-cluster.webp" style="width:380px;left:-120px;bottom:-120px;rotate:18deg">
   <img src="../site/assets/images/roses-cluster.webp" style="width:380px;right:-130px;bottom:-110px;scale:-1 1;rotate:14deg">
 </div>
@@ -50,7 +50,8 @@ img{position:absolute}
 <script>
 const id = new URLSearchParams(location.search).get('card') || 'g1';
 document.getElementById(id).classList.add('on');
-const env = new URLSearchParams(location.search).get('env');
-if (env) document.getElementById('env').src = env;
+const q = new URLSearchParams(location.search);
+if (q.get('env')) document.getElementById('env').src = q.get('env');
+if (q.get('wreath')) document.getElementById('wreath').src = q.get('wreath');
 </script>
 </body></html>

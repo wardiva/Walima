@@ -82,7 +82,8 @@ export function initScratch(root, { onReveal, reducedMotion }) {
     panel.removeAttribute("role");
     panel.removeAttribute("tabindex");
     panel.removeAttribute("aria-label");
-    onReveal?.();
+    const r = panel.getBoundingClientRect();
+    onReveal?.(r.left + r.width / 2, r.top + r.height / 2);
   };
 
   const cleared = () => {
@@ -107,6 +108,7 @@ export function initScratch(root, { onReveal, reducedMotion }) {
   let last = null, lastCheck = 0;
   panel.addEventListener("pointerdown", (e) => {
     if (revealed) return;
+    panel.classList.add("is-touched"); // the hand hint steps aside
     if (reducedMotion) return reveal();
     e.preventDefault();
     panel.setPointerCapture?.(e.pointerId);

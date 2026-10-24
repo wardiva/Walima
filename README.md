@@ -4,11 +4,13 @@ A mobile-first invitation website for the Walima of **Hamza Shafi & Komal Naveed
 Saturday, 28 November 2026, 1 PM, at Grand Orchid Farmhouse, Raiwind Road, Lahore.
 It is the companion to the Barat invitation and uses the same structure.
 
-Guests open a dusty-blue envelope sealed with a maroon **H&K** wax seal. The flap
-opens, the letter rises, and an illustration of the couple appears. The rest of
-the invitation is a series of full-screen sections: the invitation, a countdown
-with a silver scratch-off date, our story, the schedule, the venue with a map,
-the dress code, a gallery, Q&A, RSVP (sent on WhatsApp), duas, and a closing screen.
+Guests open a dusty-blue envelope sealed with a maroon **H&K** wax seal. The seal
+cracks, the flap opens, the letter rises and grows to fill the screen, and the
+names write themselves inside a dusty-blue wreath that grows leaf by leaf. The
+rest of the invitation is a series of full-screen sections: the invitation, a
+flip-clock countdown with a silver scratch-off date, our story, the schedule, the
+venue with a map, the dress code, a polaroid gallery, Q&A, RSVP (sent on
+WhatsApp), duas, and a closing screen with lanterns and fireworks.
 
 ## Editing
 
@@ -48,9 +50,16 @@ project's root directory to `site`).
   rawpixel, found through Openverse and tinted ivory so they read like the
   card's plaster relief. `tools/build_assets.py` downloads them, processes them
   and paints the watercolour paper. Run `python3 -I tools/build_assets.py` to rebuild.
-- **Illustration.** `site/assets/svg/couple.svg` is a hand-drawn vector of the
-  couple in their outfits: the navy double-breasted suit with gold buttons,
-  maroon tie and pocket chain, and the ice-blue lehenga with silver embroidery
-  and a trailing veil.
+- **Hero.** A typographic hero: the names are written in (Imperial Script) inside
+  a dusty-blue laurel wreath drawn in code (`wreath()` in `site/js/icons.js`).
+  There is no illustration of the couple.
+- **Motion.** Every screen has a moment that plays on arrival or answers a touch.
+  The sections are listed in the comment at the top of `site/content.js`, and each
+  one's motion is in `site/css/motion.css`. Particles (petals, sparkles, confetti,
+  hearts, wax crumbs, fireworks) share one canvas (`site/js/fx.js`). Scroll depth,
+  hero tilt, tap-anywhere sparkles and haptics are in `site/js/motion.js`. Only
+  `transform` and `opacity` are animated, loops pause off screen, and with
+  *Reduce Motion* turned on the screens fade in calmly with no particles. No
+  libraries are used.
 - **Placeholders.** `tools/render_cards.js` renders the gallery placeholder cards
   and the link-preview image (`site/assets/images/og-walima.jpg`).

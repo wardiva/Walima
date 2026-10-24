@@ -3,12 +3,16 @@
 // to the host's number (content.rsvp.whatsapp) or, without one, to whichever
 // chat the guest picks. The choice is remembered on this device so the card
 // shows the thank-you when they come back.
+//
+// Reactions (main.js): onInvalid() when the name is missing (the field also
+// shakes), onReply(answer, button) just before the form turns into the
+// thank-you, so the burst can start from the tapped button.
 
 const KEY = "walima-hk-rsvp";
 
 const fill = (tpl, vals) => tpl.replace(/\{(\w+)\}/g, (_, k) => vals[k] ?? "");
 
-export function initRsvp(root, cfg) {
+export function initRsvp(root, cfg, { onReply, onInvalid } = {}) {
   const form = root.querySelector(".rsvp__form");
   const done = root.querySelector(".rsvp__done");
   const thanks = root.querySelector(".rsvp__thanks");
@@ -38,6 +42,11 @@ export function initRsvp(root, cfg) {
     const who = name.value.trim();
     if (!who) {
       error.textContent = cfg.nameMissing;
+      const field = name.closest(".rsvp__field");
+      field.classList.remove("is-shaking");
+      void field.offsetWidth; // restart the shake
+      field.classList.add("is-shaking");
+      onInvalid?.();
       name.focus();
       return;
     }
@@ -51,6 +60,7 @@ export function initRsvp(root, cfg) {
     const url = `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
     window.open(url, "_blank", "noopener");
 
+    onReply?.(answer, e.submitter || form.querySelector('[value="yes"]'));
     const reply = { answer, name: who, guests: n };
     try { localStorage.setItem(KEY, JSON.stringify(reply)); } catch {}
     show(reply);

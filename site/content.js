@@ -7,15 +7,17 @@
  *
  *  Page order (one full screen each):
  *     1. Opening   — a sealed dusty-blue envelope, "Tap to Open": the wax
- *                    seal lifts, the flap opens, the letter rises, and the
- *                    HERO appears — the couple under the names.
+ *                    seal cracks, the flap opens, the letter rises and
+ *                    grows into the HERO — the names written inside a
+ *                    wreath that grows leaf by leaf.
  *     2. Letter    — Bismillah, the invitation, the names and the date.
  *     3. Countdown — the date under silver scratch-off foil, live countdown.
  *     4. Story     — a few words from the couple.
  *     5. Schedule  — timeline built from `schedule.items`.
  *     6. Venue     — name, address, map and "Open in Google Maps".
  *     7. Dress code
- *     8. Gallery   — swipeable photos from `gallery.photos`.
+ *     8. Gallery   — a pile of polaroids from `gallery.photos`; flick or
+ *                    tap the top one to see the next.
  *     9. Q&A       — tap a question to open it.
  *    10. RSVP      — name + guests, "I Will Attend" / "Can't Attend"
  *                    (sends the reply on WhatsApp).
@@ -204,7 +206,6 @@ export default {
       { src: "assets/audio/a-thousand-years.mp3", title: "A Thousand Years — Christina Perri" },
     ],
     musicVolume: 0.7,
-    couple: "assets/svg/couple.svg", // the illustrated couple, 420x620
     paper: "assets/images/paper-blue.jpg", // most screens
     paperLight: "assets/images/paper-ice.jpg", // envelope, hero, letter
     paperDeep: "assets/images/paper-dusk.jpg", // closing
