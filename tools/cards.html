@@ -1,6 +1,6 @@
 <!doctype html>
-<!-- Placeholder gallery cards + the link-preview image, rendered by
-     tools/render_cards.js. Open with ?card=<id>. -->
+<!-- The link-preview image, rendered by
+     tools/render_cards.js. -->
 <html><head><meta charset="utf-8"><style>
 @font-face{font-family:Imperial;src:url(../site/assets/fonts/imperial-script-400-latin.woff2)}
 @font-face{font-family:Quicksand;src:url(../site/assets/fonts/quicksand-var-latin.woff2);font-weight:300 700}
@@ -15,43 +15,15 @@ img{position:absolute}
 .k{font-family:Quicksand;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:#6e1f2a}
 .d{font-family:Libre;color:#6e1f2a;letter-spacing:.2em}
 </style></head><body>
-<div class="c" id="g1" style="background-image:url(../site/assets/images/paper-ice.jpg)">
-  <img src="../site/assets/images/garland-bows.webp" style="width:760px;left:20px;top:-60px">
-  <img id="wreath" src="" style="width:640px;left:80px;top:250px">
-  <img src="../site/assets/images/roses-cluster.webp" style="width:380px;left:-120px;bottom:-120px;rotate:18deg">
-  <img src="../site/assets/images/roses-cluster.webp" style="width:380px;right:-130px;bottom:-110px;scale:-1 1;rotate:14deg">
-</div>
-<div class="c" id="g2" style="background-image:url(../site/assets/images/paper-blue.jpg)">
-  <img src="../site/assets/images/frame-cartouche.webp" style="width:900px;left:-50px;top:60px">
-  <div class="t s" style="top:400px;font-size:150px;color:#fbf8f1">H &amp; K</div>
-  <img src="../site/assets/images/roses-cluster.webp" style="width:420px;right:-150px;bottom:-150px;rotate:-14deg">
-</div>
-<div class="c" id="g3" style="background-image:url(../site/assets/images/paper-dusk.jpg)">
-  <img src="../site/assets/images/roses-cluster.webp" style="width:900px;left:-40px;top:80px">
-  <img src="../site/assets/images/divider-flowers.webp" style="width:420px;left:190px;bottom:60px">
-</div>
-<div class="c" id="g4" style="background-image:url(../site/assets/images/paper-ice.jpg)">
-  <img src="../site/assets/images/crest-shell.webp" style="width:460px;left:170px;top:150px">
-  <div class="t k" style="top:470px;font-size:26px">Walima</div>
-  <div class="t s" style="top:510px;font-size:120px">Hamza &amp; Komal</div>
-  <div class="t d" style="top:700px;font-size:40px">28 · 11 · 2026</div>
-  <img src="../site/assets/images/roses-spray.webp" style="width:330px;left:-110px;top:-80px;rotate:200deg">
-</div>
-<div class="c" id="g5" style="background-image:url(../site/assets/images/paper-blue.jpg)">
-  <img src="../site/assets/images/hydrangea.webp" style="width:560px;left:-60px;top:-40px;rotate:12deg">
-  <img src="../site/assets/images/roses-spray.webp" style="width:430px;right:-60px;bottom:-60px">
-  <div class="t s" style="top:470px;font-size:104px;color:#fbf8f1;text-shadow:0 2px 8px rgba(31,42,68,.3)">Alhamdulillah</div>
-</div>
 <div class="c og" id="og" style="background-image:url(../site/assets/images/paper-ice.jpg)">
   <img src="../site/assets/images/roses-cluster.webp" style="width:420px;left:-120px;top:-130px;rotate:160deg">
   <img src="../site/assets/images/roses-cluster.webp" style="width:440px;right:-130px;bottom:-150px;rotate:-12deg">
   <img id="env" src="" style="width:640px;left:280px;top:110px">
 </div>
 <script>
-const id = new URLSearchParams(location.search).get('card') || 'g1';
+const id = new URLSearchParams(location.search).get('card') || 'og';
 document.getElementById(id).classList.add('on');
 const q = new URLSearchParams(location.search);
 if (q.get('env')) document.getElementById('env').src = q.get('env');
-if (q.get('wreath')) document.getElementById('wreath').src = q.get('wreath');
 </script>
 </body></html>

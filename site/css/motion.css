@@ -256,7 +256,7 @@
 .cd__when.is-revealed .cd__date { animation: date-pop 0.8s var(--ease-spring); }
 @keyframes date-pop { 0% { transform: scale(0.9); } 50% { transform: scale(1.08); } 100% { transform: none; } }
 
-/* ═════════════ 4 · Story ═════════════ */
+/* ═════════════ 5 · Story ═════════════ */
 .story__heart {
   display: block;
   width: calc(150 * var(--u));
@@ -289,7 +289,7 @@
 .float-hearts i:nth-child(6) { left: 92%; animation-delay: 10.5s; animation-duration: 14s; scale: 0.6; }
 .story-card .w { --wbase: 0.6s; }
 
-/* ═════════════ 5 · Schedule: the line draws itself ═════════════ */
+/* ═════════════ 4 · Schedule: the line draws itself ═════════════ */
 .tl__line { transform: scaleY(0); transform-origin: 50% 0; }
 .is-active .tl__line { animation: draw-down 1.5s var(--ease-in-out) 0.6s both; }
 @keyframes draw-down { to { transform: none; } }
@@ -393,14 +393,7 @@
 @keyframes swing { 0% { transform: rotate(-26deg); } 22% { transform: rotate(17deg); } 42% { transform: rotate(-11deg); } 62% { transform: rotate(6deg); } 80% { transform: rotate(-2.5deg); } 100% { transform: none; } }
 @keyframes hang-sway { from { transform: rotate(-2deg); } to { transform: rotate(2deg); } }
 
-/* ═════════════ 8 · Gallery: polaroids are dealt onto the table ═════════════ */
-.deck:not(.is-dealt) .pol { opacity: 0; }
-.deck.is-dealt .pol { animation: deal 0.9s var(--ease-spring) calc(0.95s - var(--k) * 0.15s) both; }
-@keyframes deal { from { opacity: 0; translate: 40% 120%; rotate: 28deg; } 40% { opacity: 1; } to { opacity: 1; translate: 0 0; rotate: 0deg; } }
-.gal__hint .hand { animation: swipe-hint 2.4s var(--ease-in-out) infinite; }
-@keyframes swipe-hint { 0%, 100% { transform: none; } 30% { transform: translate3d(8px, 0, 0) rotate(12deg); } 60% { transform: translate3d(-6px, 0, 0) rotate(-8deg); } }
-
-/* ═════════════ 9 · Q&A: answers spring open ═════════════ */
+/* ═════════════ 8 · Q&A: answers spring open ═════════════ */
 .faq__item { transition: background-color 0.3s, box-shadow 0.3s; }
 .faq__item[open] { background: rgba(255, 255, 255, 0.82); box-shadow: inset 0 0 0 1px rgba(176, 138, 79, 0.45), 0 calc(6 * var(--u)) calc(16 * var(--u)) rgba(31, 42, 68, 0.1); }
 .faq__item summary { transition: transform 0.2s var(--ease-out); }
@@ -410,13 +403,13 @@
 .faq__item p { animation: faq-spring 0.65s var(--ease-spring); transform-origin: 50% 0; }
 @keyframes faq-spring { from { opacity: 0; transform: translate3d(0, -10px, 0) scale(0.92, 0.6); } to { opacity: 1; transform: none; } }
 
-/* ═════════════ 10 · RSVP ═════════════ */
+/* ═════════════ 9 · RSVP ═════════════ */
 .rsvp__field.is-shaking { animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97); }
 @keyframes shake { 15%, 85% { transform: translate3d(-2px, 0, 0); } 30%, 70% { transform: translate3d(5px, 0, 0); } 45% { transform: translate3d(-7px, 0, 0); } 58% { transform: translate3d(7px, 0, 0); } }
 .rsvp__done { animation: done-in 0.8s var(--ease-spring); }
 @keyframes done-in { from { opacity: 0; transform: scale(0.7) translate3d(0, 10px, 0); } to { opacity: 1; transform: none; } }
 
-/* ═════════════ 11 · Dua: soft rays of light ═════════════ */
+/* ═════════════ 10 · Dua: soft rays of light ═════════════ */
 .rays {
   position: absolute; z-index: -1;
   left: 50%; top: 50%;
@@ -432,7 +425,7 @@
 .is-active .rays { opacity: 1; animation: spin 90s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ═════════════ 12 · Closing: lanterns & fireworks ═════════════ */
+/* ═════════════ 11 · Closing: lanterns & fireworks ═════════════ */
 .s-closing { cursor: pointer; }
 .lanterns { position: absolute; inset: 0 0 auto; height: 0; z-index: 0; pointer-events: none; }
 .lantern {
@@ -462,13 +455,13 @@
 /* ═════════════ Reduce Motion: everything arrives still ═════════════ */
 @media (prefers-reduced-motion: reduce) {
   .write, .write__in, .w, .aw, .lf, .bb, .fl, .hero__amp, .cd__cell, .tl__line, .tl__node, .tl__time, .tl__what,
-  .dua__trans, .lantern, .pin-drop__pin, .pin-drop__shadow, .deck .pol {
+  .dua__trans, .lantern, .pin-drop__pin, .pin-drop__shadow {
     animation: none !important;
     transform: none;
     opacity: 1;
   }
   .write::after, .twinkles, .hero__motes, .bf, .tl__run, .pin-drop__ripple, .cd__hint, .float-hearts, .btn--shine::after { display: none !important; }
-  .deco > img, .wreath, .hang, .story__heart img, .lantern__glow, .rays, .tl__icon, .ic-steam, .ic-star, .ic-gem, .intro__tap, .gal__hint .hand {
+  .deco > img, .wreath, .hang, .story__heart img, .lantern__glow, .rays, .tl__icon, .ic-steam, .ic-star, .ic-gem, .intro__tap {
     animation: none !important;
   }
   .ic-steam { opacity: 0.7; }

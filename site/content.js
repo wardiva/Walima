@@ -17,14 +17,12 @@
  *     6. Venue     — name, address, an illustrated map (tap → Google Maps)
  *                    and "Open in Google Maps".
  *     7. Dress code
- *     8. Gallery   — a pile of polaroids from `gallery.photos`; flick or
- *                    tap the top one to see the next.
- *     9. Q&A       — tap a question to open it.
- *    10. RSVP      — name, guests and a note, "I Will Attend" / "Can't
+ *     8. Q&A       — tap a question to open it.
+ *     9. RSVP      — name, guests and a note, "I Will Attend" / "Can't
  *                    Attend". Replies go to the host's own Google Sheet and
  *                    Gmail (set `rsvp.endpoint`; see README → RSVP replies).
- *    11. Dua       — gifts / prayers.
- *    12. Closing   — "In sha Allah".
+ *    10. Dua       — gifts / prayers.
+ *    11. Closing   — "In sha Allah".
  *
  *  • Text supports plain strings only (no HTML).
  *  • Media paths are relative to the /site folder.
@@ -123,21 +121,7 @@ export default {
     note: "Come dressed for an elegant afternoon",
   },
 
-  /* 8 — Gallery. Replace the files (portrait, about 4:5) or list your own. */
-  gallery: {
-    eyebrow: "Gallery",
-    title: "Moments",
-    hint: "Swipe",
-    photos: [
-      { src: "assets/gallery/01.jpg", alt: "" },
-      { src: "assets/gallery/02.jpg", alt: "" },
-      { src: "assets/gallery/03.jpg", alt: "" },
-      { src: "assets/gallery/04.jpg", alt: "" },
-      { src: "assets/gallery/05.jpg", alt: "" },
-    ],
-  },
-
-  /* 9 — Questions & answers */
+  /* 8 — Questions & answers */
   faq: {
     eyebrow: "Q & A",
     title: "Good to Know",
@@ -149,7 +133,7 @@ export default {
     ],
   },
 
-  /* 10 — RSVP. Each reply is added to a Google Sheet in the host's own
+  /* 9 — RSVP. Each reply is added to a Google Sheet in the host's own
           Google account, which also emails her (README → "RSVP replies").
           Paste the web-app URL that ends in /exec into `endpoint`. While it
           is empty the buttons show `closed` and nothing can be sent. */
@@ -175,7 +159,7 @@ export default {
     change: "Change reply",
   },
 
-  /* 11 — Gifts & prayers */
+  /* 10 — Gifts & prayers */
   dua: {
     eyebrow: "Gifts",
     title: "Your Duas",
@@ -184,7 +168,7 @@ export default {
     translation: "May Allah bless you both, shower His blessings upon you, and unite you in goodness.",
   },
 
-  /* 12 — Closing */
+  /* 11 — Closing */
   closing: {
     lines: ["We can't wait", "to celebrate with you"],
     inshaAllah: "إِنْ شَاءَ ٱللَّٰهُ",

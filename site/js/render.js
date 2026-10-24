@@ -272,25 +272,6 @@ function dressCode(c) {
   </section>`;
 }
 
-function gallery(c) {
-  const g = c.gallery, cp = c.couple;
-  const caption = `${cp.groom.shortName} ${cp.joiner} ${cp.bride.shortName}`;
-  return `
-  ${section("gallery", "blue")}
-    ${deco("crest-wave", "d-top-crest", 0, 0.3)}
-    <div class="gal" ${r(0, "fade")}>
-      <span class="caps card-eyebrow gal__eyebrow" ${r(1)}>${esc(g.eyebrow)}</span>
-      <h2 class="card-title gal__title" ${r(2)}>${write(g.title, "", 0.4)}</h2>
-      <div class="deck" id="galDeck" tabindex="0" role="group" aria-roledescription="carousel" aria-label="${esc(g.title)}">
-        ${g.photos.map((p, i) => `
-        <figure class="pol" style="--k:${i}"><span class="pol__photo"><img data-src="${esc(p.src)}" alt="${esc(p.alt)}" decoding="async" draggable="false" /></span><figcaption class="script pol__cap">${esc(caption)}</figcaption></figure>`).join("")}
-      </div>
-      <div class="gal__hint caps" ${r(6)}>${icon.hand}<span>${esc(g.hint)}</span></div>
-      <div class="gal__dots" id="galDots" ${r(7)}>${g.photos.map((_, i) => `<button type="button" aria-label="Photo ${i + 1}"${i ? "" : ' aria-current="true"'}></button>`).join("")}</div>
-    </div>
-  </section>`;
-}
-
 function faq(c) {
   const f = c.faq;
   return `
@@ -390,7 +371,7 @@ function closing(c) {
 
 export function renderSections(c) {
   decoN = 0;
-  return [opening, letter, countdown, schedule, story, venue, dressCode, gallery, faq, rsvp, dua, closing]
+  return [opening, letter, countdown, schedule, story, venue, dressCode, faq, rsvp, dua, closing]
     .map((fn) => fn(c))
     .join("");
 }

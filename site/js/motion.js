@@ -19,7 +19,7 @@ export function initScrollDepth(scroller, sections, { reducedMotion }) {
   if (reducedMotion) return;
   const items = sections.filter((s) => s.dataset.section !== "opening").map((s) => ({
     s,
-    card: s.querySelector(":scope > .card, :scope > .gal, :scope > .closing"),
+    card: s.querySelector(":scope > .card, :scope > .closing"),
     decos: [...s.querySelectorAll(":scope > .deco")].map((el) => ({ el, depth: +el.dataset.depth || 0 })),
     dirty: false,
   }));
@@ -132,7 +132,7 @@ export function initButterfly(bf, { reducedMotion, onTap }) {
 }
 
 /** Tap anywhere: sparkles. Drag a finger: dust. */
-export function initTouchMagic(app, fx, { reducedMotion, skip = "button, a, input, select, textarea, summary, label, iframe, .cd__when, .deck, .bf, .s-closing" }) {
+export function initTouchMagic(app, fx, { reducedMotion, skip = "button, a, input, select, textarea, summary, label, iframe, .cd__when, .bf, .s-closing" }) {
   if (reducedMotion) return;
   const pos = (x, y) => { const r = app.getBoundingClientRect(); return [x - r.left, y - r.top]; };
   app.addEventListener("pointerdown", (e) => {

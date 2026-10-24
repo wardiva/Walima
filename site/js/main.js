@@ -5,7 +5,6 @@ import { initMusic } from "./music.js";
 import { initCountdown } from "./countdown.js";
 import { createFx } from "./fx.js";
 import { initScratch } from "./scratch.js";
-import { initGallery } from "./gallery.js";
 import { initRsvp } from "./rsvp.js";
 import { haptic, initScrollDepth, initHeroParallax, initButterfly, initTouchMagic } from "./motion.js";
 
@@ -47,23 +46,6 @@ const music = initMusic({
   volume: content.media.musicVolume,
   labels: { on: content.ui.musicOn, off: content.ui.musicOff },
 });
-
-/* ── Gallery photos load one screen ahead ── */
-const gallery = initGallery(document.getElementById("galDeck"), document.getElementById("galDots"), {
-  reducedMotion,
-  onFlick: () => haptic(8),
-});
-const nearObserver = new IntersectionObserver(
-  (entries) => {
-    for (const e of entries) {
-      if (!e.isIntersecting) continue;
-      const s = e.target;
-      if (s.dataset.section === "gallery") gallery.load();
-      nearObserver.unobserve(s);
-    }
-  },
-  { root: scroller, rootMargin: "100% 0px" }
-);
 
 /* ── Hero ── */
 const hero = document.getElementById("hero");
@@ -127,13 +109,9 @@ const onscreenObserver = new IntersectionObserver(
 let opened = false;
 let current = sections[0];
 
-const onFirstActive = {
-  gallery: () => gallery.deal(),
-};
 const setCurrent = (s) => {
   current = s;
   if (s.dataset.section !== "opening" || opened) {
-    if (!s.classList.contains("is-active")) onFirstActive[s.dataset.section]?.();
     s.classList.add("is-active");
   }
   const isLast = s === sections[sections.length - 1];
@@ -163,7 +141,7 @@ initOpening({
     opened = true;
     byName("opening").classList.add("is-active");
     scroller.classList.remove("is-locked");
-    sections.forEach((s) => { nearObserver.observe(s); activeObserver.observe(s); midObserver.observe(s); onscreenObserver.observe(s); });
+    sections.forEach((s) => { activeObserver.observe(s); midObserver.observe(s); onscreenObserver.observe(s); });
     setCurrent(current);
     fx.petals();
     heroParallax.setActive(true);

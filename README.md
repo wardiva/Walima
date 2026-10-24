@@ -15,11 +15,10 @@ rest of the invitation is a series of full-screen sections, in this order:
 4. our story
 5. the venue, with an illustrated map that opens Google Maps
 6. the dress code
-7. a polaroid gallery
-8. Q&A
-9. RSVP (each reply goes to the host's Google Sheet and Gmail)
-10. duas
-11. a closing screen with lanterns and fireworks
+7. Q&A
+8. RSVP (each reply goes to the host's Google Sheet and Gmail)
+9. duas
+10. a closing screen with lanterns and fireworks
 
 ## Editing
 
@@ -33,7 +32,6 @@ Before sharing, do these:
 | What | Where |
 | --- | --- |
 | Background songs: add `perfect.mp3` and `a-thousand-years.mp3` | `site/assets/audio/` (the music button appears once at least one file is there) |
-| Couple photos: replace `01.jpg`–`05.jpg` (portrait, about 4:5), or list your own | `site/assets/gallery/` and `gallery.photos` in `content.js` |
 | RSVP deadline | `rsvp.byDate` (currently 20 November 2026) |
 | Where RSVPs go | `rsvp.endpoint`: see [RSVP replies](#rsvp-replies) below. Until it is set, the RSVP card shows "Replies open soon" and nothing can be sent. |
 | Exact Google Maps pin | `venue.mapsUrl` (Google Maps → Share → Copy link) |
@@ -116,5 +114,5 @@ project's root directory to `site`).
   the farmhouse plot with the dropped pin, a compass, and a little car on its way.
   It isn't to scale. Tapping it, or the button below it, opens `venue.mapsUrl` in
   Google Maps.
-- **Placeholders.** `tools/render_cards.js` renders the gallery placeholder cards
-  and the link-preview image (`site/assets/images/og-walima.jpg`).
+- **Link preview.** `tools/render_cards.js` renders the link-preview image
+  (`site/assets/images/og-walima.jpg`).
