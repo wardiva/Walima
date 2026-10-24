@@ -20,7 +20,7 @@ export function initScrollDepth(scroller, sections, { reducedMotion }) {
   const items = sections.filter((s) => s.dataset.section !== "opening").map((s) => ({
     s,
     card: s.querySelector(":scope > .card, :scope > .closing"),
-    decos: [...s.querySelectorAll(":scope > .deco")].map((el) => ({ el, depth: +el.dataset.depth || 0 })),
+    decos: [...s.querySelectorAll(":scope > .deco, :scope > .amb > [data-depth]")].map((el) => ({ el, depth: +el.dataset.depth || 0 })),
     dirty: false,
   }));
   const hero = sections[0]?.querySelector(".hero");
@@ -131,13 +131,28 @@ export function initButterfly(bf, { reducedMotion, onTap }) {
   return { arrive };
 }
 
-/** Tap anywhere: sparkles. Drag a finger: dust. */
+/** A soft ring spreads across the paper where the finger landed (under the cards). */
+function ripple(e) {
+  const section = e.target.closest(".section");
+  const amb = section?.querySelector(":scope > .amb");
+  if (!amb) return;
+  const r = section.getBoundingClientRect();
+  const el = document.createElement("i");
+  el.className = "amb__ripple";
+  el.style.left = `${e.clientX - r.left}px`;
+  el.style.top = `${e.clientY - r.top}px`;
+  amb.append(el);
+  el.addEventListener("animationend", () => el.remove(), { once: true });
+}
+
+/** Tap anywhere: sparkles and a ripple on the paper. Drag a finger: dust. */
 export function initTouchMagic(app, fx, { reducedMotion, skip = "button, a, input, select, textarea, summary, label, iframe, .cd__when, .bf, .s-closing" }) {
   if (reducedMotion) return;
   const pos = (x, y) => { const r = app.getBoundingClientRect(); return [x - r.left, y - r.top]; };
   app.addEventListener("pointerdown", (e) => {
     if (e.target.closest(skip)) return;
     fx.sparkle(...pos(e.clientX, e.clientY), 12);
+    ripple(e);
   }, { passive: true });
   let lx = 0, ly = 0;
   const trail = (x, y) => {

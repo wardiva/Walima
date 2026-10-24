@@ -37,7 +37,31 @@ const deco = (name, cls, i = 0, depth = 0.12) => {
 /** Opens a screen; main.js paints its paper backdrop from data-paper. */
 const section = (name, paper, extra = "") =>
   `<section class="section s-${name} ${extra}" data-section="${name}" data-paper="${paper}">
-    <div class="bg"></div>`;
+    <div class="bg"></div>
+    ${ambient(name)}`;
+
+/* ───────────── Living backgrounds ─────────────
+   Each screen has its own ambient layer between the paper and the
+   ornaments (styles in ambient.css). Together they are one day passing as
+   you scroll: morning light → ink on paper → drifting clouds → afternoon
+   sun → wishes on the wind → garden shade → the bride's chiffon → light on
+   water → fairy lights at dusk → moonrise → a night of lanterns. Elements
+   with data-depth also drift with the scroll (motion.js). */
+const many = (n, cls, vars = () => "") => Array.from({ length: n }, (_, k) => `<i class="${cls}" style="--k:${k};${vars(k)}"></i>`).join("");
+const AMBIENT = {
+  opening: `<i class="amb__leak"></i><i class="amb__dapple"></i><i class="amb__leaves" data-depth="0.08"></i><i class="amb__leaves amb__leaves--far" data-depth="0.04"></i>`,
+  letter: `<i class="amb__bloom amb__bloom--1" data-depth="0.1"></i><i class="amb__bloom amb__bloom--2" data-depth="-0.08"></i><i class="amb__bloom amb__bloom--3" data-depth="0.05"></i><i class="amb__dust"></i><i class="amb__dust amb__dust--2"></i>`,
+  countdown: `<i class="amb__sun"></i>${many(4, "amb__cloud")}`,
+  schedule: `<i class="amb__beams"></i><i class="amb__sun amb__sun--corner"></i><i class="amb__dust amb__dust--ivory"></i>`,
+  story: `<i class="amb__bloom amb__bloom--4" data-depth="0.1"></i><i class="amb__bloom amb__bloom--5" data-depth="-0.06"></i>${many(8, "amb__seed")}`,
+  venue: `<i class="amb__leaves amb__leaves--garden" data-depth="0.08"></i><i class="amb__dapple amb__dapple--garden"></i>${many(7, "amb__floret")}`,
+  dress: `<i class="amb__silk amb__silk--1" data-depth="0.1"></i><i class="amb__silk amb__silk--2" data-depth="-0.08"></i><i class="amb__silk amb__silk--3"></i>${many(6, "amb__glint")}`,
+  faq: `<i class="amb__caustic"></i><i class="amb__caustic amb__caustic--2"></i>`,
+  rsvp: `<i class="amb__bokeh-set">${many(6, "amb__bokeh", (k) => `--w:${70 + (k * 23) % 60}`)}</i><i class="amb__curtain">${many(15, "amb__strand", (k) => `--len:${58 + (k * 37) % 38}%;--off:${(k * 7) % 30}px`)}</i>`,
+  dua: `<i class="amb__stars"></i><i class="amb__stars amb__stars--2"></i><i class="amb__moon"><svg viewBox="0 0 100 100"><defs><radialGradient id="moonG" cx=".35" cy=".35" r=".8"><stop offset="0" stop-color="#fffaf0"/><stop offset="1" stop-color="#e9d9b0"/></radialGradient><mask id="moonM"><rect width="100" height="100" fill="#fff"/><circle cx="64" cy="40" r="34" fill="#000"/></mask></defs><circle cx="50" cy="50" r="36" fill="url(#moonG)" mask="url(#moonM)"/></svg></i>`,
+  closing: `<i class="amb__stars"></i><i class="amb__stars amb__stars--2"></i>${many(7, "amb__skylantern", (k) => `--w:${12 + (k * 5) % 9}`)}`,
+};
+const ambient = (name) => (AMBIENT[name] ? `<div class="amb amb--${name}" aria-hidden="true">${AMBIENT[name]}</div>` : "");
 
 /** Twinkling stars, positioned in CSS by :nth-child. */
 const twinkles = (n, cls) => `<span class="twinkles ${cls}" aria-hidden="true">${"<i></i>".repeat(n)}</span>`;
@@ -47,6 +71,7 @@ function opening(c) {
   return `
   <section class="section s-opening is-intro" id="opening" data-section="opening" data-paper="light">
     <div class="bg" style="background-image:url('${m.paperLight}')"></div>
+    ${ambient("opening")}
 
     <!-- The sealed envelope -->
     <div class="env-scene" aria-hidden="true">
