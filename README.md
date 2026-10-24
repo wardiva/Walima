@@ -136,5 +136,10 @@ project's root directory to `site`).
   the farmhouse plot with the dropped pin, a compass, and a little car on its way.
   It isn't to scale. Tapping it, or the button below it, opens `venue.mapsUrl` in
   Google Maps.
-- **Link preview.** `tools/render_cards.js` renders the link-preview image
-  (`site/assets/images/og-walima.jpg`).
+- **Link preview.** `site/assets/images/og-walima.jpg` (1200×630) is the client's
+  own envelope photo, `tools/og-source.jpg`, scaled to 1200 px wide and cropped
+  so that "Walima Ceremony" and the wax seal sit in the middle (they also survive
+  a centred square crop). To rebuild it, run
+  `ffmpeg -i tools/og-source.jpg -vf "scale=1200:-1,crop=1200:630:0:120" -q:v 3 site/assets/images/og-walima.jpg`,
+  then bump `?v=` on the three `og:image` / `twitter:image` tags in
+  `site/index.html` so WhatsApp fetches the new image.
