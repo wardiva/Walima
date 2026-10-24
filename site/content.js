@@ -183,14 +183,13 @@ export default {
 
   /* Media */
   media: {
-    // Background songs, played in order and looped. Add the audio files to
-    // site/assets/audio/ with these names (MP3). Missing files are skipped;
-    // with none present the music button stays hidden.
+    // Background music, looped. The file is in site/assets/audio/. A
+    // missing file is skipped, and with none present the music button stays
+    // hidden. This is a clip of the client's file starting at 2:08, the
+    // chorus ("I have died every day waiting for you…"), and running to the
+    // end. For an untrimmed file, add start: <seconds> to begin part-way
+    // through, e.g. start: 128. More tracks play in order.
     music: [
-      // A Walima clip of the client's file, from the second chorus ("Baby,
-      // I'm dancing in the dark…") to the end. For an untrimmed file, add
-      // start: <seconds> to begin part-way through, e.g. start: 159.6.
-      { src: "assets/audio/perfect.mp3", title: "Perfect — Ed Sheeran" },
       { src: "assets/audio/a-thousand-years.mp3", title: "A Thousand Years — Christina Perri" },
     ],
     musicVolume: 0.7,
