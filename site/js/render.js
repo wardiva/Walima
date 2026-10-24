@@ -118,10 +118,9 @@ function letter(c) {
       ${write(cp.groom.name, "letter-card__name", 1.0)}
       <span class="letter-card__amp" ${r(9, "pop")}>${esc(cp.joiner)}</span>
       ${write(cp.bride.name, "letter-card__name", 1.75)}
-      <span class="serif letter-card__day" ${r(16)}>${esc(l.day)}</span>
-      <span class="caps letter-card__time" ${r(17)}>${esc(l.time)}</span>
-      <div class="arabic letter-card__verse" lang="ar" ${r(19, "glow")}>${esc(l.verseArabic)}</div>
-      <span class="letter-card__trans" ${r(20)}>${esc(l.verseTranslation)} <span class="nowrap">${esc(l.verseReference)}</span></span>
+      <span class="letter-card__rule" aria-hidden="true" ${r(30, "rule")}><i></i></span>
+      <div class="arabic letter-card__verse" lang="ar" ${r(32, "glow")}>${esc(l.verseArabic)}</div>
+      <span class="letter-card__trans" ${r(34)}>${esc(l.verseTranslation)} <span class="nowrap">${esc(l.verseReference)}</span></span>
     </div>
   </section>`;
 }
@@ -193,8 +192,48 @@ function schedule(c) {
   </section>`;
 }
 
+/**
+ * An illustrated map in the invitation's palette: the main road (labelled
+ * with venue.address), the farmhouse plot with the dropped pin, a compass
+ * and a little car on its way. It's a picture, not a survey: tapping it
+ * opens the real location (venue.mapsUrl) in Google Maps.
+ */
+function mapArt(v) {
+  const rows = Array.from({ length: 9 }, (_, i) => `<rect x="${236 + i * 19}" y="150" width="15" height="120" rx="3"/>`).join("");
+  const blocks = [];
+  for (let y = 0; y < 4; y++) for (let x = 0; x < 5; x++) {
+    if ((x + y * 2) % 7 === 3) continue;
+    blocks.push(`<rect x="${-6 + x * 40}" y="${-8 + y * 34}" width="32" height="26" rx="4"/>`);
+  }
+  const trees = (cx, cy, n) => Array.from({ length: n }, (_, i) => {
+    const a = i * 2.4, rr = 4 + (i % 3) * 5;
+    return `<circle cx="${(cx + Math.cos(a) * rr).toFixed(1)}" cy="${(cy + Math.sin(a) * rr * 0.7).toFixed(1)}" r="${3.2 + (i % 2)}"/>`;
+  }).join("");
+  return `
+<svg class="map-art" viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <g class="map-art__fields" transform="rotate(-6 320 210)">${rows}</g>
+  <g class="map-art__blocks" transform="rotate(-8 90 60)">${blocks.join("")}</g>
+  <g class="map-art__park"><ellipse cx="92" cy="196" rx="54" ry="34"/><g class="map-art__trees">${trees(92, 196, 11)}</g></g>
+  <g class="map-art__park"><ellipse cx="348" cy="70" rx="40" ry="26"/><g class="map-art__trees">${trees(348, 70, 7)}</g></g>
+  <g class="map-art__roads">
+    <path d="M-10 150C110 136 250 170 410 146"/><path d="M58-10L104 260"/><path d="M-10 92C70 96 150 84 230 70"/><path d="M226 128L246 126"/>
+  </g>
+  <g class="map-art__main">
+    <path class="map-art__casing" d="M296-12L148 262"/><path class="map-art__lane" d="M296-12L148 262"/><path class="map-art__dash" d="M296-12L148 262"/>
+    <path id="mapRoadLabel" d="M156 252L292 0" fill="none"/>
+    <text class="map-art__road-label"><textPath href="#mapRoadLabel" startOffset="50%" text-anchor="middle">${esc(String(v.address).toUpperCase())}</textPath></text>
+  </g>
+  <g class="map-art__plot"><rect x="238" y="104" width="58" height="44" rx="9"/><g class="map-art__trees">${trees(252, 116, 4)}${trees(284, 138, 3)}</g></g>
+  <g class="map-art__car-path"><g class="map-art__car"><rect x="-4.5" y="-8" width="9" height="16" rx="3.2"/><rect class="map-art__glass" x="-3.3" y="-5.4" width="6.6" height="3.4" rx="1"/></g></g>
+  <text class="map-art__city" x="40" y="62">${esc(String(v.city).toUpperCase())}</text>
+  <g class="map-art__compass" transform="translate(370 32)"><circle r="14"/><path d="M0-11L3.6 0H-3.6Z"/><path class="map-art__compass-s" d="M0 11L3.6 0H-3.6Z"/><text y="-17">N</text></g>
+  <g class="map-art__tag" transform="translate(276 178)"><rect x="-62" y="-15" width="124" height="30" rx="15"/><text y="6">${esc(v.name)}</text></g>
+</svg>`;
+}
+
 function venue(c) {
   const v = c.venue;
+  const where = `${v.name} ${v.subName}, ${v.address}, ${v.city}`;
   return `
   ${section("venue", "blue")}
     ${deco("garland-bows", "d-top-garland", 0, 0.3)}
@@ -204,10 +243,11 @@ function venue(c) {
       <span class="venue__sub" ${r(5)}>${esc(v.subName)}</span>
       <span class="venue__addr" ${r(6)}>${esc(v.address)}</span>
       <span class="caps venue__city" ${r(7)}>${esc(v.city)}</span>
-      <div class="venue__map" ${r(8)}>
-        <iframe data-src="${esc(v.mapEmbed)}" title="Map: ${esc(v.name)} ${esc(v.subName)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <a class="venue__map" href="${esc(v.mapsUrl)}" target="_blank" rel="noopener" aria-label="${esc(v.openLocation)}: ${esc(where)}" ${r(8)}>
+        ${mapArt(v)}
         <span class="pin-drop" aria-hidden="true"><span class="pin-drop__ripple"></span><span class="pin-drop__ripple pin-drop__ripple--2"></span><span class="pin-drop__shadow"></span><span class="pin-drop__pin">${icon.dropPin}</span></span>
-      </div>
+        <span class="venue__map-open" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-8 8M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></span>
+      </a>
       <a class="caps btn btn--navy btn--shine" href="${esc(v.mapsUrl)}" target="_blank" rel="noopener" ${r(9)}>${icon.pin}<span>${esc(v.openLocation)}</span></a>
     </div>
   </section>`;
@@ -282,17 +322,24 @@ function rsvp(c) {
       <h2 class="card-title" ${r(2)}>${write(v.title, "", 0.4)}</h2>
       <p class="rsvp__by" ${r(4)}>${esc(v.byLine)}<br /><span class="serif rsvp__date">${esc(v.byDate)}</span></p>
       <form class="rsvp__form" novalidate ${r(5)}>
-        <label class="rsvp__field rsvp__name">
-          <span class="sr-only">${esc(v.namePlaceholder)}</span>
-          <input name="name" type="text" autocomplete="name" placeholder="${esc(v.namePlaceholder)}" maxlength="60" required />
-        </label>
-        <label class="rsvp__field rsvp__guests">
-          <span class="caps">${esc(v.guestsLabel)}</span>
-          <select name="guests">${opts}</select>
-        </label>
-        <p class="rsvp__error" role="alert"></p>
-        <button class="caps btn btn--navy btn--shine" type="submit" value="yes">${icon.check}<span>${esc(v.attend)}</span></button>
-        <button class="caps btn btn--ghost" type="submit" value="no"><span>${esc(v.decline)}</span></button>
+        <fieldset class="rsvp__fields">
+          <label class="rsvp__field rsvp__name">
+            <span class="sr-only">${esc(v.namePlaceholder)}</span>
+            <input name="name" type="text" autocomplete="name" placeholder="${esc(v.namePlaceholder)}" maxlength="60" required />
+          </label>
+          <label class="rsvp__field rsvp__guests">
+            <span class="caps">${esc(v.guestsLabel)}</span>
+            <select name="guests">${opts}</select>
+          </label>
+          <label class="rsvp__field rsvp__note">
+            <span class="sr-only">${esc(v.messagePlaceholder)}</span>
+            <input name="message" type="text" autocomplete="off" placeholder="${esc(v.messagePlaceholder)}" maxlength="200" />
+          </label>
+          <label class="rsvp__hp" aria-hidden="true">Website <input name="website" type="text" tabindex="-1" autocomplete="off" /></label>
+          <p class="rsvp__error" role="alert" aria-live="assertive"></p>
+          <button class="caps btn btn--navy btn--shine" type="submit" value="yes">${icon.check}<span>${esc(v.attend)}</span></button>
+          <button class="caps btn btn--ghost" type="submit" value="no"><span>${esc(v.decline)}</span></button>
+        </fieldset>
       </form>
       <div class="rsvp__done" hidden>
         <span class="rsvp__mark" aria-hidden="true">${icon.heart}</span>
@@ -343,7 +390,7 @@ function closing(c) {
 
 export function renderSections(c) {
   decoN = 0;
-  return [opening, letter, countdown, story, schedule, venue, dressCode, gallery, faq, rsvp, dua, closing]
+  return [opening, letter, countdown, schedule, story, venue, dressCode, gallery, faq, rsvp, dua, closing]
     .map((fn) => fn(c))
     .join("");
 }

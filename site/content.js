@@ -10,17 +10,19 @@
  *                    seal cracks, the flap opens, the letter rises and
  *                    grows into the HERO — the names written inside a
  *                    wreath that grows leaf by leaf.
- *     2. Letter    — Bismillah, the invitation, the names and the date.
+ *     2. Letter    — Bismillah, the invitation, the names and the verse.
  *     3. Countdown — the date under silver scratch-off foil, live countdown.
- *     4. Story     — a few words from the couple.
- *     5. Schedule  — timeline built from `schedule.items`.
- *     6. Venue     — name, address, map and "Open in Google Maps".
+ *     4. Schedule  — timeline built from `schedule.items`.
+ *     5. Story     — a few words from the couple.
+ *     6. Venue     — name, address, an illustrated map (tap → Google Maps)
+ *                    and "Open in Google Maps".
  *     7. Dress code
  *     8. Gallery   — a pile of polaroids from `gallery.photos`; flick or
  *                    tap the top one to see the next.
  *     9. Q&A       — tap a question to open it.
- *    10. RSVP      — name + guests, "I Will Attend" / "Can't Attend"
- *                    (sends the reply on WhatsApp).
+ *    10. RSVP      — name, guests and a note, "I Will Attend" / "Can't
+ *                    Attend". Replies go to the host's own Google Sheet and
+ *                    Gmail (set `rsvp.endpoint`; see README → RSVP replies).
  *    11. Dua       — gifts / prayers.
  *    12. Closing   — "In sha Allah".
  *
@@ -62,8 +64,6 @@ export default {
     bismillah: "بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ",
     lines: ["Together with their families,", "you are cordially invited to the"],
     eventLine: "Walima Ceremony of", // spaced capitals, above the names
-    day: "Saturday, November 28, 2026",
-    time: "At 1 PM Noon",
     verseArabic: "وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً",
     verseTranslation: "And He placed between you affection and mercy",
     verseReference: "(Quran 30:21)",
@@ -81,18 +81,7 @@ export default {
     labels: { days: "Days", hours: "Hours", minutes: "Minutes", seconds: "Seconds" },
   },
 
-  /* 4 — Our story */
-  story: {
-    eyebrow: "Our Story",
-    title: "With Joy",
-    // One entry per paragraph.
-    paragraphs: [
-      "With hearts full of joy, we invite you to join us in the celebration of our Walima. Your presence will make our happiness even more special.",
-    ],
-    signature: "Hamza & Komal",
-  },
-
-  /* 5 — Schedule. Add, remove or reorder rows freely. */
+  /* 4 — Schedule. Add, remove or reorder rows freely. */
   schedule: {
     eyebrow: "The Day",
     title: "Schedule",
@@ -103,6 +92,17 @@ export default {
     ],
   },
 
+  /* 5 — Our story */
+  story: {
+    eyebrow: "Our Story",
+    title: "With Joy",
+    // One entry per paragraph.
+    paragraphs: [
+      "With hearts full of joy, we invite you to join us in the celebration of our Walima. Your presence will make our happiness even more special.",
+    ],
+    signature: "Hamza & Komal",
+  },
+
   /* 6 — Venue */
   venue: {
     eyebrow: "The Venue",
@@ -110,10 +110,9 @@ export default {
     subName: "Farmhouse",
     address: "Raiwind Road",
     city: "Lahore",
-    // Paste the exact pin here (Google Maps → Share → Copy link) to replace the search.
+    // Where the map card and the button go. Paste the exact pin here
+    // (Google Maps → Share → Copy link) to replace the search.
     mapsUrl: "https://www.google.com/maps/search/?api=1&query=Grand+Orchid+Farm+House+Raiwind+Road+Lahore",
-    // Map shown on the card (no API key needed).
-    mapEmbed: "https://maps.google.com/maps?q=Grand%20Orchid%20Farm%20House%2C%20Raiwind%20Road%2C%20Lahore&z=14&output=embed",
     openLocation: "Open in Google Maps",
   },
 
@@ -150,25 +149,27 @@ export default {
     ],
   },
 
-  /* 10 — RSVP. Replies are sent on WhatsApp. Put the host's number in
-          international format without "+" or spaces (e.g. "923001234567");
-          left empty, WhatsApp asks the guest which chat to send it to. */
+  /* 10 — RSVP. Each reply is added to a Google Sheet in the host's own
+          Google account, which also emails her (README → "RSVP replies").
+          Paste the web-app URL that ends in /exec into `endpoint`. While it
+          is empty the buttons show `closed` and nothing can be sent. */
   rsvp: {
     eyebrow: "RSVP",
     title: "Kindly Reply",
     byLine: "Please confirm your presence by",
     byDate: "20 November 2026",
-    whatsapp: "",
+    endpoint: "",
     namePlaceholder: "Your name",
     guestsLabel: "Guests",
     maxGuests: 6,
+    messagePlaceholder: "A note for the couple (optional)",
     attend: "I Will Attend",
     decline: "Can't Attend",
     nameMissing: "Please write your name first",
-    // The WhatsApp message. {name}, {guests} and {event} are filled in.
-    messageYes: "Assalam o Alaikum! {name} will attend the {event} ({guests}). JazakAllah for the invitation.",
-    messageNo: "Assalam o Alaikum! {name} regretfully can't attend the {event}. Wishing Hamza & Komal every happiness.",
-    event: "Walima of Hamza & Komal on 28 November 2026",
+    sending: "Sending",
+    sendFailed: "Your reply didn't go through. Please check your connection and tap again.",
+    closed: "Replies open soon, please check back shortly.",
+    event: "Walima of Hamza & Komal, 28 November 2026", // shown in the host's email
     thanksYes: "JazakAllah — we can't wait to see you!",
     thanksNo: "JazakAllah — you'll be in our duas.",
     change: "Change reply",

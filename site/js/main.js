@@ -48,7 +48,7 @@ const music = initMusic({
   labels: { on: content.ui.musicOn, off: content.ui.musicOff },
 });
 
-/* ── Gallery and map load one screen ahead ── */
+/* ── Gallery photos load one screen ahead ── */
 const gallery = initGallery(document.getElementById("galDeck"), document.getElementById("galDots"), {
   reducedMotion,
   onFlick: () => haptic(8),
@@ -58,8 +58,6 @@ const nearObserver = new IntersectionObserver(
     for (const e of entries) {
       if (!e.isIntersecting) continue;
       const s = e.target;
-      const map = s.querySelector("iframe[data-src]");
-      if (map) map.src = map.dataset.src;
       if (s.dataset.section === "gallery") gallery.load();
       nearObserver.unobserve(s);
     }
@@ -211,12 +209,6 @@ scroller.querySelectorAll(".hang").forEach((h, i) => h.addEventListener("click",
   h.animate([0, 16, -12, 8, -5, 2.5, 0].map((a) => ({ transform: `rotate(${a * dir}deg)` })), { duration: 1800, easing: "ease-in-out" });
 }));
 
-/* ── Venue: the dropped pin steps aside once the guest uses the map ── */
-const pin = scroller.querySelector(".pin-drop");
-window.addEventListener("blur", () => setTimeout(() => {
-  if (document.activeElement?.tagName === "IFRAME") pin?.classList.add("is-hidden");
-}));
-
 /* ── Q&A: one answer open at a time, with a little sparkle ── */
 const faqs = [...scroller.querySelectorAll(".faq__item")];
 faqs.forEach((d) => d.addEventListener("toggle", () => {
@@ -229,6 +221,7 @@ faqs.forEach((d) => d.addEventListener("toggle", () => {
 /* ── RSVP: confetti and hearts for yes, a gentle drift for no ── */
 initRsvp(document.getElementById("rsvp"), content.rsvp, {
   onInvalid: () => haptic([30, 50, 30]),
+  onFail: () => haptic([30, 50, 30]),
   onReply(answer, button) {
     const [x, y] = centre(button);
     if (answer === "yes") {
