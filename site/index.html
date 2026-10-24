@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#c9d7df" />
+    <meta name="color-scheme" content="light" />
+    <title>Hamza &amp; Komal — Walima Invitation</title>
+    <meta name="description" content="You are cordially invited to the Walima of Hamza Shafi &amp; Komal Naveed, Saturday 28 November 2026, Lahore." />
+    <!-- Link preview (WhatsApp, iMessage…). Crawlers don't run JavaScript, so
+         edit these by hand; og:image must be an absolute URL (update it if the
+         site moves to another domain). -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://hamza-and-komal-walima-invitation.vercel.app/" />
+    <meta property="og:site_name" content="Hamza &amp; Komal — Walima Invitation" />
+    <meta property="og:title" content="Hamza &amp; Komal — Walima Invitation" />
+    <meta property="og:description" content="Saturday, 28 November 2026 · 1 PM · Grand Orchid Farmhouse, Raiwind Road, Lahore. You are cordially invited." />
+    <meta property="og:image" content="https://hamza-and-komal-walima-invitation.vercel.app/assets/images/og-walima.jpg?v=1" />
+    <meta property="og:image:secure_url" content="https://hamza-and-komal-walima-invitation.vercel.app/assets/images/og-walima.jpg?v=1" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="A dusty-blue envelope reading The Walima of Hamza &amp; Komal, sealed with a maroon H&amp;K wax seal" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Hamza &amp; Komal — Walima Invitation" />
+    <meta name="twitter:image" content="https://hamza-and-komal-walima-invitation.vercel.app/assets/images/og-walima.jpg?v=1" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 21'%3E%3Cpath fill='%235f7a90' d='M12 21s-1.2-.9-3.1-2.5C4.3 14.6 0 11.1 0 6.4 0 2.8 2.7 0 6.2 0c2.2 0 4.3 1.1 5.8 3 1.5-1.9 3.6-3 5.8-3C21.3 0 24 2.8 24 6.4c0 4.7-4.3 8.2-8.9 12.1C13.2 20.1 12 21 12 21z'/%3E%3C/svg%3E" />
+    <link rel="preload" as="font" type="font/woff2" href="assets/fonts/imperial-script-400-latin.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="assets/fonts/quicksand-var-latin.woff2" crossorigin />
+    <link rel="stylesheet" href="css/fonts.css" />
+
+    <link rel="preload" as="image" href="assets/images/paper-ice.jpg" />
+    <link rel="preload" as="image" href="assets/images/paper-blue.jpg" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/controls.css" />
+    <link rel="stylesheet" href="css/sections.css" />
+  </head>
+  <body>
+    <div class="backdrop" aria-hidden="true"></div>
+
+    <div class="app" id="app">
+      <main class="scroller is-locked" id="scroller" aria-live="polite"></main>
+
+      <canvas class="petals" id="petals" aria-hidden="true"></canvas>
+
+      <button class="music-btn" id="musicBtn" type="button" aria-pressed="false" hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M9 18V5l11-2v13" />
+          <circle cx="6" cy="18" r="3" />
+          <circle cx="17" cy="16" r="3" />
+          <path class="music-btn__slash" d="M3 3l18 18" />
+        </svg>
+      </button>
+
+      <button class="scroll-cue" id="scrollCue" type="button">
+        <span class="scroll-cue__btn" aria-hidden="true">
+          <span class="scroll-cue__halo"></span>
+          <svg class="scroll-cue__chev" viewBox="0 0 24 24">
+            <path class="c1" d="M7 6l5 5 5-5" />
+            <path class="c2" d="M7 12l5 5 5-5" />
+          </svg>
+        </span>
+      </button>
+    </div>
+
+    <noscript>
+      <p class="noscript">This invitation needs JavaScript to open.</p>
+    </noscript>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>

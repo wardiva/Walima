@@ -1,0 +1,4 @@
+.asset-cache/
+node_modules/
+.vercel
+.DS_Store
