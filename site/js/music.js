@@ -2,6 +2,10 @@
 // block autoplay with sound, so playback starts on the "Tap to Open" gesture;
 // the floating button toggles it afterwards. Tracks whose file is missing are
 // skipped; if none can play, the button stays hidden.
+//
+// A track may set `start` (seconds) to begin part-way through an untrimmed
+// file. Once a track is known to exist it is preloaded, so the music is
+// already playing as the seal cracks rather than buffering first.
 
 export function initMusic({ button, tracks, volume = 0.7, labels }) {
   const audio = new Audio();
@@ -26,7 +30,7 @@ export function initMusic({ button, tracks, volume = 0.7, labels }) {
     if (!list.length) return;
     button.hidden = false;
     requestAnimationFrame(() => button.classList.add("is-ready"));
-    if (!audio.src) audio.src = list[0].src;
+    if (!audio.src) { audio.preload = "auto"; load(0); }
     if (wanted) play();
   });
 
@@ -42,10 +46,21 @@ export function initMusic({ button, tracks, volume = 0.7, labels }) {
     fadeRaf = requestAnimationFrame(step);
   };
 
+  // Load track i; seek to its `start` once the file's timing is known.
+  let seekTo = 0;
+  function load(i) {
+    index = i;
+    seekTo = Number(list[i].start) || 0;
+    audio.src = list[i].src;
+  }
+  audio.addEventListener("loadedmetadata", () => {
+    if (seekTo && seekTo < audio.duration) audio.currentTime = seekTo;
+    seekTo = 0;
+  });
+
   // Next song when one ends; the last one wraps to the first.
   audio.addEventListener("ended", () => {
-    index = (index + 1) % list.length;
-    audio.src = list[index].src;
+    load((index + 1) % list.length);
     audio.play().catch(() => {});
   });
   // A file that fails mid-way: drop it and move on.
@@ -53,8 +68,7 @@ export function initMusic({ button, tracks, volume = 0.7, labels }) {
     if (!list.length || !audio.src) return;
     list.splice(index, 1);
     if (!list.length) { button.hidden = true; return; }
-    index %= list.length;
-    audio.src = list[index].src;
+    load(index % list.length);
     if (wanted) audio.play().catch(() => {});
   });
 

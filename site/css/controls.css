@@ -57,6 +57,12 @@
   visibility: visible;
   transition: opacity 0.3s var(--ease-out) 0.2s, visibility 0s;
 }
+/* stepped aside so it never covers a card (main.js) */
+.scroll-cue.is-visible.is-tucked {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s var(--ease-out), visibility 0s linear 0.2s;
+}
 .scroll-cue__btn {
   position: relative;
   width: calc(56 * var(--u));

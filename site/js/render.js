@@ -44,8 +44,8 @@ const section = (name, paper, extra = "") =>
    Each screen has its own ambient layer between the paper and the
    ornaments (styles in ambient.css). Together they are one day passing as
    you scroll: morning light → ink on paper → drifting clouds → afternoon
-   sun → wishes on the wind → garden shade → the bride's chiffon → light on
-   water → fairy lights at dusk → moonrise → a night of lanterns. Elements
+   sun → wishes on the wind → garden shade → the bride's chiffon → soft
+   dusk light → fairy lights at dusk → moonrise → a night of lanterns. Elements
    with data-depth also drift with the scroll (motion.js). */
 const many = (n, cls, vars = () => "") => Array.from({ length: n }, (_, k) => `<i class="${cls}" style="--k:${k};${vars(k)}"></i>`).join("");
 const AMBIENT = {
@@ -56,11 +56,28 @@ const AMBIENT = {
   story: `<i class="amb__bloom amb__bloom--4" data-depth="0.1"></i><i class="amb__bloom amb__bloom--5" data-depth="-0.06"></i>${many(8, "amb__seed")}`,
   venue: `<i class="amb__leaves amb__leaves--garden" data-depth="0.08"></i><i class="amb__dapple amb__dapple--garden"></i>${many(7, "amb__floret")}`,
   dress: `<i class="amb__silk amb__silk--1" data-depth="0.1"></i><i class="amb__silk amb__silk--2" data-depth="-0.08"></i><i class="amb__silk amb__silk--3"></i>${many(6, "amb__glint")}`,
-  faq: `<i class="amb__caustic"></i><i class="amb__caustic amb__caustic--2"></i>`,
-  rsvp: `<i class="amb__bokeh-set">${many(6, "amb__bokeh", (k) => `--w:${70 + (k * 23) % 60}`)}</i><i class="amb__curtain">${many(15, "amb__strand", (k) => `--len:${58 + (k * 37) % 38}%;--off:${(k * 7) % 30}px`)}</i>`,
+  faq: `<i class="amb__glow amb__glow--rose"></i><i class="amb__glow amb__glow--ice"></i><i class="amb__sheen"></i>`,
+  rsvp: `<i class="amb__bokeh-set">${many(5, "amb__bokeh", (k) => `--w:${70 + (k * 23) % 60}`)}</i><i class="amb__curtain">${fairyLights()}</i>`,
   dua: `<i class="amb__stars"></i><i class="amb__stars amb__stars--2"></i><i class="amb__moon"><svg viewBox="0 0 100 100"><defs><radialGradient id="moonG" cx=".35" cy=".35" r=".8"><stop offset="0" stop-color="#fffaf0"/><stop offset="1" stop-color="#e9d9b0"/></radialGradient><mask id="moonM"><rect width="100" height="100" fill="#fff"/><circle cx="64" cy="40" r="34" fill="#000"/></mask></defs><circle cx="50" cy="50" r="36" fill="url(#moonG)" mask="url(#moonM)"/></svg></i>`,
   closing: `<i class="amb__stars"></i><i class="amb__stars amb__stars--2"></i>${many(7, "amb__skylantern", (k) => `--w:${12 + (k * 5) % 9}`)}`,
 };
+/** Fairy lights: a few strands at irregular spacing and depth, each bulb with its own slow twinkle. */
+function fairyLights() {
+  let seed = 7;
+  const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+  const xs = [2.5, 7, 13, 27, 48, 72, 87, 93, 97.5];
+  return xs.map((x, k) => {
+    const depth = [0.9, 0.6, 1, 0.55, 0.5, 0.6, 1, 0.65, 0.9][k];
+    const len = 62 + Math.round(rnd() * 34);
+    let y = 4 + rnd() * 8, bulbs = "";
+    while (y < 94) {
+      bulbs += `<i class="amb__bulb" style="--y:${y.toFixed(1)}%;--s:${(0.7 + rnd() * 0.6).toFixed(2)};--d:${(2.2 + rnd() * 3).toFixed(2)}s;--dl:${(-rnd() * 5).toFixed(2)}s"></i>`;
+      y += 9 + rnd() * 13;
+    }
+    const run = k % 3 === 1 ? `<i class="amb__run" style="--rd:${(9 + rnd() * 6).toFixed(1)}s;--rl:${(-rnd() * 9).toFixed(1)}s"><i></i></i>` : "";
+    return `<i class="amb__strand" style="--x:${x}%;--len:${len}%;--depth:${depth};--sw:${(6 + rnd() * 4).toFixed(1)}s;--sd:${(-rnd() * 6).toFixed(1)}s">${bulbs}${run}</i>`;
+  }).join("");
+}
 const ambient = (name) => (AMBIENT[name] ? `<div class="amb amb--${name}" aria-hidden="true">${AMBIENT[name]}</div>` : "");
 
 /** Twinkling stars, positioned in CSS by :nth-child. */

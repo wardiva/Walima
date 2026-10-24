@@ -116,6 +116,7 @@ const setCurrent = (s) => {
   }
   const isLast = s === sections[sections.length - 1];
   cue.classList.toggle("is-visible", opened && !isLast);
+  queueCue?.();
 };
 
 const activeObserver = new IntersectionObserver(
@@ -157,6 +158,30 @@ initOpening({
     setTimeout(() => butterfly.arrive(), 2600);
   },
 });
+
+/* ── The cue steps aside whenever it would cover a card (short screens,
+      large system text), and returns once the card has scrolled clear.
+      Measured from layout, so reveal and scroll-depth transforms can't
+      make it flicker. ── */
+const cueBtn = cue.querySelector(".scroll-cue__btn");
+let cueRaf = 0;
+const checkCue = () => {
+  cueRaf = 0;
+  const card = current?.querySelector(":scope > .card, :scope > .closing");
+  let clash = false;
+  if (card && opened) {
+    const bottom = current.offsetTop + card.offsetTop + card.offsetHeight - scroller.scrollTop;
+    const top = current.offsetTop + card.offsetTop - scroller.scrollTop;
+    const q = cueBtn.getBoundingClientRect(), s = scroller.getBoundingClientRect();
+    clash = q.top - s.top < bottom - 4 && q.bottom - s.top > top;
+  }
+  cue.classList.toggle("is-tucked", clash);
+};
+const queueCue = () => { if (!cueRaf) cueRaf = requestAnimationFrame(checkCue); };
+scroller.addEventListener("scroll", queueCue, { passive: true });
+window.addEventListener("resize", queueCue);
+const cardSizes = new ResizeObserver(queueCue);
+scroller.querySelectorAll(".card").forEach((c) => cardSizes.observe(c));
 
 /* ── Scroll cue: jump to the next screen ── */
 cue.addEventListener("click", () => {

@@ -2,7 +2,7 @@
    One ambient layer per screen, between the watercolour paper (.bg) and
    the ornaments. Read top to bottom, they are a single day passing:
    morning light → ink on paper → clouds → afternoon sun → wishes on the
-   wind → garden shade → chiffon → light on water → fairy lights at dusk →
+   wind → garden shade → chiffon → soft dusk light → fairy lights →
    moonrise → a night of lanterns. A tint on each screen (--t1 top, --t2
    bottom, each screen starting where the last one ended) carries the light
    from morning ivory to night navy.
@@ -22,7 +22,7 @@
   background: linear-gradient(180deg, var(--t1, transparent), var(--t2, transparent));
 }
 .amb > i { position: absolute; display: block; }
-.amb > i > i { position: absolute; display: block; }
+.amb > i > i, .amb__bulb, .amb__run, .amb__run > i { position: absolute; display: block; }
 
 /* the day, screen by screen */
 .amb--opening   { --t1: rgba(255, 244, 222, 0.34); --t2: rgba(255, 248, 236, 0.05); }
@@ -274,57 +274,79 @@
 .amb__glint:nth-child(8) { left: 70%; top: 88%; animation-delay: 3.2s; }
 .amb__glint:nth-child(9) { left: 44%; top: 94%; animation-delay: 2.2s; }
 
-/* ═════════════ 8 · Q & A: light on water ═════════════ */
-.amb__caustic {
-  top: -260px; left: -260px; right: 0; bottom: 0;
-  background: url("../assets/images/amb-caustic.webp") 0 0 / 260px 260px repeat;
-  opacity: 0.24;
-  animation: caustic-a 26s linear infinite;
+/* ═════════════ 8 · Q & A: dusk light, barely moving ═════════════ */
+/* No pattern at all: two very soft glows drift and breathe, and a faint,
+   wide sheen glides across now and then, so the card stays the focus. */
+.amb__glow {
+  width: 120%; aspect-ratio: 1;
+  border-radius: 50%;
 }
-.amb__caustic--2 {
-  left: 0; right: -340px; top: -340px;
-  background-size: 340px 340px;
-  opacity: 0.2;
-  animation: caustic-b 37s linear infinite, caustic-breathe 7s ease-in-out infinite alternate;
+.amb__glow--rose {
+  left: -45%; top: -25%;
+  background: radial-gradient(circle, rgba(255, 238, 228, 0.42), rgba(255, 238, 228, 0.12) 40%, rgba(255, 238, 228, 0) 66%);
+  animation: glow-drift-a 18s ease-in-out infinite alternate;
 }
-@keyframes caustic-a { to { transform: translate3d(260px, 260px, 0); } }
-@keyframes caustic-b { to { transform: translate3d(-340px, 340px, 0); } }
-@keyframes caustic-breathe { from { opacity: 0.1; } to { opacity: 0.26; } }
+.amb__glow--ice {
+  right: -50%; bottom: -30%;
+  background: radial-gradient(circle, rgba(236, 244, 250, 0.4), rgba(236, 244, 250, 0.1) 40%, rgba(236, 244, 250, 0) 66%);
+  animation: glow-drift-b 22s ease-in-out infinite alternate;
+}
+@keyframes glow-drift-a { from { opacity: 0.55; transform: translate3d(0, 0, 0) scale(0.95); } to { opacity: 1; transform: translate3d(10%, 6%, 0) scale(1.08); } }
+@keyframes glow-drift-b { from { opacity: 1; transform: translate3d(0, 0, 0) scale(1.05); } to { opacity: 0.5; transform: translate3d(-8%, -6%, 0) scale(0.95); } }
+.amb__sheen {
+  top: -20%; bottom: -20%; left: 0;
+  width: 70%;
+  background: linear-gradient(105deg, rgba(255, 252, 244, 0) 20%, rgba(255, 252, 244, 0.16) 50%, rgba(255, 252, 244, 0) 80%);
+  animation: sheen 16s ease-in-out 1s infinite;
+}
+@keyframes sheen { 0% { opacity: 0; transform: translate3d(-110%, 0, 0); } 15% { opacity: 1; } 60% { opacity: 1; transform: translate3d(150%, 0, 0); } 61%, 100% { opacity: 0; transform: translate3d(150%, 0, 0); } }
 
 /* ═════════════ 9 · RSVP: fairy lights at dusk ═════════════ */
-.amb__curtain {
-  inset: 0;
-  transform-origin: 50% 0;
-  animation: curtain 8s ease-in-out infinite alternate;
-}
-@keyframes curtain { from { transform: rotate(-0.6deg); } to { transform: rotate(0.6deg); } }
+/* A few strands at irregular spacing and depth; each small, dim bulb
+   twinkles on its own slow cycle, the strands sway, and now and then a
+   shimmer runs down one of them. */
+.amb__curtain { inset: 0; }
 .amb__strand {
   top: -1%;
-  left: calc(3% + var(--k) * 6.7%);
-  width: 12px; margin-left: -6px;
-  height: var(--len, 80%);
-  background:
-    radial-gradient(circle, rgba(255, 246, 214, 1) 0 1.6px, rgba(255, 228, 165, 0.55) 2.6px, rgba(255, 228, 165, 0) 6px) 50% var(--off, 0px) / 12px 30px repeat-y,
-    linear-gradient(90deg, transparent 5.6px, rgba(255, 250, 236, 0.28) 5.6px 6.4px, transparent 6.4px);
-  -webkit-mask-image: linear-gradient(180deg, #000 82%, transparent);
-  mask-image: linear-gradient(180deg, #000 82%, transparent);
-  animation: strand 2.8s ease-in-out calc(var(--k) * -0.37s) infinite alternate;
+  left: var(--x);
+  width: 1px; height: var(--len, 70%);
+  background: linear-gradient(180deg, rgba(255, 250, 236, 0.3), rgba(255, 250, 236, 0.1));
+  opacity: var(--depth, 1);
+  transform-origin: 50% 0;
+  animation: strand-sway var(--sw, 7s) ease-in-out var(--sd, 0s) infinite alternate;
 }
-@keyframes strand { from { opacity: 0.45; } to { opacity: 1; } }
-.amb__bokeh-set { inset: 0; }
+@keyframes strand-sway { from { transform: rotate(-1.4deg); } to { transform: rotate(1.4deg); } }
+.amb__bulb {
+  left: 0; top: var(--y);
+  width: calc(7px * var(--s, 1)); height: calc(7px * var(--s, 1));
+  margin: calc(-3.5px * var(--s, 1)) 0 0 calc(-3.5px * var(--s, 1) + 0.5px);
+  border-radius: 50%;
+  background: radial-gradient(circle, #fffaf0 0 32%, rgba(255, 228, 172, 0.85) 58%, rgba(255, 228, 172, 0) 100%);
+  box-shadow: 0 0 calc(10px * var(--s, 1)) calc(3px * var(--s, 1)) rgba(255, 214, 150, 0.4);
+  animation: bulb var(--d, 3s) ease-in-out var(--dl, 0s) infinite alternate;
+}
+@keyframes bulb { from { opacity: 0.22; transform: scale(0.7); } to { opacity: 1; transform: scale(1); } }
+.amb__run { inset: 0; animation: run-down var(--rd, 11s) cubic-bezier(0.45, 0, 0.55, 1) var(--rl, 0s) infinite; }
+.amb__run > i {
+  left: 0; top: 0;
+  width: 14px; height: 14px; margin: -7px 0 0 -6.5px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 246, 220, 0.75), rgba(255, 226, 168, 0) 70%);
+}
+@keyframes run-down { 0% { opacity: 0; transform: translate3d(0, 0, 0); } 5% { opacity: 1; } 32% { opacity: 1; transform: translate3d(0, 100%, 0); } 36%, 100% { opacity: 0; transform: translate3d(0, 100%, 0); } }
+.amb__bokeh-set { inset: 0; opacity: 0.65; }
 .amb__bokeh {
   width: calc(var(--w, 90) * var(--u)); aspect-ratio: 1;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 238, 200, 0.5), rgba(255, 238, 200, 0.18) 55%, rgba(255, 238, 200, 0) 70%);
+  background: radial-gradient(circle, rgba(255, 238, 200, 0.42), rgba(255, 238, 200, 0.14) 55%, rgba(255, 238, 200, 0) 70%);
   animation: bokeh 12s ease-in-out calc(var(--k) * -2.3s) infinite alternate;
 }
 .amb__bokeh:nth-child(1) { left: 6%; top: 62%; }
-.amb__bokeh:nth-child(2) { left: 70%; top: 74%; background: radial-gradient(circle, rgba(220, 234, 244, 0.5), rgba(220, 234, 244, 0.15) 55%, transparent 70%); }
+.amb__bokeh:nth-child(2) { left: 70%; top: 74%; background: radial-gradient(circle, rgba(220, 234, 244, 0.42), rgba(220, 234, 244, 0.12) 55%, transparent 70%); }
 .amb__bokeh:nth-child(3) { left: 40%; top: 86%; }
 .amb__bokeh:nth-child(4) { left: 84%; top: 46%; }
-.amb__bokeh:nth-child(5) { left: -4%; top: 30%; background: radial-gradient(circle, rgba(220, 234, 244, 0.45), rgba(220, 234, 244, 0.12) 55%, transparent 70%); }
-.amb__bokeh:nth-child(6) { left: 56%; top: 54%; }
-@keyframes bokeh { from { opacity: 0.35; transform: translate3d(0, 0, 0) scale(0.9); } to { opacity: 0.9; transform: translate3d(calc(14 * var(--u)), calc(-22 * var(--u)), 0) scale(1.08); } }
+.amb__bokeh:nth-child(5) { left: -4%; top: 30%; background: radial-gradient(circle, rgba(220, 234, 244, 0.38), rgba(220, 234, 244, 0.1) 55%, transparent 70%); }
+@keyframes bokeh { from { opacity: 0.35; transform: translate3d(0, 0, 0) scale(0.9); } to { opacity: 0.85; transform: translate3d(calc(14 * var(--u)), calc(-22 * var(--u)), 0) scale(1.08); } }
 
 /* ═════════════ 10 · Dua: moonrise ═════════════ */
 .amb--dua .amb__stars { inset: 0 0 45%; }
@@ -371,7 +393,8 @@
   .amb *, .amb *::before, .amb *::after { animation: none !important; }
   .amb__bloom { opacity: 0.5; }
   .amb__moon { opacity: 1; transform: none; }
-  .amb__seed, .amb__floret, .amb__skylantern, .amb__glint, .amb__ripple { display: none; }
+  .amb__seed, .amb__floret, .amb__skylantern, .amb__glint, .amb__ripple, .amb__run, .amb__sheen { display: none; }
+  .amb__bulb { opacity: 0.6; }
   .amb__cloud:nth-child(2) { transform: translate3d(10%, 0, 0); }
   .amb__cloud:nth-child(3) { transform: translate3d(70%, 0, 0); }
   .amb__cloud:nth-child(4) { transform: translate3d(-20%, 0, 0); }

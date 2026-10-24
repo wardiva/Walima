@@ -187,6 +187,9 @@ export default {
     // site/assets/audio/ with these names (MP3). Missing files are skipped;
     // with none present the music button stays hidden.
     music: [
+      // A Walima clip of the client's file, from the second chorus ("Baby,
+      // I'm dancing in the dark…") to the end. For an untrimmed file, add
+      // start: <seconds> to begin part-way through, e.g. start: 159.6.
       { src: "assets/audio/perfect.mp3", title: "Perfect — Ed Sheeran" },
       { src: "assets/audio/a-thousand-years.mp3", title: "A Thousand Years — Christina Perri" },
     ],

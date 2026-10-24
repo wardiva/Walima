@@ -10,7 +10,7 @@ Builds the invitation's artwork into site/assets/images.
    so it reads like the plaster scrollwork on the printed Walima card.
 3. Paints the dusty-blue watercolour paper used behind every screen.
 4. Generates the small textures for the living backgrounds (ambient layers):
-   leaf shade, watercolour blooms, water-caustic light, sheer chiffon,
+   leaf shade, watercolour blooms, sheer chiffon,
    clouds and star fields. All are made here from noise and geometry (no
    stock images), white/blue/navy with alpha, so the CSS can tint and fade
    them. `python3 -I tools/build_assets.py --ambient` rebuilds only these.
@@ -175,32 +175,6 @@ def watercolor_bloom(size=560, seed=1, color=(95, 122, 144)):
     return _rgba(color, a)
 
 
-def caustics(size=512, seed=9, cells=22):
-    """Tileable water-caustic light: bright seams of a periodic Voronoi pattern."""
-    rng = np.random.default_rng(seed)
-    pts = rng.random((cells, 2)) * size
-    yy, xx = np.mgrid[0:size, 0:size].astype(np.float32)
-    # periodic domain warp: sums of sines whose periods divide the tile
-    t = 2 * np.pi / size
-    ph = rng.uniform(0, 6.28, 6)
-    xx = xx + 14 * np.sin(yy * t * 2 + ph[0]) + 8 * np.sin((xx + yy) * t * 3 + ph[1]) + 5 * np.sin(yy * t * 5 + ph[2])
-    yy = yy + 14 * np.sin(xx * t * 2 + ph[3]) + 8 * np.sin((xx - yy) * t * 3 + ph[4]) + 5 * np.sin(xx * t * 5 + ph[5])
-    d1 = np.full((size, size), 1e9, np.float32)
-    d2 = np.full((size, size), 1e9, np.float32)
-    for px, py in pts:
-        for ox in (-size, 0, size):
-            for oy in (-size, 0, size):
-                d = np.hypot(xx - px - ox, yy - py - oy)
-                d2 = np.where(d < d1, d1, np.minimum(d2, d))
-                d1 = np.minimum(d1, d)
-    seam = np.exp(-((d2 - d1) / 3.2) ** 2)
-    glow = np.exp(-((d2 - d1) / 12.0) ** 2) * 0.35
-    vary = 0.55 + 0.45 * noise((size, size), 64, rng)
-    a = _blur(np.clip((seam + glow) * vary, 0, 1), 1.2) * 0.95
-    # tile-safe blur already approximated; brighten crossings
-    return _rgba((255, 253, 244), np.clip(a, 0, 1))
-
-
 def chiffon(w=1000, h=420, seed=3, color=(196, 216, 230)):
     """A length of sheer chiffon caught by the wind: folds, sheen, soft edges."""
     rng = np.random.default_rng(seed)
@@ -266,7 +240,6 @@ def ambient_textures():
         "amb-leaves": leaf_shade(),
         "amb-bloom-a": watercolor_bloom(seed=1, color=(95, 122, 144)),
         "amb-bloom-b": watercolor_bloom(seed=7, color=(140, 166, 186)),
-        "amb-caustic": caustics(),
         "amb-chiffon-a": chiffon(seed=3, color=(196, 216, 230)),
         "amb-chiffon-b": chiffon(seed=8, color=(214, 226, 236)),
         "amb-cloud-a": cloud(seed=2),
