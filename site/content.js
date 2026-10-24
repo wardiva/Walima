@@ -142,7 +142,7 @@ export default {
     title: "Kindly Reply",
     byLine: "Please confirm your presence by",
     byDate: "25 November 2026",
-    endpoint: "",
+    endpoint: "https://script.google.com/macros/s/AKfycbwsnjax1F9SFKIDIV9sB9LVYnO1pT6JliND5-m97LAbkNqVWiTajtWZDhvVrBWw4KmAaA/exec",
     namePlaceholder: "Your name",
     guestsLabel: "Guests",
     maxGuests: 6,
