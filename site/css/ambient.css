@@ -1,9 +1,9 @@
 /* ═════════════════════════ Living backgrounds ═════════════════════════
    One ambient layer per screen, between the watercolour paper (.bg) and
    the ornaments. Read top to bottom, they are a single day passing:
-   morning light → ink on paper → clouds → afternoon sun → wishes on the
-   wind → garden shade → chiffon → soft dusk light → fairy lights →
-   moonrise → a night of lanterns. A tint on each screen (--t1 top, --t2
+   morning light → ink on paper → clouds → afternoon sun → garden shade →
+   chiffon → ink blooms and wishes on the wind → fairy lights → moonrise →
+   a night of lanterns. A tint on each screen (--t1 top, --t2
    bottom, each screen starting where the last one ended) carries the light
    from morning ivory to night navy.
 
@@ -29,10 +29,9 @@
 .amb--letter    { --t1: rgba(255, 248, 236, 0.05); --t2: rgba(236, 245, 251, 0.12); }
 .amb--countdown { --t1: rgba(236, 245, 251, 0.26); --t2: rgba(236, 245, 251, 0.06); }
 .amb--schedule  { --t1: rgba(255, 244, 222, 0.16); --t2: rgba(255, 240, 215, 0.08); }
-.amb--story     { --t1: rgba(255, 240, 215, 0.08); --t2: rgba(240, 230, 224, 0.07); }
 .amb--venue     { --t1: rgba(240, 230, 224, 0.07); --t2: rgba(233, 218, 212, 0.12); }
 .amb--dress     { --t1: rgba(233, 218, 212, 0.12); --t2: rgba(214, 194, 200, 0.18); }
-.amb--faq       { --t1: rgba(214, 194, 200, 0.18); --t2: rgba(168, 154, 178, 0.24); }
+.amb--faq       { --t1: rgba(255, 240, 215, 0.08); --t2: rgba(240, 230, 224, 0.07); }
 .amb--rsvp      { --t1: rgba(150, 140, 168, 0.22); --t2: rgba(30, 40, 68, 0.6); }
 .amb--dua       { --t1: rgba(28, 38, 64, 0.62); --t2: rgba(40, 52, 84, 0.4); }
 .amb--closing   { --t1: rgba(24, 33, 58, 0.34); --t2: rgba(20, 28, 48, 0.22); }
@@ -176,34 +175,7 @@
 @keyframes beams { from { opacity: 0.6; transform: rotate(-6deg); } to { opacity: 1; transform: rotate(8deg); } }
 .amb__sun--corner { left: -34%; right: auto; top: -26%; width: 80%; }
 
-/* ═════════════ 5 · Story: ink and wishes on the wind ═════════════ */
-.amb__bloom--4 { right: -30%; top: -6%; width: 76%; background-image: url("../assets/images/amb-bloom-b.webp"); --bd: 0.4s; }
-.amb__bloom--5 { left: -34%; bottom: -12%; width: 86%; --bd: 2s; }
-.amb__seed {
-  bottom: -10%;
-  width: calc(44 * var(--u)); min-width: 28px; aspect-ratio: 2 / 3;
-  filter: drop-shadow(0 0 1.5px rgba(31, 42, 68, 0.35));
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 60'%3E%3Cg stroke='%23fbf8f1' stroke-width='.9' fill='none' stroke-linecap='round'%3E%3Cpath d='M20 21v31'/%3E%3Cpath d='M20 21L5 9M20 21L9 4M20 21L15 1M20 21L25 1M20 21L31 4M20 21L35 9M20 21L3 16M20 21L37 16M20 21L12 12M20 21L28 12'/%3E%3C/g%3E%3Cg fill='%23fbf8f1'%3E%3Ccircle cx='5' cy='9' r='1.2'/%3E%3Ccircle cx='9' cy='4' r='1.2'/%3E%3Ccircle cx='15' cy='1.5' r='1.2'/%3E%3Ccircle cx='25' cy='1.5' r='1.2'/%3E%3Ccircle cx='31' cy='4' r='1.2'/%3E%3Ccircle cx='35' cy='9' r='1.2'/%3E%3Ccircle cx='3' cy='16' r='1.2'/%3E%3Ccircle cx='37' cy='16' r='1.2'/%3E%3C/g%3E%3Cellipse cx='20' cy='54' rx='1.8' ry='4.2' fill='%23c9ab72'/%3E%3C/svg%3E") center / contain no-repeat;
-  opacity: 0;
-  animation: seed-float var(--sd, 18s) linear var(--sl, 0s) infinite;
-}
-.amb__seed:nth-child(3) { left: 6%; --sd: 19s; --sl: -2s; }
-.amb__seed:nth-child(4) { left: 22%; --sd: 24s; --sl: -14s; scale: 0.75; }
-.amb__seed:nth-child(5) { left: 40%; --sd: 21s; --sl: -7s; }
-.amb__seed:nth-child(6) { left: 58%; --sd: 26s; --sl: -19s; scale: 0.65; }
-.amb__seed:nth-child(7) { left: 72%; --sd: 18s; --sl: -11s; scale: 0.85; }
-.amb__seed:nth-child(8) { left: 86%; --sd: 23s; --sl: -4s; }
-.amb__seed:nth-child(9) { left: 14%; --sd: 28s; --sl: -22s; scale: 0.55; }
-.amb__seed:nth-child(10) { left: 66%; --sd: 30s; --sl: -26s; scale: 0.6; }
-@keyframes seed-float {
-  0% { opacity: 0; transform: translate3d(0, 0, 0) rotate(-12deg); }
-  8% { opacity: 0.9; }
-  35% { transform: translate3d(calc(34 * var(--u)), calc(-40 * var(--app-h) / 100), 0) rotate(10deg); }
-  70% { opacity: 0.8; transform: translate3d(calc(-14 * var(--u)), calc(-78 * var(--app-h) / 100), 0) rotate(-6deg); }
-  100% { opacity: 0; transform: translate3d(calc(30 * var(--u)), calc(-115 * var(--app-h) / 100), 0) rotate(14deg); }
-}
-
-/* ═════════════ 6 · Venue: the farmhouse garden ═════════════ */
+/* ═════════════ 5 · Venue: the farmhouse garden ═════════════ */
 .amb__leaves--garden { right: auto; left: -26%; top: -10%; width: 100%; opacity: 0.22; transform-origin: 15% 0; animation-duration: 13s; }
 .amb__dapple--garden {
   background:
@@ -235,7 +207,7 @@
   100% { opacity: 0; transform: translate3d(calc(12 * var(--u)), calc(112 * var(--app-h) / 100), 0) rotate(380deg); }
 }
 
-/* ═════════════ 7 · Dress code: the bride's chiffon ═════════════ */
+/* ═════════════ 6 · Dress code: the bride's chiffon ═════════════ */
 .amb__silk {
   left: -30%;
   width: 160%; aspect-ratio: 1000 / 420;
@@ -274,34 +246,34 @@
 .amb__glint:nth-child(8) { left: 70%; top: 88%; animation-delay: 3.2s; }
 .amb__glint:nth-child(9) { left: 44%; top: 94%; animation-delay: 2.2s; }
 
-/* ═════════════ 8 · Q & A: dusk light, barely moving ═════════════ */
-/* No pattern at all: two very soft glows drift and breathe, and a faint,
-   wide sheen glides across now and then, so the card stays the focus. */
-.amb__glow {
-  width: 120%; aspect-ratio: 1;
-  border-radius: 50%;
+/* ═════════════ 7 · Q & A: ink blooms and wishes on the wind ═════════════ */
+.amb__bloom--4 { right: -30%; top: -6%; width: 76%; background-image: url("../assets/images/amb-bloom-b.webp"); --bd: 0.4s; }
+.amb__bloom--5 { left: -34%; bottom: -12%; width: 86%; --bd: 2s; }
+.amb__seed {
+  bottom: -10%;
+  width: calc(44 * var(--u)); min-width: 28px; aspect-ratio: 2 / 3;
+  filter: drop-shadow(0 0 1.5px rgba(31, 42, 68, 0.35));
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 60'%3E%3Cg stroke='%23fbf8f1' stroke-width='.9' fill='none' stroke-linecap='round'%3E%3Cpath d='M20 21v31'/%3E%3Cpath d='M20 21L5 9M20 21L9 4M20 21L15 1M20 21L25 1M20 21L31 4M20 21L35 9M20 21L3 16M20 21L37 16M20 21L12 12M20 21L28 12'/%3E%3C/g%3E%3Cg fill='%23fbf8f1'%3E%3Ccircle cx='5' cy='9' r='1.2'/%3E%3Ccircle cx='9' cy='4' r='1.2'/%3E%3Ccircle cx='15' cy='1.5' r='1.2'/%3E%3Ccircle cx='25' cy='1.5' r='1.2'/%3E%3Ccircle cx='31' cy='4' r='1.2'/%3E%3Ccircle cx='35' cy='9' r='1.2'/%3E%3Ccircle cx='3' cy='16' r='1.2'/%3E%3Ccircle cx='37' cy='16' r='1.2'/%3E%3C/g%3E%3Cellipse cx='20' cy='54' rx='1.8' ry='4.2' fill='%23c9ab72'/%3E%3C/svg%3E") center / contain no-repeat;
+  opacity: 0;
+  animation: seed-float var(--sd, 18s) linear var(--sl, 0s) infinite;
 }
-.amb__glow--rose {
-  left: -45%; top: -25%;
-  background: radial-gradient(circle, rgba(255, 238, 228, 0.42), rgba(255, 238, 228, 0.12) 40%, rgba(255, 238, 228, 0) 66%);
-  animation: glow-drift-a 18s ease-in-out infinite alternate;
+.amb__seed:nth-child(3) { left: 6%; --sd: 19s; --sl: -2s; }
+.amb__seed:nth-child(4) { left: 22%; --sd: 24s; --sl: -14s; scale: 0.75; }
+.amb__seed:nth-child(5) { left: 40%; --sd: 21s; --sl: -7s; }
+.amb__seed:nth-child(6) { left: 58%; --sd: 26s; --sl: -19s; scale: 0.65; }
+.amb__seed:nth-child(7) { left: 72%; --sd: 18s; --sl: -11s; scale: 0.85; }
+.amb__seed:nth-child(8) { left: 86%; --sd: 23s; --sl: -4s; }
+.amb__seed:nth-child(9) { left: 14%; --sd: 28s; --sl: -22s; scale: 0.55; }
+.amb__seed:nth-child(10) { left: 66%; --sd: 30s; --sl: -26s; scale: 0.6; }
+@keyframes seed-float {
+  0% { opacity: 0; transform: translate3d(0, 0, 0) rotate(-12deg); }
+  8% { opacity: 0.9; }
+  35% { transform: translate3d(calc(34 * var(--u)), calc(-40 * var(--app-h) / 100), 0) rotate(10deg); }
+  70% { opacity: 0.8; transform: translate3d(calc(-14 * var(--u)), calc(-78 * var(--app-h) / 100), 0) rotate(-6deg); }
+  100% { opacity: 0; transform: translate3d(calc(30 * var(--u)), calc(-115 * var(--app-h) / 100), 0) rotate(14deg); }
 }
-.amb__glow--ice {
-  right: -50%; bottom: -30%;
-  background: radial-gradient(circle, rgba(236, 244, 250, 0.4), rgba(236, 244, 250, 0.1) 40%, rgba(236, 244, 250, 0) 66%);
-  animation: glow-drift-b 22s ease-in-out infinite alternate;
-}
-@keyframes glow-drift-a { from { opacity: 0.55; transform: translate3d(0, 0, 0) scale(0.95); } to { opacity: 1; transform: translate3d(10%, 6%, 0) scale(1.08); } }
-@keyframes glow-drift-b { from { opacity: 1; transform: translate3d(0, 0, 0) scale(1.05); } to { opacity: 0.5; transform: translate3d(-8%, -6%, 0) scale(0.95); } }
-.amb__sheen {
-  top: -20%; bottom: -20%; left: 0;
-  width: 70%;
-  background: linear-gradient(105deg, rgba(255, 252, 244, 0) 20%, rgba(255, 252, 244, 0.16) 50%, rgba(255, 252, 244, 0) 80%);
-  animation: sheen 16s ease-in-out 1s infinite;
-}
-@keyframes sheen { 0% { opacity: 0; transform: translate3d(-110%, 0, 0); } 15% { opacity: 1; } 60% { opacity: 1; transform: translate3d(150%, 0, 0); } 61%, 100% { opacity: 0; transform: translate3d(150%, 0, 0); } }
 
-/* ═════════════ 9 · RSVP: fairy lights at dusk ═════════════ */
+/* ═════════════ 8 · RSVP: fairy lights at dusk ═════════════ */
 /* A few strands at irregular spacing and depth; each small, dim bulb
    twinkles on its own slow cycle, the strands sway, and now and then a
    shimmer runs down one of them. */
@@ -348,7 +320,7 @@
 .amb__bokeh:nth-child(5) { left: -4%; top: 30%; background: radial-gradient(circle, rgba(220, 234, 244, 0.38), rgba(220, 234, 244, 0.1) 55%, transparent 70%); }
 @keyframes bokeh { from { opacity: 0.35; transform: translate3d(0, 0, 0) scale(0.9); } to { opacity: 0.85; transform: translate3d(calc(14 * var(--u)), calc(-22 * var(--u)), 0) scale(1.08); } }
 
-/* ═════════════ 10 · Dua: moonrise ═════════════ */
+/* ═════════════ 9 · Dua: moonrise ═════════════ */
 .amb--dua .amb__stars { inset: 0 0 45%; }
 .amb__moon {
   right: 9%; top: calc(5% + var(--safe-t));
@@ -363,11 +335,11 @@
   background: radial-gradient(circle, rgba(255, 244, 214, 0.35), rgba(255, 244, 214, 0.08) 45%, rgba(255, 244, 214, 0) 68%);
   animation: halo-breathe 6s ease-in-out infinite alternate;
 }
-.is-active .amb__moon { animation: moonrise 5s cubic-bezier(0.2, 0.7, 0.3, 1) 0.4s forwards; }
+.is-active .amb__moon { animation: moonrise 3.5s cubic-bezier(0.2, 0.7, 0.3, 1) 0.1s forwards; }
 @keyframes moonrise { to { opacity: 1; transform: none; } }
 @keyframes halo-breathe { from { opacity: 0.6; transform: scale(0.94); } to { opacity: 1; transform: scale(1.06); } }
 
-/* ═════════════ 11 · Closing: a night of lanterns ═════════════ */
+/* ═════════════ 10 · Closing: a night of lanterns ═════════════ */
 .amb--closing .amb__stars { inset: 0 0 35%; }
 .amb__skylantern {
   bottom: -6%;
@@ -393,7 +365,7 @@
   .amb *, .amb *::before, .amb *::after { animation: none !important; }
   .amb__bloom { opacity: 0.5; }
   .amb__moon { opacity: 1; transform: none; }
-  .amb__seed, .amb__floret, .amb__skylantern, .amb__glint, .amb__ripple, .amb__run, .amb__sheen { display: none; }
+  .amb__seed, .amb__floret, .amb__skylantern, .amb__glint, .amb__ripple, .amb__run { display: none; }
   .amb__bulb { opacity: 0.6; }
   .amb__cloud:nth-child(2) { transform: translate3d(10%, 0, 0); }
   .amb__cloud:nth-child(3) { transform: translate3d(70%, 0, 0); }
@@ -403,3 +375,19 @@
 
 /* cards stay crisp ivory over the dusk and night skies */
 .s-dua .card, .s-rsvp .card { background: linear-gradient(180deg, rgba(252, 251, 248, 0.93), rgba(246, 248, 248, 0.88)); }
+
+/* ───────────── Seamless boundaries between screens ─────────────
+   A static band at each screen's top and bottom edge (above the paper,
+   ambient layer and ornaments, below the card) fades into a colour shared
+   with the neighbouring screen (main.js sets --edge-top / --edge-bot), so
+   while a screen slides past the join is soft, not a straight line. */
+.section::after {
+  content: "";
+  position: absolute; inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  --feather: calc(var(--app-h) * 0.12);
+  background:
+    linear-gradient(180deg, var(--edge-top, transparent) 0, transparent var(--feather)),
+    linear-gradient(0deg, var(--edge-bot, transparent) 0, transparent var(--feather));
+}

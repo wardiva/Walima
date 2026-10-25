@@ -37,7 +37,6 @@ SOURCES = {
     "crest-shell": (RP + "cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L2pvYjcyMC0xNzMtcC5wbmc.png", 760),
     "crest-scroll": (RP + "cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L2pvYjcyMC0xNzItcC5wbmc.png", 760),
     "crest-wave": (RP + "cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L2pvYjcyMC0xNzAtcC5wbmc.png", 760),
-    "ornament-heart": (RP + "cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA0L2pvYjcxMy0wNTMtcC5wbmc.png", 600),
     "divider-scroll": (RP + "cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA0L2pvYjcxMy0xMDktcC5wbmc.png", 560),
     "divider-flowers": (RP + "cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L2pvYjcxOS0xMjMtcF8xLnBuZw.png", 560),
     "garland-bows": (RP + "cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L2pvYjcxNi0wNTYtcC5wbmc.png", 900),

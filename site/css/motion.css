@@ -44,15 +44,15 @@
   box-shadow: 0 0 0.3em 0.08em rgba(243, 227, 187, 0.8);
   opacity: 0;
 }
-.is-active .write, .is-active .write__in { animation: write var(--wdur, 1.05s) cubic-bezier(0.5, 0.05, 0.4, 1) var(--wd, 0s) both; }
-.is-active .write::after { animation: glint var(--wdur, 1.05s) linear var(--wd, 0s) both; }
+.is-active .write, .is-active .write__in { animation: write var(--wdur, 1.05s) cubic-bezier(0.5, 0.05, 0.4, 1) calc(var(--wd, 0s) * var(--wk, 1)) both; }
+.is-active .write::after { animation: glint var(--wdur, 1.05s) linear calc(var(--wd, 0s) * var(--wk, 1)) both; }
 @keyframes write { to { transform: none; } }
 @keyframes glint { 0% { opacity: 0; } 12% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; } }
 
 /* ───────────── Words one by one ───────────── */
 .w, .aw { display: inline-block; opacity: 0; transform: translate3d(0, 0.45em, 0); }
-.is-active .w { animation: word-in 0.55s var(--ease-out) calc(var(--wi) * 0.045s + var(--wbase, 0.55s)) both; }
-.is-active .aw { animation: word-in-ar 0.9s var(--ease-out) calc(var(--wi) * 0.16s + var(--wbase, 0.3s)) both; }
+.is-active .w { animation: word-in 0.45s var(--ease-out) calc(var(--wi) * 0.02s + var(--wbase, 0.1s)) both; }
+.is-active .aw { animation: word-in-ar 0.7s var(--ease-out) calc(var(--wi) * 0.06s + var(--wbase, 0.1s)) both; }
 @keyframes word-in { to { opacity: 1; transform: none; } }
 @keyframes word-in-ar { from { opacity: 0; transform: translate3d(0, 0.3em, 0) scale(0.86); } 60% { opacity: 1; } to { opacity: 1; transform: none; } }
 /* Arabic words carry the gold themselves (each word is its own layer) */
@@ -64,9 +64,9 @@
   color: transparent; -webkit-text-fill-color: transparent;
 }
 .letter-card__bismillah, .dua__arabic { background: none; -webkit-text-fill-color: initial; color: inherit; }
-.dua__arabic { --wbase: 0.9s; }
+.dua__arabic { --wbase: 0.15s; }
 .dua__trans { opacity: 0; transform: translate3d(0, 8px, 0); }
-.is-active .dua__trans { animation: word-in 0.8s var(--ease-out) calc(var(--wi) * 0.16s + 0.9s) both; }
+.is-active .dua__trans { animation: word-in 0.6s var(--ease-out) calc(var(--wi) * 0.06s + 0.2s) both; }
 
 /* ═════════════ 1 · Envelope ═════════════ */
 .s-opening.is-opening .env-scene { animation: env-shake 0.42s ease-in-out; }
@@ -225,13 +225,13 @@
 @keyframes bf-leave { to { transform: translate(380%, -620%) rotate(-24deg); opacity: 0; } }
 
 /* ═════════════ 2 · Letter ═════════════ */
-.letter-card .d-card-crest { transition-delay: 0.6s; }
-.letter-card__bismillah { --wbase: 0.55s; }
-.letter-card__amp[data-reveal] { transition-delay: 1.65s; }
+.letter-card .d-card-crest { transition-delay: 0.15s; }
+.letter-card__bismillah { --wbase: 0.1s; }
+.letter-card__amp[data-reveal] { transition-delay: 0.45s; }
 
 /* ═════════════ 3 · Countdown ═════════════ */
 .cd__cell { opacity: 0; transform: translate3d(0, calc(18 * var(--u)), 0) scale(0.85); }
-.is-active .cd__cell { animation: cell-in 0.8s var(--ease-spring) calc(0.75s + var(--ci) * 0.1s) both; }
+.is-active .cd__cell { animation: cell-in 0.7s var(--ease-spring) calc(0.12s + var(--ci) * 0.06s) both; }
 @keyframes cell-in { to { opacity: 1; transform: none; } }
 .cd__hint {
   position: absolute; z-index: 2;
@@ -256,42 +256,9 @@
 .cd__when.is-revealed .cd__date { animation: date-pop 0.8s var(--ease-spring); }
 @keyframes date-pop { 0% { transform: scale(0.9); } 50% { transform: scale(1.08); } 100% { transform: none; } }
 
-/* ═════════════ 5 · Story ═════════════ */
-.story__heart {
-  display: block;
-  width: calc(150 * var(--u));
-  margin: calc(-14 * var(--u)) 0 calc(12 * var(--u));
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-.story__heart img { width: 100%; height: auto; animation: heartbeat 2.6s var(--ease-in-out) 2.2s infinite; }
-@keyframes heartbeat { 0%, 100% { transform: scale(1); } 12% { transform: scale(1.08); } 24% { transform: scale(0.98); } 36% { transform: scale(1.05); } 50% { transform: scale(1); } }
-.float-hearts i {
-  top: auto; bottom: -6%;
-  width: calc(18 * var(--u)); height: calc(16 * var(--u));
-  clip-path: none;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 21'%3E%3Cpath fill='%23fbf8f1' d='M12 21s-1.2-.9-3.1-2.5C4.3 14.6 0 11.1 0 6.4 0 2.8 2.7 0 6.2 0c2.2 0 4.3 1.1 5.8 3 1.5-1.9 3.6-3 5.8-3C21.3 0 24 2.8 24 6.4c0 4.7-4.3 8.2-8.9 12.1C13.2 20.1 12 21 12 21z'/%3E%3C/svg%3E") center / contain no-repeat;
-  animation: heart-rise 13s linear infinite;
-}
-.float-hearts { z-index: -1; }
-@keyframes heart-rise {
-  0% { opacity: 0; transform: translate3d(0, 0, 0) rotate(-10deg); }
-  10% { opacity: 0.75; }
-  50% { transform: translate3d(calc(26 * var(--u)), calc(-48 * var(--app-h) / 100), 0) rotate(10deg); }
-  85% { opacity: 0.5; }
-  100% { opacity: 0; transform: translate3d(calc(-10 * var(--u)), calc(-100 * var(--app-h) / 100), 0) rotate(-8deg); }
-}
-.float-hearts i:nth-child(1) { left: 8%; animation-delay: 0s; }
-.float-hearts i:nth-child(2) { left: 24%; animation-delay: 4.4s; animation-duration: 15s; scale: 0.7; }
-.float-hearts i:nth-child(3) { left: 46%; animation-delay: 8.1s; }
-.float-hearts i:nth-child(4) { left: 66%; animation-delay: 2.2s; animation-duration: 16s; scale: 0.8; }
-.float-hearts i:nth-child(5) { left: 82%; animation-delay: 6.3s; }
-.float-hearts i:nth-child(6) { left: 92%; animation-delay: 10.5s; animation-duration: 14s; scale: 0.6; }
-.story-card .w { --wbase: 0.6s; }
-
 /* ═════════════ 4 · Schedule: the line draws itself ═════════════ */
 .tl__line { transform: scaleY(0); transform-origin: 50% 0; }
-.is-active .tl__line { animation: draw-down 1.5s var(--ease-in-out) 0.6s both; }
+.is-active .tl__line { animation: draw-down 0.9s var(--ease-in-out) 0.1s both; }
 @keyframes draw-down { to { transform: none; } }
 .tl__run { position: absolute; inset: 0; transform: translate3d(0, 0, 0); }
 .tl__run i {
@@ -307,7 +274,7 @@
 .is-active .tl__run i { animation: run-fade 3.6s linear 2.4s infinite; }
 @keyframes run { 0% { transform: translate3d(0, 0, 0); } 80%, 100% { transform: translate3d(0, 100%, 0); } }
 @keyframes run-fade { 0% { opacity: 0; } 10%, 70% { opacity: 1; } 80%, 100% { opacity: 0; } }
-.tl__row { --at: calc(0.75s + (var(--ri) + 0.5) / var(--rows) * 1.3s); }
+.tl__row { --at: calc(0.12s + (var(--ri) + 0.5) / var(--rows) * 0.75s); }
 .tl__node { transform: scale(0); }
 .is-active .tl__node { animation: pop 0.7s var(--ease-spring) var(--at) both; }
 @keyframes pop { 0% { transform: scale(0); } 60% { transform: scale(1.5); } 100% { transform: none; } }
@@ -325,8 +292,9 @@
 .ic-star, .ic-gem { transform-box: fill-box; transform-origin: center; animation: star-tw 2.2s var(--ease-in-out) infinite; }
 @keyframes star-tw { 0%, 100% { transform: scale(0.7); opacity: 0.6; } 50% { transform: scale(1.25) rotate(20deg); opacity: 1; } }
 .tl__icon--heart path { transform-box: fill-box; transform-origin: center; animation: heartbeat 2.4s ease-in-out infinite; }
+@keyframes heartbeat { 0%, 100% { transform: scale(1); } 12% { transform: scale(1.08); } 24% { transform: scale(0.98); } 36% { transform: scale(1.05); } 50% { transform: scale(1); } }
 
-/* ═════════════ 6 · Venue: the pin drops ═════════════ */
+/* ═════════════ 5 · Venue: the pin drops ═════════════ */
 .venue__map { position: relative; }
 .pin-drop {
   position: absolute; left: 50%; top: 50%;
@@ -356,10 +324,10 @@
   border: 2px solid rgba(138, 51, 64, 0.65);
   opacity: 0;
 }
-.is-active .pin-drop__pin { animation: pin-drop 1.1s linear 1.2s both, pin-bob 2.8s var(--ease-in-out) 2.6s infinite; }
-.is-active .pin-drop__shadow { animation: pin-shadow 1.1s linear 1.2s both; }
-.is-active .pin-drop__ripple { animation: ripple 2.4s var(--ease-out) 2.1s infinite; }
-.is-active .pin-drop__ripple--2 { animation-delay: 3.3s; }
+.is-active .pin-drop__pin { animation: pin-drop 1.1s linear 0.3s both, pin-bob 2.8s var(--ease-in-out) 1.7s infinite; }
+.is-active .pin-drop__shadow { animation: pin-shadow 1.1s linear 0.3s both; }
+.is-active .pin-drop__ripple { animation: ripple 2.4s var(--ease-out) 1.2s infinite; }
+.is-active .pin-drop__ripple--2 { animation-delay: 2.4s; }
 @keyframes pin-drop {
   0% { opacity: 0; transform: translate3d(0, calc(-190 * var(--u)), 0); animation-timing-function: cubic-bezier(0.5, 0, 1, 0.6); }
   8% { opacity: 1; }
@@ -385,15 +353,15 @@
 .is-active .btn--shine::after { animation: shine 5s var(--ease-in-out) 2.5s infinite; }
 @keyframes shine { 0%, 62% { transform: translate3d(-120%, 0, 0); } 100% { transform: translate3d(120%, 0, 0); } }
 
-/* ═════════════ 7 · Dress code: outfits swing on their hangers ═════════════ */
+/* ═════════════ 6 · Dress code: outfits swing on their hangers ═════════════ */
 .dress__icons { gap: calc(30 * var(--u)); }
 .hang { display: flex; flex-direction: column; align-items: center; transform-origin: 50% 2px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .hang__hook { width: calc(44 * var(--u)); min-width: 32px; height: auto; fill: none; stroke: var(--gold); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; margin-bottom: calc(-6 * var(--u)); }
-.is-active .hang { animation: swing 2.6s ease-in-out calc(0.6s + var(--hi) * 0.25s) both, hang-sway 4.2s ease-in-out calc(3.4s + var(--hi) * 0.5s) infinite alternate; }
+.is-active .hang { animation: swing 2.6s ease-in-out calc(0.15s + var(--hi) * 0.15s) both, hang-sway 4.2s ease-in-out calc(2.9s + var(--hi) * 0.5s) infinite alternate; }
 @keyframes swing { 0% { transform: rotate(-26deg); } 22% { transform: rotate(17deg); } 42% { transform: rotate(-11deg); } 62% { transform: rotate(6deg); } 80% { transform: rotate(-2.5deg); } 100% { transform: none; } }
 @keyframes hang-sway { from { transform: rotate(-2deg); } to { transform: rotate(2deg); } }
 
-/* ═════════════ 8 · Q&A: answers spring open ═════════════ */
+/* ═════════════ 7 · Q&A: answers spring open ═════════════ */
 .faq__item { transition: background-color 0.3s, box-shadow 0.3s; }
 .faq__item[open] { background: rgba(255, 255, 255, 0.82); box-shadow: inset 0 0 0 1px rgba(176, 138, 79, 0.45), 0 calc(6 * var(--u)) calc(16 * var(--u)) rgba(31, 42, 68, 0.1); }
 .faq__item summary { transition: transform 0.2s var(--ease-out); }
@@ -403,13 +371,36 @@
 .faq__item p { animation: faq-spring 0.65s var(--ease-spring); transform-origin: 50% 0; }
 @keyframes faq-spring { from { opacity: 0; transform: translate3d(0, -10px, 0) scale(0.92, 0.6); } to { opacity: 1; transform: none; } }
 
-/* ═════════════ 9 · RSVP ═════════════ */
+/* hearts float up the background, with the seeds (ambient.css) */
+.float-hearts i {
+  top: auto; bottom: -6%;
+  width: calc(18 * var(--u)); height: calc(16 * var(--u));
+  clip-path: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 21'%3E%3Cpath fill='%23fbf8f1' d='M12 21s-1.2-.9-3.1-2.5C4.3 14.6 0 11.1 0 6.4 0 2.8 2.7 0 6.2 0c2.2 0 4.3 1.1 5.8 3 1.5-1.9 3.6-3 5.8-3C21.3 0 24 2.8 24 6.4c0 4.7-4.3 8.2-8.9 12.1C13.2 20.1 12 21 12 21z'/%3E%3C/svg%3E") center / contain no-repeat;
+  animation: heart-rise 13s linear infinite;
+}
+.float-hearts { z-index: -1; }
+@keyframes heart-rise {
+  0% { opacity: 0; transform: translate3d(0, 0, 0) rotate(-10deg); }
+  10% { opacity: 0.75; }
+  50% { transform: translate3d(calc(26 * var(--u)), calc(-48 * var(--app-h) / 100), 0) rotate(10deg); }
+  85% { opacity: 0.5; }
+  100% { opacity: 0; transform: translate3d(calc(-10 * var(--u)), calc(-100 * var(--app-h) / 100), 0) rotate(-8deg); }
+}
+.float-hearts i:nth-child(1) { left: 8%; animation-delay: 0s; }
+.float-hearts i:nth-child(2) { left: 24%; animation-delay: 4.4s; animation-duration: 15s; scale: 0.7; }
+.float-hearts i:nth-child(3) { left: 46%; animation-delay: 8.1s; }
+.float-hearts i:nth-child(4) { left: 66%; animation-delay: 2.2s; animation-duration: 16s; scale: 0.8; }
+.float-hearts i:nth-child(5) { left: 82%; animation-delay: 6.3s; }
+.float-hearts i:nth-child(6) { left: 92%; animation-delay: 10.5s; animation-duration: 14s; scale: 0.6; }
+
+/* ═════════════ 8 · RSVP ═════════════ */
 .rsvp__field.is-shaking { animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97); }
 @keyframes shake { 15%, 85% { transform: translate3d(-2px, 0, 0); } 30%, 70% { transform: translate3d(5px, 0, 0); } 45% { transform: translate3d(-7px, 0, 0); } 58% { transform: translate3d(7px, 0, 0); } }
 .rsvp__done { animation: done-in 0.8s var(--ease-spring); }
 @keyframes done-in { from { opacity: 0; transform: scale(0.7) translate3d(0, 10px, 0); } to { opacity: 1; transform: none; } }
 
-/* ═════════════ 10 · Dua: soft rays of light ═════════════ */
+/* ═════════════ 9 · Dua: soft rays of light ═════════════ */
 .rays {
   position: absolute; z-index: -1;
   left: 50%; top: 50%;
@@ -425,7 +416,7 @@
 .is-active .rays { opacity: 1; animation: spin 90s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ═════════════ 11 · Closing: lanterns & fireworks ═════════════ */
+/* ═════════════ 10 · Closing: lanterns & fireworks ═════════════ */
 .s-closing { cursor: pointer; }
 .lanterns { position: absolute; inset: 0 0 auto; height: 0; z-index: 0; pointer-events: none; }
 .lantern {
@@ -446,7 +437,7 @@
   background: radial-gradient(circle, rgba(255, 228, 165, 0.55), rgba(255, 228, 165, 0.12) 40%, rgba(255, 228, 165, 0) 68%);
   animation: flicker 2.2s ease-in-out infinite alternate;
 }
-.is-active .lantern { animation: lantern-in 1.6s var(--ease-spring) calc(0.3s + var(--li) * 0.25s) both, lantern-sway 4.5s ease-in-out calc(2s + var(--li) * 0.7s) infinite alternate; }
+.is-active .lantern { animation: lantern-in 1.4s var(--ease-spring) calc(0.1s + var(--li) * 0.15s) both, lantern-sway 4.5s ease-in-out calc(2s + var(--li) * 0.7s) infinite alternate; }
 @keyframes lantern-in { from { opacity: 0; transform: translate3d(0, -110%, 0); } to { opacity: 1; transform: none; } }
 @keyframes lantern-sway { from { opacity: 1; transform: rotate(-4deg); } to { opacity: 1; transform: rotate(4deg); } }
 @keyframes flicker { 0% { opacity: 0.75; } 40% { opacity: 1; } 55% { opacity: 0.85; } 100% { opacity: 0.95; } }
@@ -461,7 +452,7 @@
     opacity: 1;
   }
   .write::after, .twinkles, .hero__motes, .bf, .tl__run, .pin-drop__ripple, .cd__hint, .float-hearts, .btn--shine::after { display: none !important; }
-  .deco > img, .wreath, .hang, .story__heart img, .lantern__glow, .rays, .tl__icon, .ic-steam, .ic-star, .ic-gem, .intro__tap {
+  .deco > img, .wreath, .hang, .lantern__glow, .rays, .tl__icon, .ic-steam, .ic-star, .ic-gem, .intro__tap {
     animation: none !important;
   }
   .ic-steam { opacity: 0.7; }

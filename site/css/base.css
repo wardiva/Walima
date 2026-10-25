@@ -175,7 +175,7 @@ em, i, cite { font-style: normal; }
   transition:
     opacity 0.7s var(--ease-out),
     transform 0.8s var(--ease-out);
-  transition-delay: calc(var(--i, 0) * 0.08s + var(--base-delay, 0.08s));
+  transition-delay: calc(min(var(--i, 0), var(--imax, 99)) * var(--stagger, 0.08s) + var(--base-delay, 0.08s));
 }
 [data-reveal="fade"] { transform: none; }
 /* cards rise in on a spring, tipped back like a page being set down */
@@ -198,6 +198,13 @@ em, i, cite { font-style: normal; }
 [data-reveal="glow"] { transform: scale(0.9); transition-duration: 1.4s, 1.6s; }
 [data-reveal="left"] { transform: translate3d(calc(-60 * var(--u)), 0, 0) rotate(-3deg); transition-timing-function: var(--ease-out), var(--ease-spring); }
 [data-reveal="right"] { transform: translate3d(calc(60 * var(--u)), 0, 0) rotate(3deg); transition-timing-function: var(--ease-out), var(--ease-spring); }
+/* Screens after the hero reveal on their first visible pixel, and their
+   content fades in quickly and almost together, so a card that slides in
+   already carries its words and settles as the snap does (script titles
+   start writing during the swipe). */
+.section:not(.s-opening) { --stagger: 0.02s; --imax: 8; --base-delay: 0s; --wk: 0.15; }
+.section:not(.s-opening) > .card[data-reveal] { transition-duration: 0.3s, 1s; }
+.section:not(.s-opening) > .card [data-reveal]:not([data-reveal="bloom"]) { transition-duration: 0.35s, 0.6s; }
 .section.is-active [data-reveal] {
   opacity: 1;
   transform: none;

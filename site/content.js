@@ -13,16 +13,15 @@
  *     2. Letter    — Bismillah, the invitation, the names and the verse.
  *     3. Countdown — the date under silver scratch-off foil, live countdown.
  *     4. Schedule  — timeline built from `schedule.items`.
- *     5. Story     — a few words from the couple.
- *     6. Venue     — name, address, an illustrated map (tap → Google Maps)
+ *     5. Venue     — name, address, an illustrated map (tap → Google Maps)
  *                    and "Open in Google Maps".
- *     7. Dress code
- *     8. Q&A       — tap a question to open it.
- *     9. RSVP      — name, guests and a note, "I Will Attend" / "Can't
+ *     6. Dress code
+ *     7. Q&A       — tap a question to open it.
+ *     8. RSVP      — name, guests and a note, "I Will Attend" / "Can't
  *                    Attend". Replies go to the host's own Google Sheet and
  *                    Gmail (set `rsvp.endpoint`; see README → RSVP replies).
- *    10. Dua       — gifts / prayers.
- *    11. Closing   — "In sha Allah".
+ *     9. Dua       — gifts / prayers.
+ *    10. Closing   — "In sha Allah".
  *
  *  • Text supports plain strings only (no HTML).
  *  • Media paths are relative to the /site folder.
@@ -90,18 +89,7 @@ export default {
     ],
   },
 
-  /* 5 — Our story */
-  story: {
-    eyebrow: "Our Story",
-    title: "With Joy",
-    // One entry per paragraph.
-    paragraphs: [
-      "With hearts full of joy, we invite you to join us in the celebration of our Walima. Your presence will make our happiness even more special.",
-    ],
-    signature: "Hamza & Komal",
-  },
-
-  /* 6 — Venue */
+  /* 5 — Venue */
   venue: {
     eyebrow: "The Venue",
     name: "Grand Orchid",
@@ -114,14 +102,14 @@ export default {
     openLocation: "Open in Google Maps",
   },
 
-  /* 7 — Dress code */
+  /* 6 — Dress code */
   dressCode: {
     eyebrow: "Dress Code",
     title: "Formal Wear",
     note: "Come dressed for an elegant afternoon",
   },
 
-  /* 8 — Questions & answers */
+  /* 7 — Questions & answers */
   faq: {
     eyebrow: "Q & A",
     title: "Good to Know",
@@ -133,7 +121,7 @@ export default {
     ],
   },
 
-  /* 9 — RSVP. Each reply is added to a Google Sheet in the host's own
+  /* 8 — RSVP. Each reply is added to a Google Sheet in the host's own
           Google account, which also emails her (README → "RSVP replies").
           Paste the web-app URL that ends in /exec into `endpoint`. While it
           is empty the buttons show `closed` and nothing can be sent. */
@@ -160,7 +148,7 @@ export default {
     change: "Change reply",
   },
 
-  /* 10 — Gifts & prayers */
+  /* 9 — Gifts & prayers */
   dua: {
     eyebrow: "Gifts",
     title: "Your Duas",
@@ -169,7 +157,7 @@ export default {
     translation: "May Allah bless you both, shower His blessings upon you, and unite you in goodness.",
   },
 
-  /* 11 — Closing */
+  /* 10 — Closing */
   closing: {
     lines: ["We can't wait", "to celebrate with you"],
     inshaAllah: "إِنْ شَاءَ ٱللَّٰهُ",

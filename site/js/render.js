@@ -27,9 +27,10 @@ const write = (text, cls = "", delay = 0, ivory = false) =>
 
 const ART = "assets/images/";
 let decoN = 0;
-/** An ivory relief ornament: a positioned wrapper (parallax + bloom) around a swaying image. */
-const deco = (name, cls, i = 0, depth = 0.12) => {
-  const n = decoN++;
+/** An ivory relief ornament: a positioned wrapper (parallax + bloom) around a
+    swaying image. `seed` pins its sway (period and phase) when it matters. */
+const deco = (name, cls, i = 0, depth = 0.12, seed) => {
+  const n = seed ?? decoN; decoN++;
   const sway = `--sw:${(6 + (n * 37) % 5).toFixed(1)}s;--sd:${-((n * 53) % 7)}s`;
   return `<span class="deco ${cls}" data-depth="${depth}" data-reveal="bloom" style="--i:${i};--d:${depth};${sway}"><img src="${ART}${name}.webp" alt="" decoding="async" /></span>`;
 };
@@ -44,8 +45,9 @@ const section = (name, paper, extra = "") =>
    Each screen has its own ambient layer between the paper and the
    ornaments (styles in ambient.css). Together they are one day passing as
    you scroll: morning light → ink on paper → drifting clouds → afternoon
-   sun → wishes on the wind → garden shade → the bride's chiffon → soft
-   dusk light → fairy lights at dusk → moonrise → a night of lanterns. Elements
+   sun → garden shade → the bride's chiffon → ink blooms, dandelion seeds
+   and hearts on the wind → fairy lights at dusk → moonrise → a night of
+   lanterns. Elements
    with data-depth also drift with the scroll (motion.js). */
 const many = (n, cls, vars = () => "") => Array.from({ length: n }, (_, k) => `<i class="${cls}" style="--k:${k};${vars(k)}"></i>`).join("");
 const AMBIENT = {
@@ -53,10 +55,9 @@ const AMBIENT = {
   letter: `<i class="amb__bloom amb__bloom--1" data-depth="0.1"></i><i class="amb__bloom amb__bloom--2" data-depth="-0.08"></i><i class="amb__bloom amb__bloom--3" data-depth="0.05"></i><i class="amb__dust"></i><i class="amb__dust amb__dust--2"></i>`,
   countdown: `<i class="amb__sun"></i>${many(4, "amb__cloud")}`,
   schedule: `<i class="amb__beams"></i><i class="amb__sun amb__sun--corner"></i><i class="amb__dust amb__dust--ivory"></i>`,
-  story: `<i class="amb__bloom amb__bloom--4" data-depth="0.1"></i><i class="amb__bloom amb__bloom--5" data-depth="-0.06"></i>${many(8, "amb__seed")}`,
   venue: `<i class="amb__leaves amb__leaves--garden" data-depth="0.08"></i><i class="amb__dapple amb__dapple--garden"></i>${many(7, "amb__floret")}`,
   dress: `<i class="amb__silk amb__silk--1" data-depth="0.1"></i><i class="amb__silk amb__silk--2" data-depth="-0.08"></i><i class="amb__silk amb__silk--3"></i>${many(6, "amb__glint")}`,
-  faq: `<i class="amb__glow amb__glow--rose"></i><i class="amb__glow amb__glow--ice"></i><i class="amb__sheen"></i>`,
+  faq: `<i class="amb__bloom amb__bloom--4" data-depth="0.1"></i><i class="amb__bloom amb__bloom--5" data-depth="-0.06"></i>${many(8, "amb__seed")}`,
   rsvp: `<i class="amb__bokeh-set">${many(5, "amb__bokeh", (k) => `--w:${70 + (k * 23) % 60}`)}</i><i class="amb__curtain">${fairyLights()}</i>`,
   dua: `<i class="amb__stars"></i><i class="amb__stars amb__stars--2"></i><i class="amb__moon"><svg viewBox="0 0 100 100"><defs><radialGradient id="moonG" cx=".35" cy=".35" r=".8"><stop offset="0" stop-color="#fffaf0"/><stop offset="1" stop-color="#e9d9b0"/></radialGradient><mask id="moonM"><rect width="100" height="100" fill="#fff"/><circle cx="64" cy="40" r="34" fill="#000"/></mask></defs><circle cx="50" cy="50" r="36" fill="url(#moonG)" mask="url(#moonM)"/></svg></i>`,
   closing: `<i class="amb__stars"></i><i class="amb__stars amb__stars--2"></i>${many(7, "amb__skylantern", (k) => `--w:${12 + (k * 5) % 9}`)}`,
@@ -194,24 +195,6 @@ function countdown(c) {
   </section>`;
 }
 
-function story(c) {
-  const s = c.story;
-  let n = 0;
-  return `
-  ${section("story", "blue")}
-    ${deco("roses-flourish", "d-story-tr", 0, 0.25)}
-    ${deco("roses-spray", "d-story-bl", 2, -0.2)}
-    ${twinkles(6, "float-hearts")}
-    <div class="card story-card" ${r(0, "card")}>
-      <span class="caps card-eyebrow" ${r(1)}>${esc(s.eyebrow)}</span>
-      <h2 class="card-title" ${r(2)}>${write(s.title, "", 0.4)}</h2>
-      <button class="story__heart" id="storyHeart" type="button" tabindex="-1" aria-hidden="true" ${r(3, "pop")}><img src="${ART}ornament-heart.webp" alt="" /></button>
-      ${s.paragraphs.map((p) => { const html = `<p class="story__p">${words(p, "w", n)}</p>`; n += p.split(/\s+/).length; return html; }).join("")}
-      ${write(s.signature, "story__sig", 0.9 + n * 0.045)}
-    </div>
-  </section>`;
-}
-
 function schedule(c) {
   const s = c.schedule;
   const row = (it, i) => `
@@ -318,8 +301,9 @@ function faq(c) {
   const f = c.faq;
   return `
   ${section("faq", "blue", "section--tall")}
-    ${deco("roses-flourish", "d-faq-tl", 0, 0.25)}
-    ${deco("hydrangea", "d-faq-br", 2, -0.2)}
+    ${deco("roses-flourish", "d-faq-tr", 0, 0.25, 7)}
+    ${deco("roses-spray", "d-faq-bl", 2, -0.2, 8)}
+    ${twinkles(6, "float-hearts")}
     <div class="card faq-card" ${r(0, "card")}>
       <span class="caps card-eyebrow" ${r(1)}>${esc(f.eyebrow)}</span>
       <h2 class="card-title" ${r(2)}>${write(f.title, "", 0.4)}</h2>
@@ -412,7 +396,7 @@ function closing(c) {
 
 export function renderSections(c) {
   decoN = 0;
-  return [opening, letter, countdown, schedule, story, venue, dressCode, faq, rsvp, dua, closing]
+  return [opening, letter, countdown, schedule, venue, dressCode, faq, rsvp, dua, closing]
     .map((fn) => fn(c))
     .join("");
 }

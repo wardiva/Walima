@@ -12,13 +12,12 @@ rest of the invitation is a series of full-screen sections, in this order:
 1. the invitation
 2. a flip-clock countdown with a silver scratch-off date
 3. the schedule
-4. our story
-5. the venue, with an illustrated map that opens Google Maps
-6. the dress code
-7. Q&A
-8. RSVP (each reply goes to the host's Google Sheet and Gmail)
-9. duas
-10. a closing screen with lanterns and fireworks
+4. the venue, with an illustrated map that opens Google Maps
+5. the dress code
+6. Q&A
+7. RSVP (each reply goes to the host's Google Sheet and Gmail)
+8. duas
+9. a closing screen with lanterns and fireworks
 
 ## Editing
 
@@ -112,10 +111,10 @@ project's root directory to `site`).
   - watercolour ink blooming (invitation)
   - drifting clouds (countdown)
   - afternoon sunbeams (schedule)
-  - dandelion seeds on the wind (story)
   - garden shade with falling hydrangea florets (venue)
   - the bride's chiffon (dress code)
-  - soft dusk light (Q&A)
+  - watercolour ink blooms, dandelion seeds and hearts floating up, under
+    ivory roses and a flourish (Q&A)
   - a fairy-light curtain at dusk (RSVP)
   - moonrise and stars (dua)
   - sky lanterns at night (closing)

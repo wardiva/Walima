@@ -36,6 +36,30 @@ const fx = createFx(document.getElementById("fx"), { reducedMotion });
 const local = (x, y) => { const r = app.getBoundingClientRect(); return [x - r.left, y - r.top]; };
 const centre = (el) => { const r = el.getBoundingClientRect(); return local(r.left + r.width / 2, r.top + r.height / 2); };
 
+/* ── Seamless boundaries: each screen fades, at its top and bottom edge, into
+      one colour it shares with its neighbour (the mix of both papers and
+      tints there), so no straight edge shows while a screen slides past. ── */
+const PAPER_EDGES = { light: [[186, 204, 213], [195, 211, 219]], blue: [[162, 182, 195], [164, 184, 196]], deep: [[78, 99, 125], [85, 107, 132]] };
+const over = (base, tint) => { // tint = "rgba(r, g, b, a)" laid over an opaque base
+  const m = /rgba?\(([^)]+)\)/.exec(tint || "");
+  if (!m) return base;
+  const [r, g, b, a = 1] = m[1].split(",").map(Number);
+  return base.map((c, i) => c + ([r, g, b][i] - c) * a);
+};
+const paintEdges = () => {
+  const ends = sections.map((s) => {
+    const amb = s.querySelector(":scope > .amb"), cs = amb && getComputedStyle(amb);
+    const [top, bot] = PAPER_EDGES[s.dataset.paper] || PAPER_EDGES.blue;
+    return [over(top, cs?.getPropertyValue("--t1")), over(bot, cs?.getPropertyValue("--t2"))];
+  });
+  const rgb = (c) => `rgb(${c.map((v) => Math.round(v)).join(", ")})`;
+  sections.forEach((s, i) => {
+    if (i > 0) s.style.setProperty("--edge-top", rgb(ends[i - 1][1].map((v, k) => (v + ends[i][0][k]) / 2)));
+    if (i < sections.length - 1) s.style.setProperty("--edge-bot", rgb(ends[i][1].map((v, k) => (v + ends[i + 1][0][k]) / 2)));
+  });
+};
+paintEdges();
+
 /* ── Controls ── */
 const cue = document.getElementById("scrollCue");
 cue.setAttribute("aria-label", content.ui.scrollDown);
@@ -119,15 +143,16 @@ const setCurrent = (s) => {
   queueCue?.();
 };
 
-// Reveal a screen as soon as it starts to arrive, so its card flows in with
-// the swipe instead of popping in after the scroll has landed.
+// Reveal a screen on its first visible pixel, so its card flows in with the
+// swipe instead of popping in after the scroll has landed. (A neighbour that
+// only touches the viewport's edge reports a ratio of 0: not yet.)
 const revealObserver = new IntersectionObserver(
   (entries) => {
     for (const e of entries) {
-      if (e.isIntersecting && e.target.dataset.section !== "opening") e.target.classList.add("is-active");
+      if (e.isIntersecting && e.intersectionRatio > 0 && e.target.dataset.section !== "opening") e.target.classList.add("is-active");
     }
   },
-  { root: scroller, threshold: 0.1 }
+  { root: scroller, threshold: [0, 0.01] }
 );
 const activeObserver = new IntersectionObserver(
   (entries) => { for (const e of entries) if (e.isIntersecting) setCurrent(e.target); },
@@ -210,14 +235,6 @@ cue.addEventListener("click", () => {
     ? Math.min(top + scroller.clientHeight * 0.85, end - scroller.clientHeight)
     : next.offsetTop;
   scroller.scrollTo({ top: target, behavior: reducedMotion ? "auto" : "smooth" });
-});
-
-/* ── Story: tap the heart ── */
-const storyHeart = document.getElementById("storyHeart");
-storyHeart?.addEventListener("click", () => {
-  haptic([10, 30, 10]);
-  fx.hearts(...centre(storyHeart), 10);
-  storyHeart.animate([{ transform: "scale(1)" }, { transform: "scale(1.25)" }, { transform: "scale(0.95)" }, { transform: "scale(1)" }], { duration: 520, easing: "ease-out" });
 });
 
 /* ── Dress code: tap a hanger to set it swinging ── */
