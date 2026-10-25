@@ -13,6 +13,17 @@
   ],
   "redirects": [
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "hamza-and-komal-walima-invitation.vercel.app"
+        }
+      ],
+      "destination": "https://hamza-walima-invitation.vercel.app/",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [
         {

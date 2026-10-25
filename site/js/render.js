@@ -99,15 +99,16 @@ function opening(c) {
       <div class="env">
         <div class="env__back"></div>
         <div class="env__letter">
+          <span class="arabic env__letter-bismillah" lang="ar">${esc(intro.letterBlessing)}</span>
           <span class="caps env__letter-eyebrow">${esc(intro.letterLine)}</span>
-          <span class="script env__letter-names">${esc(cp.initials)}</span>
+          <span class="serif env__letter-date">${esc(intro.letterDate)}</span>
         </div>
         <div class="env__front">
           <span class="caps env__line">${esc(intro.envelopeLine)}</span>
           <span class="script script--ivory env__names">${esc(intro.envelopeTitle)}</span>
         </div>
         <div class="env__flap"><div class="env__flap-out"></div><div class="env__flap-in"></div></div>
-        <div class="env__seal">${icon.waxSeal(cp.monogram)}</div>
+        <div class="env__seal">${icon.waxSeal()}</div>
       </div>
     </div>
 
@@ -389,7 +390,6 @@ function closing(c) {
       ${deco("crest-shell", "d-closing-crest", 0, 0)}
       <span class="script script--ivory closing__line" ${r(1)}>${lines(k.lines)}</span>
       <span class="arabic closing__insha" lang="ar" ${r(4, "glow")}>${esc(k.inshaAllah)}</span>
-      ${write(cp.initials, "closing__mono", 1.3, true)}
     </div>
   </section>`;
 }

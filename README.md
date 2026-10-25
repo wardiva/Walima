@@ -6,7 +6,7 @@ Saturday, 28 November 2026, 1 PM, at Grand Orchid Farmhouse, Raiwind Road, Lahor
 It is the companion to the Barat invitation and uses the same structure.
 
 Guests open a dusty-blue envelope ("Walima Ceremony") sealed with a maroon
-**H&K** wax seal. The seal cracks, the flap opens, the letter rises and grows to
+wax seal pressed with an olive sprig. The seal cracks, the flap opens, the letter rises and grows to
 fill the screen, and "Hamza, with the Beloved Daughter of Naveed Imran" writes
 itself inside a dusty-blue wreath that grows leaf by leaf. The
 rest of the invitation is a series of full-screen sections, in this order:
@@ -31,7 +31,7 @@ those tags for the link preview.
 **The bride is never named**, by the family's wish. Following the Pakistani
 card convention, she is "the Beloved Daughter of Naveed Imran"
 (`couple.bride.display` and `couple.bride.parent`), and the envelope, closing
-and RSVP emails carry no names or only the initials. Keep her name out of
+and RSVP emails carry no names or initials. Keep her name out of
 `content.js`, `index.html` and this file.
 
 The site lives at **https://hamza-walima-invitation.vercel.app** (the `og:`

@@ -446,7 +446,6 @@
 @keyframes lantern-in { from { opacity: 0; transform: translate3d(0, -110%, 0); } to { opacity: 1; transform: none; } }
 @keyframes lantern-sway { from { opacity: 1; transform: rotate(-4deg); } to { opacity: 1; transform: rotate(4deg); } }
 @keyframes flicker { 0% { opacity: 0.75; } 40% { opacity: 1; } 55% { opacity: 0.85; } 100% { opacity: 0.95; } }
-.closing__mono { --wdur: 1.4s; }
 
 /* ═════════════ Reduce Motion: everything arrives still ═════════════ */
 @media (prefers-reduced-motion: reduce) {

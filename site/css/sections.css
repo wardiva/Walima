@@ -133,8 +133,14 @@
   box-shadow: 0 1px 3px rgba(31, 42, 68, 0.2), inset 0 0 0 calc(7 * var(--u)) rgba(251, 248, 241, 0.75), inset 0 0 0 calc(8 * var(--u)) rgba(176, 138, 79, 0.45);
   transition: transform 1s var(--ease-out);
 }
-.env__letter-eyebrow { font-size: var(--fs-caption); color: var(--maroon); }
-.env__letter-names { font-size: calc(46 * var(--u)); margin-top: calc(2 * var(--u) - 0.2em); }
+.env__letter-bismillah {
+  font-size: calc(27 * var(--u)); line-height: 1.5;
+  background: var(--gold-grad); -webkit-background-clip: text; background-clip: text;
+  color: transparent; -webkit-text-fill-color: transparent;
+  padding: 0 0.2em;
+}
+.env__letter-eyebrow { font-size: var(--fs-caption); color: var(--maroon); margin-top: calc(4 * var(--u)); padding: 0 calc(18 * var(--u)); line-height: 1.6; text-align: center; text-wrap: balance; }
+.env__letter-date { font-size: calc(15 * var(--u)); letter-spacing: 0.24em; margin-right: -0.24em; color: var(--ink-3); margin-top: calc(8 * var(--u)); }
 
 .env__front {
   position: absolute; inset: 0;
@@ -204,13 +210,9 @@
   transition: transform 0.5s var(--ease-spring), opacity 0.35s var(--ease-out) 0.15s;
 }
 .env__seal svg { width: 100%; height: auto; }
-.seal__mono {
-  font-family: var(--font-script);
-  font-size: 30px;
-  fill: #e9b9a6;
-  letter-spacing: -0.02em;
-}
-.seal__mono--shade { fill: #3d0b12; opacity: 0.55; }
+/* the pressed sprig: a light relief over a dark offset shadow (debossed) */
+.seal__sprig { fill: #e9b9a6; stroke: #e9b9a6; }
+.seal__sprig--shade { fill: #3d0b12; stroke: #3d0b12; opacity: 0.55; }
 
 /* Opening sequence (classes set by opening.js) */
 .s-opening.is-opening .env__seal { transform: translate(-50%, -64%) rotate(-14deg) scale(1.12); opacity: 0; }
@@ -619,7 +621,6 @@
   font-size: calc(40 * var(--u));
   background-image: linear-gradient(90deg, #d9bf86, #f3e3bb, #d2b47a);
 }
-.closing__mono { margin-top: calc(18 * var(--u)); font-size: calc(34 * var(--u)); opacity: 0.85; }
 
 /* Every card sits in the true middle of the screen: equal room above and
    below (the bottom room is the scroll button's). */

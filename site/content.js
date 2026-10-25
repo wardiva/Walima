@@ -32,7 +32,7 @@
  *    change the names or date, update <title> and the og: tags there too.
  *  • The bride's name is never shown, by the family's wish: she is "the
  *    Beloved Daughter of" her father. Don't add it to any text here or in
- *    index.html (the wax seal's "H&K" initials are fine).
+ *    index.html. No initials either: the wax seal carries an olive sprig.
  */
 export default {
   meta: {
@@ -47,15 +47,16 @@ export default {
     groom: { name: "Hamza Shafi", shortName: "Hamza" },
     bride: { display: "Beloved Daughter of", parent: "Naveed Imran" },
     joiner: "with the", // between the groom and the bride's line
-    monogram: "H&K", // pressed into the wax seal
-    initials: "H & K", // the closing monogram and the rising envelope letter
   },
 
   /* 1 — The sealed envelope */
   intro: {
     envelopeLine: "You are invited to the", // small capitals on the envelope
     envelopeTitle: "Walima Ceremony", // script on the envelope, as on the printed one
-    letterLine: "28 · 11 · 2026", // on the letter as it rises (above the initials)
+    // the letter that rises out of the envelope opens like the printed card:
+    letterBlessing: "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ", // gold Arabic
+    letterLine: "With the blessings of Allah", // small capitals
+    letterDate: "28 · 11 · 2026",
     tapToOpen: "Tap to Open",
   },
 

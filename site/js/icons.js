@@ -25,8 +25,9 @@ export const gown = `
   <path d="M10 62c7 3 37 3 44 0"/><path d="M32 30v34M27 30c-3 10-7 22-10 34M37 30c3 10 7 22 10 34"/>
 </svg>`;
 
-/** Maroon wax seal with an irregular poured edge and a pressed monogram. */
-export function waxSeal(monogram = "H&K") {
+/** Maroon wax seal with an irregular poured edge, pressed with an olive
+    sprig (as on the client's printed envelope): no letters. */
+export function waxSeal() {
   // Poured edge: a circle whose radius wobbles with a few low harmonics.
   const pts = [];
   const N = 40;
@@ -43,7 +44,12 @@ export function waxSeal(monogram = "H&K") {
     const c2 = [p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6];
     d += ` C${c1[0].toFixed(2)} ${c1[1].toFixed(2)} ${c2[0].toFixed(2)} ${c2[1].toFixed(2)} ${p2[0].toFixed(2)} ${p2[1].toFixed(2)}`;
   }
-  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+  // the sprig: a gently curved stem with paired, alternating leaves and one at the tip
+  const leaf = (x, y, ang, len) =>
+    `<path d="M0 0C${(len * 0.3).toFixed(1)} ${(-len * 0.3).toFixed(1)} ${(len * 0.72).toFixed(1)} ${(-len * 0.28).toFixed(1)} ${len} 0C${(len * 0.72).toFixed(1)} ${(len * 0.28).toFixed(1)} ${(len * 0.3).toFixed(1)} ${(len * 0.3).toFixed(1)} 0 0Z" transform="translate(${x} ${y}) rotate(${ang})"/>`;
+  const leaves = [[66, 13.5], [58.5, 12.5], [51, 11.5], [43.5, 10.5], [36.5, 9]]
+    .map(([y, len], k) => leaf(50 - 0.4, y, -140 + k * 2, len) + leaf(50 + 0.4, y - 3.2, -40 - k * 2, len)).join("") + leaf(50, 30, -90, 8.5);
+  const sprig = `<path d="M50.6 76C49.2 64 50.9 46 50 29.5" fill="none" stroke-width="1.7" stroke-linecap="round"/>${leaves}`;
   return `
 <svg class="seal" viewBox="0 0 100 100" aria-hidden="true">
   <defs>
@@ -59,8 +65,8 @@ export function waxSeal(monogram = "H&K") {
   <circle cx="50" cy="50" r="36" fill="none" stroke="#4a0f17" stroke-width="1.3" opacity=".7"/>
   <circle cx="50" cy="50" r="38.2" fill="none" stroke="#c46a74" stroke-width=".8" opacity=".45"/>
   <circle cx="50" cy="50" r="31" fill="none" stroke="#4a0f17" stroke-width=".6" stroke-dasharray="1 2.2" opacity=".55"/>
-  <text x="50" y="62" text-anchor="middle" class="seal__mono seal__mono--shade">${esc(monogram)}</text>
-  <text x="50" y="61" text-anchor="middle" class="seal__mono">${esc(monogram)}</text>
+  <g class="seal__sprig seal__sprig--shade" transform="translate(0 1)">${sprig}</g>
+  <g class="seal__sprig">${sprig}</g>
   <ellipse cx="34" cy="26" rx="13" ry="6" fill="#fff" opacity=".13" transform="rotate(-28 34 26)"/>
 </svg>`;
 }
