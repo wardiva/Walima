@@ -126,14 +126,14 @@ function opening(c) {
       <span class="hero__layer hero__garland-wrap" data-tilt="1.1">
         <span class="deco hero__garland" data-reveal="bloom" style="--i:0"><img src="${ART}garland-bows.webp" alt="" /></span>
       </span>
-      <span class="caps hero__eyebrow" ${r(1)}>${esc(h.eyebrow)}</span>
+      <span class="caps label-caps hero__eyebrow" ${r(1)}>${esc(h.eyebrow)}</span>
       <div class="hero__ring">
         <span class="hero__layer hero__wreath" data-tilt="0.45">${icon.wreath()}</span>
         <h1 class="hero__names hero__layer" data-tilt="-0.25">
           <span class="sr-only">${esc(h.eyebrow)} ${esc(cp.groom.name)} ${esc(cp.joiner)} ${esc(cp.bride.display)} ${esc(cp.bride.parent)}</span>
           <span aria-hidden="true" class="hero__names-in">
             ${write(cp.groom.shortName, "hero__name", 0.55)}
-            <span class="caps hero__with">${esc(cp.joiner)}</span>
+            <span class="caps label-caps hero__with">${esc(cp.joiner)}</span>
             ${write(cp.bride.display, "hero__daughter", 1.45)}
             ${write(cp.bride.parent, "hero__name hero__name--parent", 2.15)}
           </span>
@@ -161,9 +161,9 @@ function letter(c) {
       ${deco("crest-shell", "d-card-crest", 1, 0)}
       <div class="arabic letter-card__bismillah" lang="ar">${words(l.bismillah, "aw")}</div>
       <p class="letter-card__lead" ${r(4)}>${lines(l.lines)}</p>
-      <span class="caps letter-card__event" ${r(5)}>${esc(l.eventLine)}</span>
+      <span class="caps label-caps letter-card__event" ${r(5)}>${esc(l.eventLine)}</span>
       ${write(cp.groom.name, "letter-card__name", 1.0)}
-      <span class="caps letter-card__with" ${r(9)}>${esc(cp.joiner)}</span>
+      <span class="caps label-caps letter-card__with" ${r(9)}>${esc(cp.joiner)}</span>
       ${write(cp.bride.display, "letter-card__daughter", 1.6)}
       ${write(cp.bride.parent, "letter-card__name letter-card__name--parent", 2.2)}
     </div>

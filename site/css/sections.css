@@ -270,7 +270,7 @@
 .hero__garland-wrap { position: absolute; top: calc(-64 * var(--u) + var(--safe-t)); left: 16%; width: 68%; }
 .hero__garland { position: relative; display: block; width: 100%; }
 /* "The Walima of" frames the names quietly; the bride's line carries the focus */
-.hero__eyebrow { font-size: var(--fs-caption); color: var(--ink-3); margin-bottom: calc(4 * var(--u)); position: relative; }
+.hero__eyebrow { margin-bottom: calc(4 * var(--u)); position: relative; }
 .hero__ring {
   position: relative;
   width: calc(468 * var(--u)); max-width: 96%;
@@ -289,11 +289,11 @@
 /* the stack sits a little high, so its widest line (the father's name)
    clears the leaves and the flowers at the foot of the wreath */
 .hero__names { top: calc(-22 * var(--u)); }
-.hero__name { font-size: calc(54 * var(--u)); line-height: 1; }
-.hero__name--parent { font-size: calc(57 * var(--u)); }
-.hero__with { font-size: var(--fs-caption); color: var(--gold); margin-top: calc(5 * var(--u)); }
-.hero__daughter { font-size: calc(39 * var(--u)); line-height: 1.1; margin-top: calc(-1 * var(--u)); }
-.hero__daughter .script, .letter-card__daughter .script { background-image: var(--maroon-grad); }
+.hero__name, .hero__daughter { font-size: calc(40 * var(--u)); line-height: 1.15; }
+.hero__name--parent { font-size: calc(54 * var(--u)); }
+.hero__with { margin: calc(9 * var(--u)) 0 calc(9 * var(--u)); }
+.hero__daughter + .hero__name { margin-top: calc(5 * var(--u) - 0.2em); }
+.hero__daughter .script, .letter-card__daughter .script, .hero__name--parent .script, .letter-card__name--parent .script { background-image: var(--maroon-grad); }
 .hero__date {
   position: relative;
   margin-top: calc(6 * var(--u));
@@ -338,15 +338,20 @@
   color: transparent; -webkit-text-fill-color: transparent;
   padding: 0 0.2em;
 }
-.letter-card__bismillah { font-size: calc(28 * var(--u)); line-height: 1.4; }
-.letter-card__lead { font-size: var(--fs-body); font-weight: 500; line-height: 1.45; color: var(--ink-2); margin: var(--group-gap) 0 0; }
-.letter-card__event { font-size: var(--fs-label); color: var(--ink-3); margin-top: calc(12 * var(--u)); } /* framing: quieter than the names */
-.letter-card__name { font-size: calc(48 * var(--u)); line-height: 1.12; }
+/* Type scale (shared with the hero): the Bismillah, a light intro, one label
+   style, and the names in two script sizes. "Hamza Shafi" (S) is a name but
+   secondary; the bride's pair, "Beloved Daughter of" (S) + "Naveed Imran" (L),
+   is one maroon unit and the focus. Larger gaps between groups, tighter within. */
+.letter-card__bismillah { font-size: calc(24 * var(--u)); line-height: 1.4; }
+.letter-card__bismillah .aw { font-size: calc(24 * var(--u)); }
+.letter-card__lead { font-size: max(calc(18 * var(--u)), 14px); font-weight: 400; line-height: 1.6; color: var(--ink-3); margin: var(--group-gap) 0 0; }
+.label-caps { font-size: var(--fs-caption); line-height: 1.2; color: var(--label); }
+.letter-card__event { margin-top: calc(12 * var(--u)); }
+.letter-card__name, .letter-card__daughter { font-size: calc(40 * var(--u)); line-height: 1.15; }
 .letter-card__name--parent { font-size: calc(56 * var(--u)); }
-.letter-card__daughter { font-size: calc(38 * var(--u)); line-height: 1.15; }
-.letter-card__bismillah .aw { font-size: calc(28 * var(--u)); }
-.letter-card__event + .letter-card__name { margin-top: calc(6 * var(--u) - 0.2em); }
-.letter-card__with { font-size: var(--fs-caption); line-height: 1; color: var(--gold); margin: calc(4 * var(--u)) 0 calc(2 * var(--u)); }
+.letter-card__event + .letter-card__name { margin-top: calc(10 * var(--u) - 0.2em); }
+.letter-card__with { margin: calc(8 * var(--u)) 0 calc(8 * var(--u)); }
+.letter-card__daughter + .letter-card__name { margin-top: calc(4 * var(--u) - 0.2em); }
 
 /* ═════════════════════════ 3 · Countdown ═════════════════════════ */
 .cd__when {
