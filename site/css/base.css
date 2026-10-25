@@ -29,10 +29,24 @@
   --font-serif: "Libre Baskerville", Baskerville, Georgia, serif;
   --font-arabic: "Amiri", "Scheherazade New", "Traditional Arabic", serif;
 
-  /* Spaced-capital labels: two sizes and one tracking, never below 12px */
-  --fs-label: max(calc(14.5 * var(--u)), 12.5px);
-  --fs-caption: max(calc(12.5 * var(--u)), 12px);
-  --fs-body: max(calc(21 * var(--u)), 15px);
+  /* ── Type scale: one decision per role (size · line-height · weight) ──
+     Sizes follow --u (the phone's width) with px floors, so body copy never
+     drops below 16px, captions below 13px or labels below 12.5px.
+     px at 412 / 360 wide in brackets. Deliberate exceptions, all numeric
+     or decorative displays, are marked "scale exception" where they're set. */
+  --fs-display: calc(58 * var(--u));            /* closing headline (47 / 41) · lh 1.1 */
+  --fs-title: calc(70 * var(--u));              /* every card's script title (57 / 50) · lh 1.1 */
+  --fs-name-hero: calc(46 * var(--u));          /* the three names in the wreath, equal (38 / 33) */
+  --fs-name: calc(50 * var(--u));               /* the three names on the invitation, equal (41 / 36) */
+  --fs-lead: max(calc(21.5 * var(--u)), 17px);  /* a card's one key line (17.6 / 17) · lh 1.5 · 600 */
+  --fs-body: max(calc(19.5 * var(--u)), 16px);  /* all body copy (16 / 16) · lh 1.55 · 500, 600 for emphasis */
+  --fs-label: max(calc(15 * var(--u)), 12.5px); /* spaced caps: eyebrows, labels, buttons (12.5) · lh 1.3 · 600 */
+  --fs-caption: max(calc(15.5 * var(--u)), 13px); /* translations, notes, errors (13) · lh 1.45 · 500 */
+  --fs-date: max(calc(19 * var(--u)), 15px);    /* serif dates and times in a line (15.5 / 15) */
+  --fs-arabic: calc(24 * var(--u));             /* Bismillah, the dua (19.6 / 17) */
+  --fs-arabic-lg: calc(40 * var(--u));          /* the envelope verse, In sha Allah (32.7 / 28.6) */
+  --lh-body: 1.55;
+  --lh-caption: 1.45;
   --track-caps: 0.28em;
 
   /* Layout unit: 1 design pixel on a 504×804 phone. Width-driven on phones,
