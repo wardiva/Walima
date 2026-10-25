@@ -119,6 +119,16 @@ const setCurrent = (s) => {
   queueCue?.();
 };
 
+// Reveal a screen as soon as it starts to arrive, so its card flows in with
+// the swipe instead of popping in after the scroll has landed.
+const revealObserver = new IntersectionObserver(
+  (entries) => {
+    for (const e of entries) {
+      if (e.isIntersecting && e.target.dataset.section !== "opening") e.target.classList.add("is-active");
+    }
+  },
+  { root: scroller, threshold: 0.1 }
+);
 const activeObserver = new IntersectionObserver(
   (entries) => { for (const e of entries) if (e.isIntersecting) setCurrent(e.target); },
   { root: scroller, threshold: 0.5 }
@@ -142,7 +152,7 @@ initOpening({
     opened = true;
     byName("opening").classList.add("is-active");
     scroller.classList.remove("is-locked");
-    sections.forEach((s) => { activeObserver.observe(s); midObserver.observe(s); onscreenObserver.observe(s); });
+    sections.forEach((s) => { revealObserver.observe(s); activeObserver.observe(s); midObserver.observe(s); onscreenObserver.observe(s); });
     setCurrent(current);
     fx.petals();
     heroParallax.setActive(true);
@@ -177,7 +187,13 @@ const checkCue = () => {
   }
   cue.classList.toggle("is-tucked", clash);
 };
-const queueCue = () => { if (!cueRaf) cueRaf = requestAnimationFrame(checkCue); };
+// Decide only once the scroll has come to rest, so the cue doesn't blink
+// in and out while a screen slides past.
+let cueIdle = 0;
+const queueCue = () => {
+  clearTimeout(cueIdle);
+  cueIdle = setTimeout(() => { if (!cueRaf) cueRaf = requestAnimationFrame(checkCue); }, 160);
+};
 scroller.addEventListener("scroll", queueCue, { passive: true });
 window.addEventListener("resize", queueCue);
 const cardSizes = new ResizeObserver(queueCue);

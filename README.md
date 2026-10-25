@@ -126,7 +126,10 @@ project's root directory to `site`).
 - **Motion.** Every screen has a moment that plays on arrival or answers a touch.
   The sections are listed in the comment at the top of `site/content.js`, and each
   one's motion is in `site/css/motion.css`. Particles (petals, sparkles, confetti,
-  hearts, wax crumbs, fireworks) share one canvas (`site/js/fx.js`). Scroll depth,
+  hearts, wax crumbs, fireworks) share one canvas (`site/js/fx.js`). The scroll depth (cards rising in and settling back,
+  ornaments drifting) runs on the browser's compositor as CSS scroll-driven
+  animations (`.depth-css` in `site/css/motion.css`), so it stays in step with
+  snapping. Older browsers fall back to a rAF loop in `site/js/motion.js`. Scroll depth,
   hero tilt, tap-anywhere sparkles and haptics are in `site/js/motion.js`. Only
   `transform` and `opacity` are animated, loops pause off screen, and with
   *Reduce Motion* turned on the screens fade in calmly with no particles. No

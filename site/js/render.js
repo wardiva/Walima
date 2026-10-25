@@ -31,7 +31,7 @@ let decoN = 0;
 const deco = (name, cls, i = 0, depth = 0.12) => {
   const n = decoN++;
   const sway = `--sw:${(6 + (n * 37) % 5).toFixed(1)}s;--sd:${-((n * 53) % 7)}s`;
-  return `<span class="deco ${cls}" data-depth="${depth}" data-reveal="bloom" style="--i:${i};${sway}"><img src="${ART}${name}.webp" alt="" decoding="async" loading="lazy" /></span>`;
+  return `<span class="deco ${cls}" data-depth="${depth}" data-reveal="bloom" style="--i:${i};--d:${depth};${sway}"><img src="${ART}${name}.webp" alt="" decoding="async" /></span>`;
 };
 
 /** Opens a screen; main.js paints its paper backdrop from data-paper. */

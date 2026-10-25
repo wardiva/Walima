@@ -489,3 +489,27 @@
   .map-art__car-path { display: none; }
   .btn.is-sending span::after { animation: none; }
 }
+
+/* ═════════════ Scroll depth on the compositor (motion.js adds .depth-css) ═════════════
+   Each screen is a view timeline. Its card rises into place as it enters and
+   sinks back a little as it leaves; ornaments drift at their own depth (--d);
+   the hero sinks as you scroll away. All of it is driven by the scroll
+   position itself, so it stays in step with momentum and snapping. */
+@supports (animation-timeline: view()) {
+  .depth-css .section { view-timeline: --sec block; }
+  .depth-css .section:not(.s-opening) > .card,
+  .depth-css .section > .closing { animation: depth linear both; animation-timeline: --sec; }
+  .depth-css .section > .deco { animation: parallax linear both; animation-timeline: --sec; }
+  .depth-css .s-opening .hero { animation: hero-leave linear both; animation-timeline: --sec; animation-range: exit 0% exit 100%; }
+}
+@keyframes depth {
+  entry 0% { translate: 0 calc(var(--app-h) * 0.16); scale: 0.93; rotate: x 14deg; }
+  entry 100% { translate: 0 0; scale: 1; rotate: x 0deg; }
+  exit 0% { translate: 0 0; scale: 1; }
+  exit 100% { translate: 0 calc(var(--app-h) * 0.15); scale: 0.94; }
+}
+@keyframes parallax {
+  entry 0% { translate: 0 calc(var(--d, 0) * var(--app-h)); }
+  exit 100% { translate: 0 calc(var(--d, 0) * var(--app-h) * -1); }
+}
+@keyframes hero-leave { from { translate: 0 0; scale: 1; } to { translate: 0 calc(var(--app-h) * 0.45); scale: 0.92; } }

@@ -17,54 +17,50 @@ export const haptic = (pattern = 12) => {
 
 export function initScrollDepth(scroller, sections, { reducedMotion }) {
   if (reducedMotion) return;
+  // Where the browser has scroll-driven animations, the depth effect lives in
+  // CSS (motion.css, .depth-css): it runs on the compositor in step with the
+  // scroll and snap, with no thresholds to jump at.
+  if (window.CSS?.supports?.("animation-timeline: view()")) {
+    document.documentElement.classList.add("depth-css");
+    return;
+  }
+  // Fallback: the same curves, updated every frame while the page is moving.
   const items = sections.filter((s) => s.dataset.section !== "opening").map((s) => ({
     s,
     card: s.querySelector(":scope > .card, :scope > .closing"),
-    decos: [...s.querySelectorAll(":scope > .deco, :scope > .amb > [data-depth]")].map((el) => ({ el, depth: +el.dataset.depth || 0 })),
-    dirty: false,
+    decos: [...s.querySelectorAll(":scope > .deco")].map((el) => ({ el, depth: +el.dataset.depth || 0 })),
   }));
   const hero = sections[0]?.querySelector(".hero");
-  let raf = 0;
+  let raf = 0, lastTop = -1, idle = 0;
 
   const update = () => {
-    raf = 0;
     const top = scroller.scrollTop, vh = scroller.clientHeight;
+    if (top === lastTop) { if (++idle > 20) { raf = 0; return; } } else { idle = 0; lastTop = top; }
     if (hero) {
       const p = Math.min(1, top / vh);
-      hero.style.translate = p ? `0 ${(p * vh * 0.45).toFixed(1)}px` : "";
-      hero.style.scale = p ? String(1 - p * 0.08) : "";
+      hero.style.translate = `0 ${(p * vh * 0.45).toFixed(1)}px`;
+      hero.style.scale = String(1 - p * 0.08);
     }
     for (const it of items) {
       const st = it.s.offsetTop - top, sh = it.s.offsetHeight;
+      if (st > vh * 1.05 || st + sh < -vh * 0.05) continue;     // well off screen: leave as is (no jump)
       let p = 0;
       if (st > 0) p = Math.min(1, st / vh);                          // entering from below
       else if (st + sh < vh) p = Math.max(-1, (st + sh - vh) / vh);   // leaving upwards
-      if (st >= vh || st + sh <= 0) {
-        if (it.dirty) { reset(it); it.dirty = false; }
-        continue;
-      }
-      it.dirty = true;
       if (it.card) {
-        if (p > 0) {
-          it.card.style.translate = `0 ${(p * vh * 0.16).toFixed(1)}px`;
-          it.card.style.scale = String(1 - p * 0.07);
-          it.card.style.rotate = `x ${(p * 14).toFixed(2)}deg`;
-        } else {
-          it.card.style.translate = `0 ${(-p * vh * 0.42).toFixed(1)}px`;
-          it.card.style.scale = String(1 + p * 0.1);
-          it.card.style.rotate = "";
-        }
+        const a = Math.max(p, 0), l = Math.max(-p, 0);
+        it.card.style.translate = `0 ${(a * vh * 0.16 + l * vh * 0.15).toFixed(1)}px`;
+        it.card.style.scale = String(1 - a * 0.07 - l * 0.06);
+        it.card.style.rotate = `x ${(a * 14).toFixed(2)}deg`;
       }
       for (const d of it.decos) d.el.style.translate = `0 ${(p * vh * d.depth).toFixed(1)}px`;
     }
+    raf = requestAnimationFrame(update);
   };
-  const reset = (it) => {
-    if (it.card) it.card.style.translate = it.card.style.scale = it.card.style.rotate = "";
-    for (const d of it.decos) d.el.style.translate = "";
-  };
-  scroller.addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
-  window.addEventListener("resize", () => { if (!raf) raf = requestAnimationFrame(update); });
-  update();
+  const kick = () => { idle = 0; if (!raf) raf = requestAnimationFrame(update); };
+  scroller.addEventListener("scroll", kick, { passive: true });
+  window.addEventListener("resize", kick);
+  kick();
 }
 
 /** Hero layers follow tilt / finger / mouse, eased in one rAF while the hero is on screen. */
