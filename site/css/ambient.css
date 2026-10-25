@@ -85,6 +85,12 @@
   opacity: 0.26;
   transform-origin: 85% 0;
   animation: leaves-sway 11s ease-in-out infinite alternate;
+  /* the texture's shade runs to its own edges: feather all four, so the
+     layer never ends in a straight line across the screen */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 24%, #000 80%, transparent), linear-gradient(180deg, transparent, #000 20%, #000 78%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(90deg, transparent, #000 24%, #000 80%, transparent), linear-gradient(180deg, transparent, #000 20%, #000 78%, transparent);
+  mask-composite: intersect;
 }
 .amb__leaves--far { right: auto; left: -34%; top: 40%; width: 100%; opacity: 0.12; animation: leaves-sway-far 15s ease-in-out infinite alternate; }
 @keyframes leaves-sway { from { transform: rotate(-2.5deg); } to { transform: rotate(2.8deg) translate3d(-3%, 1.5%, 0); } }
