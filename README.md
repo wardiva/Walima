@@ -7,7 +7,7 @@ It is the companion to the Barat invitation and uses the same structure.
 
 Guests open a dusty-blue envelope ("Walima Ceremony") sealed with a maroon
 wax seal pressed with a rose. The seal cracks, the flap opens, the letter rises and grows to
-fill the screen, and "Hamza, with the Beloved Daughter of Naveed Imran" writes
+fill the screen, and "Hamza Shafi, with the Beloved Daughter of Naveed Imran" writes
 itself inside a dusty-blue wreath that grows leaf by leaf. The
 rest of the invitation is a series of full-screen sections, in this order:
 
@@ -115,10 +115,10 @@ project's root directory to `site`).
   card's plaster relief. `tools/build_assets.py` downloads them, processes them
   and paints the watercolour paper. Run `python3 -I tools/build_assets.py` to rebuild.
 - **Hero.** A typographic hero, written in (Imperial Script) inside a dusty-blue
-  laurel wreath drawn in code (`wreath()` in `site/js/icons.js`): "Hamza", a
-  quiet "with the", "Beloved Daughter of" in maroon script and "Naveed Imran",
-  the largest line. "The Walima of" above it is set small and muted. The
-  invitation card repeats the same hierarchy. There is no illustration of the couple.
+  laurel wreath drawn in code (`wreath()` in `site/js/icons.js`): "Hamza Shafi",
+  "Beloved Daughter of" and "Naveed Imran" in one script size and maroon, with
+  quiet gold small caps ("The Walima of", "with the") between them. The
+  invitation card repeats the same treatment. There is no illustration of the couple.
 - **Living backgrounds.** Each screen has its own ambient layer between the paper
   and the ornaments (`site/css/ambient.css`, markup in `AMBIENT` in
   `site/js/render.js`). Read top to bottom, they make one day passing:

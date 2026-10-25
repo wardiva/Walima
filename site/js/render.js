@@ -131,7 +131,7 @@ function opening(c) {
         <h1 class="hero__names hero__layer" data-tilt="-0.25">
           <span class="sr-only">${esc(h.eyebrow)} ${esc(cp.groom.name)} ${esc(cp.joiner)} ${esc(cp.bride.display)} ${esc(cp.bride.parent)}</span>
           <span aria-hidden="true" class="hero__names-in">
-            ${write(cp.groom.shortName, "hero__name", 0.55)}
+            ${write(cp.groom.name, "hero__name", 0.55)}
             <span class="caps label-caps hero__with">${esc(cp.joiner)}</span>
             ${write(cp.bride.display, "hero__daughter", 1.45)}
             ${write(cp.bride.parent, "hero__name hero__name--parent", 2.15)}

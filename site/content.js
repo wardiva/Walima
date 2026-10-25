@@ -9,7 +9,7 @@
  *  Page order (one full screen each):
  *     1. Opening   — a sealed dusty-blue envelope, "Tap to Open": the wax
  *                    seal cracks, the flap opens, the letter rises and
- *                    grows into the HERO — "Hamza with the Beloved
+ *                    grows into the HERO — "Hamza Shafi with the Beloved
  *                    Daughter of Naveed Imran" written inside a wreath
  *                    that grows leaf by leaf.
  *     2. Letter    — Bismillah, the invitation and the names.
@@ -44,7 +44,7 @@ export default {
   /* Names as they appear throughout the invitation. The bride is never
      named: she is introduced as her father's beloved daughter. */
   couple: {
-    groom: { name: "Hamza Shafi", shortName: "Hamza" },
+    groom: { name: "Hamza Shafi" },
     bride: { display: "Beloved Daughter of", parent: "Naveed Imran" },
     joiner: "with the", // between the groom and the bride's line
   },

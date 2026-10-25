@@ -287,9 +287,9 @@
   text-align: center;
 }
 .hero__names-in { display: flex; flex-direction: column; align-items: center; }
-/* the stack sits a little high, so its widest line (the father's name)
-   clears the leaves and the flowers at the foot of the wreath */
-.hero__names { top: calc(-22 * var(--u)); }
+/* the stack sits just above centre, clear of the leaves and of the flowers
+   at the foot of the wreath (its first and last lines are both wide) */
+.hero__names { top: calc(-12 * var(--u)); }
 .hero__name, .hero__daughter { font-size: var(--fs-name-hero); line-height: 1.15; }
 .hero__with { margin: calc(9 * var(--u)) 0 calc(9 * var(--u)); }
 .hero__daughter + .hero__name { margin-top: calc(8 * var(--u) - 0.2em); }
