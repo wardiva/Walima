@@ -129,8 +129,8 @@
 @keyframes breathe { 50% { transform: scale(1.018) rotate(0.6deg); } }
 
 .hero__names .write { --wdur: 1s; }
-.hero__amp { opacity: 0; transform: scale(0.2) rotate(-160deg); }
-.s-opening.is-opened .hero__amp { animation: amp-in 1s var(--ease-spring) 1.3s both; }
+.hero__with { opacity: 0; transform: translate3d(0, 0.6em, 0) scale(0.85); }
+.s-opening.is-opened .hero__with { animation: amp-in 0.8s var(--ease-out) 1.25s both; }
 @keyframes amp-in { to { opacity: 1; transform: none; } }
 
 /* twinkling stars */
@@ -227,7 +227,8 @@
 /* ═════════════ 2 · Letter ═════════════ */
 .letter-card .d-card-crest { transition-delay: 0.15s; }
 .letter-card__bismillah { --wbase: 0.1s; }
-.letter-card__amp[data-reveal] { transition-delay: 0.45s; }
+.letter-card__with[data-reveal] { transition-delay: 0.3s; }
+.letter-card { --wk: 0.3; }
 
 /* ═════════════ 3 · Countdown ═════════════ */
 .cd__cell { opacity: 0; transform: translate3d(0, calc(18 * var(--u)), 0) scale(0.85); }
@@ -445,7 +446,7 @@
 
 /* ═════════════ Reduce Motion: everything arrives still ═════════════ */
 @media (prefers-reduced-motion: reduce) {
-  .write, .write__in, .w, .aw, .lf, .bb, .fl, .hero__amp, .cd__cell, .tl__line, .tl__node, .tl__time, .tl__what,
+  .write, .write__in, .w, .aw, .lf, .bb, .fl, .hero__with, .cd__cell, .tl__line, .tl__node, .tl__time, .tl__what,
   .dua__trans, .lantern, .pin-drop__pin, .pin-drop__shadow {
     animation: none !important;
     transform: none;

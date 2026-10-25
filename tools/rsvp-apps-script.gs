@@ -52,7 +52,7 @@ function doGet() {
 function sendTestRsvp() {
   record_({
     answer: 'yes', name: 'Test Guest (you can delete this row)', guests: 2,
-    message: 'Testing the RSVP setup', event: 'Walima of Hamza & Komal',
+    message: 'Testing the RSVP setup', event: 'Walima of Hamza Shafi',
     sentAt: new Date().toISOString(), timeZone: Session.getScriptTimeZone(), userAgent: 'Apps Script test',
   });
 }

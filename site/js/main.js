@@ -185,12 +185,12 @@ initOpening({
     if (reducedMotion) return;
     // a sparkle where each name finishes writing, then the butterfly arrives
     const names = hero.querySelectorAll(".hero__name");
-    [[names[0], 1450], [names[1], 2450]].forEach(([el, ms]) => setTimeout(() => {
+    [[names[0], 1450], [names[1], 3050]].forEach(([el, ms]) => setTimeout(() => {
       if (!el) return;
       const r = el.getBoundingClientRect();
       fx.sparkle(...local(r.right - r.width * 0.12, r.top + r.height * 0.45), 14);
     }, ms));
-    setTimeout(() => butterfly.arrive(), 2600);
+    setTimeout(() => butterfly.arrive(), 3200);
   },
 });
 

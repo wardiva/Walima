@@ -20,6 +20,7 @@
   /* Script names: cocoa with a warm lift across the word, like the card */
   --script-grad: linear-gradient(90deg, #3f2a22 0%, #573a2c 30%, #74503a 55%, #5b3d2e 80%, #432c23 100%);
   --gold-grad: linear-gradient(90deg, #8e6a33 0%, #a8874f 32%, #c9ab72 58%, #a3865a 82%, #8e6f42 100%);
+  --maroon-grad: linear-gradient(90deg, #5c1722 0%, #75242f 30%, #8f3944 55%, #772835 80%, #5e1823 100%); /* "Beloved Daughter of" */
   --silver-grad: linear-gradient(115deg, #9aa7b1 0%, #eef2f5 22%, #b6c1ca 42%, #f7f9fb 56%, #a5b1bb 76%, #d5dce2 100%);
 
   --font-script: "Imperial Script", "Great Vibes", "Pinyon Script", cursive;

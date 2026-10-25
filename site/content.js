@@ -2,14 +2,16 @@
  * ─────────────────────────────────────────────────────────────────────────
  *  INVITATION CONTENT — the only file you need to edit.
  * ─────────────────────────────────────────────────────────────────────────
- *  Walima of Hamza Shafi & Komal Naveed · Saturday 28 November 2026, 1 PM
+ *  Walima of Hamza Shafi with the beloved daughter of Naveed Imran
+ *  Saturday 28 November 2026, 1 PM
  *  Grand Orchid Farmhouse, Raiwind Road, Lahore.
  *
  *  Page order (one full screen each):
  *     1. Opening   — a sealed dusty-blue envelope, "Tap to Open": the wax
  *                    seal cracks, the flap opens, the letter rises and
- *                    grows into the HERO — the names written inside a
- *                    wreath that grows leaf by leaf.
+ *                    grows into the HERO — "Hamza with the Beloved
+ *                    Daughter of Naveed Imran" written inside a wreath
+ *                    that grows leaf by leaf.
  *     2. Letter    — Bismillah, the invitation, the names and the verse.
  *     3. Countdown — the date under silver scratch-off foil, live countdown.
  *     4. Schedule  — timeline built from `schedule.items`.
@@ -28,25 +30,32 @@
  *  • Dates with a time use ISO 8601 with Pakistan's UTC offset (+05:00).
  *  • Link previews (WhatsApp etc.) read index.html, not this file: if you
  *    change the names or date, update <title> and the og: tags there too.
+ *  • The bride's name is never shown, by the family's wish: she is "the
+ *    Beloved Daughter of" her father. Don't add it to any text here or in
+ *    index.html (the wax seal's "H&K" initials are fine).
  */
 export default {
   meta: {
-    pageTitle: "Hamza & Komal — Walima Invitation",
-    description: "You are cordially invited to the Walima of Hamza Shafi & Komal Naveed, Saturday 28 November 2026, Lahore.",
+    pageTitle: "Walima Invitation — Hamza Shafi",
+    description: "You are cordially invited to the Walima of Hamza Shafi with the beloved daughter of Naveed Imran, Saturday 28 November 2026, Lahore.",
     lang: "en",
   },
 
-  /* Names as they appear throughout the invitation. */
+  /* Names as they appear throughout the invitation. The bride is never
+     named: she is introduced as her father's beloved daughter. */
   couple: {
     groom: { name: "Hamza Shafi", shortName: "Hamza" },
-    bride: { name: "Komal Naveed", shortName: "Komal" },
-    joiner: "&",
+    bride: { display: "Beloved Daughter of", parent: "Naveed Imran" },
+    joiner: "with the", // between the groom and the bride's line
     monogram: "H&K", // pressed into the wax seal
+    initials: "H & K", // the closing monogram and the rising envelope letter
   },
 
   /* 1 — The sealed envelope */
   intro: {
-    envelopeLine: "The Walima of", // small capitals on the envelope
+    envelopeLine: "You are invited to the", // small capitals on the envelope
+    envelopeTitle: "Walima Ceremony", // script on the envelope, as on the printed one
+    letterLine: "28 · 11 · 2026", // on the letter as it rises (above the initials)
     tapToOpen: "Tap to Open",
   },
 
@@ -142,7 +151,7 @@ export default {
     sending: "Sending",
     sendFailed: "Your reply didn't go through. Please check your connection and tap again.",
     closed: "Replies open soon, please check back shortly.",
-    event: "Walima of Hamza & Komal, 28 November 2026", // shown in the host's email
+    event: "Walima of Hamza Shafi, 28 November 2026", // shown in the host's email (never the bride's name)
     thanksYes: "JazakAllah — we can't wait to see you!",
     thanksNo: "JazakAllah — you'll be in our duas.",
     change: "Change reply",

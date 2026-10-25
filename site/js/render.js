@@ -99,12 +99,12 @@ function opening(c) {
       <div class="env">
         <div class="env__back"></div>
         <div class="env__letter">
-          <span class="caps env__letter-eyebrow">${esc(intro.envelopeLine)}</span>
-          <span class="script env__letter-names">${esc(cp.groom.shortName)} ${esc(cp.joiner)} ${esc(cp.bride.shortName)}</span>
+          <span class="caps env__letter-eyebrow">${esc(intro.letterLine)}</span>
+          <span class="script env__letter-names">${esc(cp.initials)}</span>
         </div>
         <div class="env__front">
           <span class="caps env__line">${esc(intro.envelopeLine)}</span>
-          <span class="script script--ivory env__names">${esc(cp.groom.shortName)} ${esc(cp.joiner)} ${esc(cp.bride.shortName)}</span>
+          <span class="script script--ivory env__names">${esc(intro.envelopeTitle)}</span>
         </div>
         <div class="env__flap"><div class="env__flap-out"></div><div class="env__flap-in"></div></div>
         <div class="env__seal">${icon.waxSeal(cp.monogram)}</div>
@@ -118,7 +118,8 @@ function opening(c) {
       </span>
     </button>
 
-    <!-- The hero, revealed once the envelope opens: the names inside a growing wreath -->
+    <!-- The hero, revealed once the envelope opens: inside a growing wreath,
+         the groom, then the bride as her father's beloved daughter (never her name) -->
     <div class="hero" id="hero">
       <span class="hero__layer hero__garland-wrap" data-tilt="1.1">
         <span class="deco hero__garland" data-reveal="bloom" style="--i:0"><img src="${ART}garland-bows.webp" alt="" /></span>
@@ -127,11 +128,12 @@ function opening(c) {
       <div class="hero__ring">
         <span class="hero__layer hero__wreath" data-tilt="0.45">${icon.wreath()}</span>
         <h1 class="hero__names hero__layer" data-tilt="-0.25">
-          <span class="sr-only">${esc(h.eyebrow)} ${esc(cp.groom.name)} ${esc(cp.joiner)} ${esc(cp.bride.name)}</span>
+          <span class="sr-only">${esc(h.eyebrow)} ${esc(cp.groom.name)} ${esc(cp.joiner)} ${esc(cp.bride.display)} ${esc(cp.bride.parent)}</span>
           <span aria-hidden="true" class="hero__names-in">
             ${write(cp.groom.shortName, "hero__name", 0.55)}
-            <span class="script hero__amp">${esc(cp.joiner)}</span>
-            ${write(cp.bride.shortName, "hero__name", 1.55)}
+            <span class="caps hero__with">${esc(cp.joiner)}</span>
+            ${write(cp.bride.display, "hero__daughter", 1.45)}
+            ${write(cp.bride.parent, "hero__name hero__name--parent", 2.15)}
           </span>
         </h1>
         ${twinkles(7, "hero__twinkles")}
@@ -159,8 +161,9 @@ function letter(c) {
       <p class="letter-card__lead" ${r(4)}>${lines(l.lines)}</p>
       <span class="caps letter-card__event" ${r(5)}>${esc(l.eventLine)}</span>
       ${write(cp.groom.name, "letter-card__name", 1.0)}
-      <span class="letter-card__amp" ${r(9, "pop")}>${esc(cp.joiner)}</span>
-      ${write(cp.bride.name, "letter-card__name", 1.75)}
+      <span class="caps letter-card__with" ${r(9)}>${esc(cp.joiner)}</span>
+      ${write(cp.bride.display, "letter-card__daughter", 1.6)}
+      ${write(cp.bride.parent, "letter-card__name letter-card__name--parent", 2.2)}
       <span class="letter-card__rule" aria-hidden="true" ${r(30, "rule")}><i></i></span>
       <div class="arabic letter-card__verse" lang="ar" ${r(32, "glow")}>${esc(l.verseArabic)}</div>
       <span class="letter-card__trans" ${r(34)}>${esc(l.verseTranslation)} <span class="nowrap">${esc(l.verseReference)}</span></span>
@@ -389,7 +392,7 @@ function closing(c) {
       ${deco("crest-shell", "d-closing-crest", 0, 0)}
       <span class="script script--ivory closing__line" ${r(1)}>${lines(k.lines)}</span>
       <span class="arabic closing__insha" lang="ar" ${r(4, "glow")}>${esc(k.inshaAllah)}</span>
-      ${write(`${cp.groom.shortName} ${cp.joiner} ${cp.bride.shortName}`, "closing__mono", 1.3, true)}
+      ${write(cp.initials, "closing__mono", 1.3, true)}
     </div>
   </section>`;
 }

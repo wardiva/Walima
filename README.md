@@ -1,12 +1,14 @@
-# Hamza & Komal — Walima Invitation
+# Walima Invitation — Hamza Shafi
 
-A mobile-first invitation website for the Walima of **Hamza Shafi & Komal Naveed**:
+A mobile-first invitation website for the Walima of **Hamza Shafi** with the
+beloved daughter of **Naveed Imran**:
 Saturday, 28 November 2026, 1 PM, at Grand Orchid Farmhouse, Raiwind Road, Lahore.
 It is the companion to the Barat invitation and uses the same structure.
 
-Guests open a dusty-blue envelope sealed with a maroon **H&K** wax seal. The seal
-cracks, the flap opens, the letter rises and grows to fill the screen, and the
-names write themselves inside a dusty-blue wreath that grows leaf by leaf. The
+Guests open a dusty-blue envelope ("Walima Ceremony") sealed with a maroon
+**H&K** wax seal. The seal cracks, the flap opens, the letter rises and grows to
+fill the screen, and "Hamza, with the Beloved Daughter of Naveed Imran" writes
+itself inside a dusty-blue wreath that grows leaf by leaf. The
 rest of the invitation is a series of full-screen sections, in this order:
 
 1. the invitation
@@ -25,6 +27,14 @@ Everything a guest reads is in **`site/content.js`**: names, dates, schedule,
 venue, Q&A, RSVP settings and media paths. If you change the names or the date,
 also update `<title>` and the `og:` tags in `site/index.html`. WhatsApp reads
 those tags for the link preview.
+
+**The bride is never named**, by the family's wish. Following the Pakistani
+card convention, she is "the Beloved Daughter of Naveed Imran"
+(`couple.bride.display` and `couple.bride.parent`), and the envelope, closing
+and RSVP emails carry no names or only the initials. Keep her name out of
+`content.js`, `index.html` and this file. The one place it remains is the
+site's web address (the Vercel project's domain, used by the `og:` URLs in
+`index.html`), which is kept because links have already been shared.
 
 Before sharing, do these:
 
@@ -101,9 +111,11 @@ project's root directory to `site`).
   rawpixel, found through Openverse and tinted ivory so they read like the
   card's plaster relief. `tools/build_assets.py` downloads them, processes them
   and paints the watercolour paper. Run `python3 -I tools/build_assets.py` to rebuild.
-- **Hero.** A typographic hero: the names are written in (Imperial Script) inside
-  a dusty-blue laurel wreath drawn in code (`wreath()` in `site/js/icons.js`).
-  There is no illustration of the couple.
+- **Hero.** A typographic hero, written in (Imperial Script) inside a dusty-blue
+  laurel wreath drawn in code (`wreath()` in `site/js/icons.js`): "Hamza", a
+  quiet "with the", "Beloved Daughter of" in maroon script and "Naveed Imran",
+  the largest line. "The Walima of" above it is set small and muted. The
+  invitation card repeats the same hierarchy. There is no illustration of the couple.
 - **Living backgrounds.** Each screen has its own ambient layer between the paper
   and the ornaments (`site/css/ambient.css`, markup in `AMBIENT` in
   `site/js/render.js`). Read top to bottom, they make one day passing:
