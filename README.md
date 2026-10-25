@@ -32,9 +32,12 @@ those tags for the link preview.
 card convention, she is "the Beloved Daughter of Naveed Imran"
 (`couple.bride.display` and `couple.bride.parent`), and the envelope, closing
 and RSVP emails carry no names or only the initials. Keep her name out of
-`content.js`, `index.html` and this file. The one place it remains is the
-site's web address (the Vercel project's domain, used by the `og:` URLs in
-`index.html`), which is kept because links have already been shared.
+`content.js`, `index.html` and this file.
+
+The site lives at **https://hamza-walima-invitation.vercel.app** (the `og:`
+URLs in `index.html` use it). The first address, which contained her name,
+permanently redirects there, path and all, so links already shared on WhatsApp
+keep working (the host redirect in `site/vercel.json`).
 
 Before sharing, do these:
 
