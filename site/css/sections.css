@@ -133,13 +133,14 @@
   box-shadow: 0 1px 3px rgba(31, 42, 68, 0.2), inset 0 0 0 calc(7 * var(--u)) rgba(251, 248, 241, 0.75), inset 0 0 0 calc(8 * var(--u)) rgba(176, 138, 79, 0.45);
   transition: transform 1s var(--ease-out);
 }
-.env__letter-bismillah {
+.env__letter-bismillah, .env__letter-verse {
   font-size: calc(27 * var(--u)); line-height: 1.5;
   background: var(--gold-grad); -webkit-background-clip: text; background-clip: text;
   color: transparent; -webkit-text-fill-color: transparent;
   padding: 0 0.2em;
 }
-.env__letter-eyebrow { font-size: var(--fs-caption); color: var(--maroon); margin-top: calc(4 * var(--u)); padding: 0 calc(18 * var(--u)); line-height: 1.6; text-align: center; text-wrap: balance; }
+.env__letter-verse { font-size: calc(32 * var(--u)); line-height: 1.45; margin-top: calc(8 * var(--u)); }
+.env__letter-trans { font-size: var(--fs-caption); font-weight: 500; color: var(--ink-3); line-height: 1.4; padding: 0 calc(18 * var(--u)); text-align: center; text-wrap: balance; }
 .env__letter-date { font-size: calc(15 * var(--u)); letter-spacing: 0.24em; margin-right: -0.24em; color: var(--ink-3); margin-top: calc(8 * var(--u)); }
 
 .env__front {

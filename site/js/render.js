@@ -100,7 +100,8 @@ function opening(c) {
         <div class="env__back"></div>
         <div class="env__letter">
           <span class="arabic env__letter-bismillah" lang="ar">${esc(intro.letterBlessing)}</span>
-          <span class="caps env__letter-eyebrow">${esc(intro.letterLine)}</span>
+          <span class="arabic env__letter-verse" lang="ar">${esc(intro.letterVerseArabic)}</span>
+          <span class="env__letter-trans">${esc(intro.letterVerseTranslation)} ${esc(intro.letterVerseReference)}</span>
           <span class="serif env__letter-date">${esc(intro.letterDate)}</span>
         </div>
         <div class="env__front">

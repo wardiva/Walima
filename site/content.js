@@ -55,7 +55,9 @@ export default {
     envelopeTitle: "Walima Ceremony", // script on the envelope, as on the printed one
     // the letter that rises out of the envelope opens like the printed card:
     letterBlessing: "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ", // gold Arabic
-    letterLine: "With the blessings of Allah", // small capitals
+    letterVerseArabic: "وَخَلَقْنَاكُمْ أَزْوَاجًا", // gold Arabic (as on the Barat invitation)
+    letterVerseTranslation: "And We created you in pairs.",
+    letterVerseReference: "(Quran 78:8)",
     letterDate: "28 · 11 · 2026",
     tapToOpen: "Tap to Open",
   },
