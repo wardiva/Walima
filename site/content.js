@@ -56,7 +56,7 @@ export default {
     // the letter that rises out of the envelope carries one verse:
     letterVerseArabic: "وَخَلَقْنَاكُمْ أَزْوَاجًا", // gold Arabic (as on the Barat invitation)
     letterVerseTranslation: "And We created you in pairs.",
-    letterVerseReference: "(Quran 78:8)",
+    letterVerseReference: "Quran 78:8", // its own line, in spaced capitals
     tapToOpen: "Tap to Open",
   },
 
