@@ -12,7 +12,7 @@
  *                    grows into the HERO — "Hamza with the Beloved
  *                    Daughter of Naveed Imran" written inside a wreath
  *                    that grows leaf by leaf.
- *     2. Letter    — Bismillah, the invitation, the names and the verse.
+ *     2. Letter    — Bismillah, the invitation and the names.
  *     3. Countdown — the date under silver scratch-off foil, live countdown.
  *     4. Schedule  — timeline built from `schedule.items`.
  *     5. Venue     — name, address, an illustrated map (tap → Google Maps)
@@ -70,9 +70,6 @@ export default {
     bismillah: "بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ",
     lines: ["Together with their families,", "you are cordially invited to the"],
     eventLine: "Walima Ceremony of", // spaced capitals, above the names
-    verseArabic: "وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً",
-    verseTranslation: "And He placed between you affection and mercy",
-    verseReference: "(Quran 30:21)",
   },
 
   /* 3 — Countdown */

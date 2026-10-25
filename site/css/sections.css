@@ -327,8 +327,8 @@
 .d-closing-tr { top: calc(-50 * var(--u)); right: calc(-80 * var(--u)); width: calc(240 * var(--u)); rotate: 190deg; }
 
 /* ═════════════════════════ 2 · Letter ═════════════════════════ */
-.letter-card { --group-gap: calc(22 * var(--u)); padding-top: calc(48 * var(--u)); padding-bottom: calc(42 * var(--u)); margin-top: calc(40 * var(--u)); }
-.letter-card__bismillah, .letter-card__verse, .dua__arabic, .closing__insha {
+.letter-card { --group-gap: calc(22 * var(--u)); padding-top: calc(48 * var(--u)); padding-bottom: calc(46 * var(--u)); margin-top: calc(40 * var(--u)); }
+.letter-card__bismillah, .dua__arabic, .closing__insha {
   line-height: 1.6;
   background: var(--gold-grad);
   -webkit-background-clip: text; background-clip: text;
@@ -344,27 +344,6 @@
 .letter-card__bismillah .aw { font-size: calc(28 * var(--u)); }
 .letter-card__event + .letter-card__name { margin-top: calc(6 * var(--u) - 0.2em); }
 .letter-card__with { font-size: var(--fs-caption); line-height: 1; color: var(--gold); margin: calc(4 * var(--u)) 0 calc(2 * var(--u)); }
-/* a gold rule with a diamond between the names and the verse */
-.letter-card__rule {
-  position: relative;
-  display: block;
-  width: calc(170 * var(--u)); height: calc(10 * var(--u));
-  margin-top: var(--group-gap);
-}
-.letter-card__rule::before {
-  content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px;
-  background: linear-gradient(90deg, rgba(176, 138, 79, 0), rgba(176, 138, 79, 0.75) 30%, rgba(176, 138, 79, 0.75) 70%, rgba(176, 138, 79, 0));
-}
-.letter-card__rule i {
-  position: absolute; left: 50%; top: 50%;
-  width: calc(8 * var(--u)); height: calc(8 * var(--u)); min-width: 6px; min-height: 6px;
-  translate: -50% -50%; rotate: 45deg;
-  background: linear-gradient(135deg, #e6cf98, #b8924f 55%, #9c7840);
-  box-shadow: 0 0 0 calc(3 * var(--u)) rgba(252, 251, 248, 0.9);
-}
-.letter-card__verse { font-size: calc(32 * var(--u)); line-height: 1.4; margin-top: calc(var(--group-gap) - 4 * var(--u)); }
-.letter-card__trans { font-size: var(--fs-caption); font-weight: 500; color: var(--ink-3); line-height: 1.45; margin-top: calc(2 * var(--u)); max-width: 30em; }
-.nowrap { white-space: nowrap; }
 
 /* ═════════════════════════ 3 · Countdown ═════════════════════════ */
 .cd__when {

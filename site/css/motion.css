@@ -228,7 +228,11 @@
 .letter-card .d-card-crest { transition-delay: 0.15s; }
 .letter-card__bismillah { --wbase: 0.1s; }
 .letter-card__with[data-reveal] { transition-delay: 0.3s; }
-.letter-card { --wk: 0.3; }
+.letter-card { --wk: 0.12; }
+/* the names are the card's content: they start writing briskly, so they are
+   already appearing while the card slides in */
+.letter-card .write { --wdur: 0.8s; }
+.is-active .letter-card .write, .is-active .letter-card .write__in { animation-timing-function: cubic-bezier(0.2, 0.55, 0.35, 1); }
 
 /* ═════════════ 3 · Countdown ═════════════ */
 .cd__cell { opacity: 0; transform: translate3d(0, calc(18 * var(--u)), 0) scale(0.85); }
@@ -462,8 +466,6 @@
 }
 
 /* ═════════════ Round 2 additions ═════════════ */
-/* letter: the gold rule draws out from its diamond */
-[data-reveal="rule"] { transform: scaleX(0); transition-duration: 0.6s, 1.1s; transition-timing-function: var(--ease-out), var(--ease-in-out); }
 /* venue map: a little car drives down the road to the farmhouse */
 .map-art__car-path { opacity: 0; transform: translate(300px, -14px); }
 .map-art__car { transform: rotate(207.7deg); }

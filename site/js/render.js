@@ -164,9 +164,6 @@ function letter(c) {
       <span class="caps letter-card__with" ${r(9)}>${esc(cp.joiner)}</span>
       ${write(cp.bride.display, "letter-card__daughter", 1.6)}
       ${write(cp.bride.parent, "letter-card__name letter-card__name--parent", 2.2)}
-      <span class="letter-card__rule" aria-hidden="true" ${r(30, "rule")}><i></i></span>
-      <div class="arabic letter-card__verse" lang="ar" ${r(32, "glow")}>${esc(l.verseArabic)}</div>
-      <span class="letter-card__trans" ${r(34)}>${esc(l.verseTranslation)} <span class="nowrap">${esc(l.verseReference)}</span></span>
     </div>
   </section>`;
 }
