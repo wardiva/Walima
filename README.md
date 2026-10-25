@@ -6,7 +6,7 @@ Saturday, 28 November 2026, 1 PM, at Grand Orchid Farmhouse, Raiwind Road, Lahor
 It is the companion to the Barat invitation and uses the same structure.
 
 Guests open a dusty-blue envelope ("Walima Ceremony") sealed with a maroon
-wax seal pressed with an olive sprig. The seal cracks, the flap opens, the letter rises and grows to
+wax seal pressed with a rose. The seal cracks, the flap opens, the letter rises and grows to
 fill the screen, and "Hamza, with the Beloved Daughter of Naveed Imran" writes
 itself inside a dusty-blue wreath that grows leaf by leaf. The
 rest of the invitation is a series of full-screen sections, in this order:
@@ -154,9 +154,10 @@ project's root directory to `site`).
   It isn't to scale. Tapping it, or the button below it, opens `venue.mapsUrl` in
   Google Maps.
 - **Link preview.** `site/assets/images/og-walima.jpg` (1200×630) is the client's
-  own envelope photo, `tools/og-source.jpg`, scaled to 1200 px wide and cropped
-  so that "Walima Ceremony" and the wax seal sit in the middle (they also survive
-  a centred square crop). To rebuild it, run
-  `ffmpeg -i tools/og-source.jpg -vf "scale=1200:-1,crop=1200:630:0:120" -q:v 3 site/assets/images/og-walima.jpg`,
+  own envelope photo (a dusty-blue handmade-paper envelope tied with a satin
+  ribbon bow, no text), `tools/og-source.jpg`, scaled to 1200 px wide and cropped
+  from y = 140 so the bow sits in the middle (the bow and the ribbon crossing
+  also survive a centred square crop). To rebuild it, run
+  `ffmpeg -i tools/og-source.jpg -vf "scale=1200:-1,crop=1200:630:0:140" -q:v 3 site/assets/images/og-walima.jpg`,
   then bump `?v=` on the three `og:image` / `twitter:image` tags in
   `site/index.html` so WhatsApp fetches the new image.

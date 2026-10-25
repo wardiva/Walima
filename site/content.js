@@ -32,7 +32,7 @@
  *    change the names or date, update <title> and the og: tags there too.
  *  • The bride's name is never shown, by the family's wish: she is "the
  *    Beloved Daughter of" her father. Don't add it to any text here or in
- *    index.html. No initials either: the wax seal carries an olive sprig.
+ *    index.html. No initials either: the wax seal carries a rose.
  */
 export default {
   meta: {
@@ -53,12 +53,10 @@ export default {
   intro: {
     envelopeLine: "You are invited to the", // small capitals on the envelope
     envelopeTitle: "Walima Ceremony", // script on the envelope, as on the printed one
-    // the letter that rises out of the envelope opens like the printed card:
-    letterBlessing: "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ", // gold Arabic
+    // the letter that rises out of the envelope carries one verse:
     letterVerseArabic: "وَخَلَقْنَاكُمْ أَزْوَاجًا", // gold Arabic (as on the Barat invitation)
     letterVerseTranslation: "And We created you in pairs.",
     letterVerseReference: "(Quran 78:8)",
-    letterDate: "28 · 11 · 2026",
     tapToOpen: "Tap to Open",
   },
 

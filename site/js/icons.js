@@ -25,8 +25,8 @@ export const gown = `
   <path d="M10 62c7 3 37 3 44 0"/><path d="M32 30v34M27 30c-3 10-7 22-10 34M37 30c3 10 7 22 10 34"/>
 </svg>`;
 
-/** Maroon wax seal with an irregular poured edge, pressed with an olive
-    sprig (as on the client's printed envelope): no letters. */
+/** Maroon wax seal with an irregular poured edge, pressed with a rose:
+    no letters. */
 export function waxSeal() {
   // Poured edge: a circle whose radius wobbles with a few low harmonics.
   const pts = [];
@@ -44,12 +44,17 @@ export function waxSeal() {
     const c2 = [p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6];
     d += ` C${c1[0].toFixed(2)} ${c1[1].toFixed(2)} ${c2[0].toFixed(2)} ${c2[1].toFixed(2)} ${p2[0].toFixed(2)} ${p2[1].toFixed(2)}`;
   }
-  // the sprig: a gently curved stem with paired, alternating leaves and one at the tip
+  // the rose: a cupped bloom with a spiral heart, on a short stem with two
+  // leaves, drawn as strokes so it stays crisp (not a blob) at seal size
   const leaf = (x, y, ang, len) =>
-    `<path d="M0 0C${(len * 0.3).toFixed(1)} ${(-len * 0.3).toFixed(1)} ${(len * 0.72).toFixed(1)} ${(-len * 0.28).toFixed(1)} ${len} 0C${(len * 0.72).toFixed(1)} ${(len * 0.28).toFixed(1)} ${(len * 0.3).toFixed(1)} ${(len * 0.3).toFixed(1)} 0 0Z" transform="translate(${x} ${y}) rotate(${ang})"/>`;
-  const leaves = [[66, 13.5], [58.5, 12.5], [51, 11.5], [43.5, 10.5], [36.5, 9]]
-    .map(([y, len], k) => leaf(50 - 0.4, y, -140 + k * 2, len) + leaf(50 + 0.4, y - 3.2, -40 - k * 2, len)).join("") + leaf(50, 30, -90, 8.5);
-  const sprig = `<path d="M50.6 76C49.2 64 50.9 46 50 29.5" fill="none" stroke-width="1.7" stroke-linecap="round"/>${leaves}`;
+    `<path d="M0 0C${(len * 0.3).toFixed(1)} ${(-len * 0.32).toFixed(1)} ${(len * 0.72).toFixed(1)} ${(-len * 0.3).toFixed(1)} ${len} 0C${(len * 0.72).toFixed(1)} ${(len * 0.3).toFixed(1)} ${(len * 0.3).toFixed(1)} ${(len * 0.32).toFixed(1)} 0 0Z" transform="translate(${x} ${y}) rotate(${ang})"/>`;
+  const rose =
+    `<g fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">` +
+    `<path d="M38 37.5C37.5 49 44 53.5 50 53.5S62.5 49 62 37.5"/>` + // the cup
+    `<path d="M38 37.5C38.5 31 43.5 27.5 48 29.5"/><path d="M62 37.5C61.5 31 56.5 27.5 52 29.5"/>` + // outer petals
+    `<path d="M50.5 36.5C54.5 36.5 55 42 51 42.5C46.5 43 45 37.5 48 34.5C51 31.5 57 33 57.5 38.5C58 43.5 54 47 49.5 46.8C45 46.6 42 43.5 42 39.5"/>` + // spiral heart
+    `<path d="M50 53.5C50.3 59 49.6 65 50.2 75"/></g>` + // stem
+    leaf(49.8, 62.5, -152, 11.5) + leaf(50.2, 67.5, -28, 10.5);
   return `
 <svg class="seal" viewBox="0 0 100 100" aria-hidden="true">
   <defs>
@@ -65,8 +70,8 @@ export function waxSeal() {
   <circle cx="50" cy="50" r="36" fill="none" stroke="#4a0f17" stroke-width="1.3" opacity=".7"/>
   <circle cx="50" cy="50" r="38.2" fill="none" stroke="#c46a74" stroke-width=".8" opacity=".45"/>
   <circle cx="50" cy="50" r="31" fill="none" stroke="#4a0f17" stroke-width=".6" stroke-dasharray="1 2.2" opacity=".55"/>
-  <g class="seal__sprig seal__sprig--shade" transform="translate(0 1)">${sprig}</g>
-  <g class="seal__sprig">${sprig}</g>
+  <g class="seal__emblem seal__emblem--shade" transform="translate(0 1)">${rose}</g>
+  <g class="seal__emblem">${rose}</g>
   <ellipse cx="34" cy="26" rx="13" ry="6" fill="#fff" opacity=".13" transform="rotate(-28 34 26)"/>
 </svg>`;
 }
